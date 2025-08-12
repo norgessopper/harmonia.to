@@ -58,6 +58,17 @@
   @media (max-width: 640px){
     header.hhm-site-header h1 { font-size:2rem; }
   }
+  /* Button style (matches site theme) */
+a.button, .button {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff !important;   /* override global link color */
+  text-decoration: none;
+  padding: .7rem 1.1rem;
+  border-radius: 8px;
+  font-weight: 700;
+}
+a.button:hover, .button:hover { background: #246e45; }
 </style>
 </head>
 <body>
@@ -108,7 +119,7 @@
 
   <section aria-labelledby="need-one-file">
     <h2 id="need-one-file">1) What you need (just one file)</h2>
-    <p>Download the single bundle from our <a href="/appendices.html">Appendices</a>:</p>
+    <p>Download the single bundle<a href="/downloads/HHM_bundle.json">here</a>:</p>
     <ul>
       <li><code>HHM_bundle.json</code> — contains axioms, metatheorems, T014, operators, components, thresholds, null models, prompts/runbooks, and the HHM Result Card schema — everything required to run HHM in one file.</li>
     </ul>
@@ -1033,26 +1044,31 @@ and explain what they might mean in normal words."</code></pre>
   </section>
 
   <!-- Harmonia-ZFC -->
-  <section aria-labelledby="harmonia-zfc">
-    <h2 id="harmonia-zfc">11) Going Further — Harmonia-ZFC (Beta) for Formal Proofs (Coming soon)</h2>
+<section aria-labelledby="harmonia-zfc">
+  <h2 id="harmonia-zfc">11) Going Further — Harmonia-ZFC (Beta) for Formal Proofs (Coming soon)</h2>
 
-    <p>
-      HHM is for <strong>measurement, comparison, and prediction</strong>. When your HHM result suggests a general rule you want to
-      <strong>prove</strong> (or check for internal consistency), add <strong>Harmonia-ZFC (beta)</strong>.
-    </p>
+  <p>
+    HHM is for <strong>measurement, comparison, and prediction</strong>. When your HHM result suggests a general rule you want to
+    <strong>prove</strong> (or check for internal consistency), add <strong>Harmonia-ZFC (beta)</strong>.
+  </p>
 
-    <div class="callout" role="note" aria-label="What is Harmonia-ZFC">
-      <strong>What it is:</strong> a minified, extended Zermelo–Fraenkel with Choice (ZFC) knowledge base encoding definitions, axioms, and inference patterns so an AI can do step-by-step symbolic reasoning. <br/>
-      <strong>File:</strong> <code>harmonia-zfc-beta-v1.0.json</code> (minified). <em>Beta — expect updates; see “Versioning &amp; Updates.”</em>
-    </div>
+  <div class="callout" role="note" aria-label="What is Harmonia-ZFC">
+    <strong>What it is:</strong> a minified, extended Zermelo–Fraenkel with Choice (ZFC) knowledge base encoding definitions, axioms, and inference patterns so an AI can do step-by-step symbolic reasoning. <br/>
+    <strong>File:</strong> <code>harmonia-zfc-beta-v1.0.json</code> (minified). <em>Beta — expect updates.</em>
+  </div>
 
-    <div class="callout warning" role="note" aria-label="ZFC Beta warning">
-      <strong>Beta status &amp; caution:</strong> This beta includes <em>hundreds</em> of axioms/entries. That size is intentional for coverage, but it raises risks:
-      redundancy, near-duplicate axioms, accidental over-strengthening, naming drift, and hidden dependencies.
-      <br/><br/>
-      <strong>What this means for you:</strong> Treat Harmonia-ZFC as a powerful <em>assistant</em>, not an oracle. Before trusting a proof, run the
-      <em>Minimize → Audit → Prove</em> workflow below—or ask the AI to do it for you.
-    </div>
+  <div class="callout warning" role="note" aria-label="ZFC Beta warning">
+    <strong>Beta status &amp; caution:</strong> This beta includes <em>hundreds</em> of axioms/entries. That size is intentional for coverage, but it raises risks:
+    redundancy, near-duplicate axioms, accidental over-strengthening, naming drift, and hidden dependencies.
+    <br/><br/>
+    <strong>What this means for you:</strong> Treat Harmonia-ZFC as a powerful <em>assistant</em>, not an oracle. Before trusting a proof, run the
+    <em>Minimize → Audit → Prove</em> workflow below—or ask the AI to do it for you.
+  </div>
+
+  <p style="margin-top:1rem;">
+    <a class="button" href="/downloads/harmonia-zfc-beta-v1.0.json" download>Download Harmonia-ZFC Beta v1.0</a>
+  </p>
+
 
     <h3>Why combine HHM + Harmonia-ZFC?</h3>
     <ul>
