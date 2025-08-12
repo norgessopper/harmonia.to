@@ -1,0 +1,11 @@
+{
+  "mercury": "data/mercury_1900to2025.csv",
+  "venus":   "data/venus_1900to2025.csv",
+  "earth":   "data/earth_1900to2025.csv",
+  "mars":    "data/mars_1900to2025.csv",
+  "jupiter": "data/jupiter_1900to2025.csv",
+  "saturn":  "data/saturn_1900to2025.csv",
+  "uranus":  "data/uranus_1600to2300.csv",
+  "neptune": "data/neptune_1600to2300.csv",
+  "pluto":   "data/pluto_1600to2300.csv"
+}

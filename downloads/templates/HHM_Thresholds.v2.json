@@ -1,0 +1,15 @@
+{
+  "schema": "hhm.thresholds.v2",
+  "version": "2.2.0",
+  "notes": "Global defaults for R1 minimal pipeline.",
+  "criteria": {
+    "Echo.min": 0.90,
+    "Rec.min": 0.85,
+    "Entropy.delta.max": 0.15,
+    "CollapseOrbit.delta.max": 1
+  },
+  "lock": {
+    "frozen_at": "2025-08-11T00:00:00Z",
+    "hash": "blake3:<hash>"
+  }
+}

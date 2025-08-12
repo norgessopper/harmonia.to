@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script defer data-domain="harmonia.to" src="https://plausible.io/js/script.file-downloads.outbound-links.js"></script>
+  <script>window.plausible = window.plausible || function(){(window.plausible.q=window.plausible.q||[]).push(arguments)}</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HHM — Axioms & Metatheorems</title>
+  <meta name="description" content="Axioms and metatheorems of the Holographic Harmonic Model (HHM): the rules, consequences, and validations that structure Ψ(x,t)."/>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root { color-scheme: light; }
+    * { box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; margin: 0; background: #f8fdf9; color: #143324; }
+    header { background: #e0f0e7; color: #143324; padding: 2rem 1.5rem; text-align: center; }
+    header h1 { font-size: 2.5rem; margin: 0; font-weight: 800; letter-spacing: .5px; }
+    header p { margin-top: .5rem; font-size: 1.15rem; opacity: .9; }
+    nav[aria-label="Primary"] { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.25rem; background: #d8ede0; padding: 1rem 0; }
+    nav[aria-label="Primary"] a { text-decoration: none; color: #185c37; font-weight: 600; transition: color .2s; }
+    nav[aria-label="Primary"] a:hover { color: #0f2e21; text-decoration: underline; }
+
+    .toc { max-width: 980px; margin: 2rem auto 0; padding: 0 1.5rem; }
+    .toc .cards { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1rem; }
+    .card { background: #f4faf7; border: 1px solid #d9e6df; border-radius: 10px; padding: .9rem 1rem; }
+    .card h3 { margin: 0 0 .35rem 0; font-size: 1.05rem; }
+    .card a { color: #185c37; font-weight: 600; text-decoration: none; }
+    .card a:hover { text-decoration: underline; }
+
+    main { max-width: 800px; margin: 2rem auto 3rem; padding: 0 1.5rem; line-height: 1.75; }
+    section { margin: 3rem 0; }
+    h2 { font-size: 1.8rem; margin-bottom: .5rem; }
+    h3 { font-size: 1.35rem; margin-bottom: .35rem; }
+    h4 { font-size: 1.05rem; margin: .75rem 0 .25rem; }
+    p code, li code { background: #f4f7f5; padding: .1rem .35rem; border-radius: 4px; }
+    pre code { display: block; padding: .75rem; background: #f4f7f5; border-radius: 6px; overflow-x: auto; }
+    .button { display: inline-block; padding: .7rem 1.1rem; margin-top: 1rem; background: #2e8b57; color: #fff; border-radius: 6px; font-weight: 700; text-decoration: none; }
+    .button:hover { background: #246e45; }
+    .callout { border-left: 4px solid #2e8b57; background: #f4faf7; padding: .9rem 1rem; margin: 1rem 0; }
+    .warning { border-left: 4px solid #b86b00; background: #fff8ec; }
+    .muted { color: #3a5a4d; opacity: .9; }
+
+    footer { margin-top: 4rem; padding: 2rem 1.5rem; text-align: center; font-size: .95rem; background: #d1e9de; color: #143324; }
+    footer .tagline { font-weight: 600; font-style: italic; margin-bottom: .6rem; display: block; }
+    footer a { color: #185c37; text-decoration: underline; }
+    footer a:hover { color: #0a2016; }
+
+    @media (max-width: 720px) {
+      .toc .cards { grid-template-columns: 1fr; }
+      header p { font-size: 1.05rem; }
+      body { font-size: 1.04rem; }
+      nav[aria-label="Primary"] { flex-direction: column; gap: .7rem; }
+      .button { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Holographic Harmonic Model — Axioms & Metatheorems</h1>
+    <p>The rules and cross-domain consequences that structure Ψ(x,t)</p>
+  </header>
+
+  <nav class="hhm-site-nav" aria-label="Primary">
+  <a href="/index.html">Home</a>
+  <a href="/model/overview.html">The Model</a>
+  <a href="/hilbert.html">Hilbert &amp; Ψ(x,t)</a>
+  <a href="/tests.html">Experiments &amp; Tests</a>
+  <a href="/howtouse.html" aria-current="page">How to Use HHM</a>
+  <a href="/community.html">Community</a>
+  <a href="/faq.html">FAQ</a>
+  <a href="/about.html">About / Contact</a>
+</nav>
+
+  <!-- In-page quick nav -->
+  <div class="toc" aria-label="In-page navigation">
+    <div class="cards">
+      <div class="card">
+        <h3>Axioms</h3>
+        <ul style="margin:0; padding-left:1rem;">
+          <li><a href="#ax-why">Why start with axioms?</a></li>
+          <li><a href="#ax000">AX000 — Primacy of Ψ</a></li>
+          <li><a href="#ax001">AX001 — Hilbert Projection</a></li>
+          <li><a href="#ax002">AX002 — Rhythmic Recurrence</a></li>
+          <li><a href="#ax003">AX003 — Collapse Stability</a></li>
+          <li><a href="#ax004">AX004 — Scale-Invariant Dynamics</a></li>
+          <li><a href="#ax005">AX005 — Information Conservation</a></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Metatheorems</h3>
+        <ul style="margin:0; padding-left:1rem;">
+          <li><a href="#mt">What are metatheorems?</a></li>
+          <li><a href="#mt0001">MT0001 — Axial Saturation</a></li>
+          <li><a href="#mt0002">MT0002 — Temporal Recurrence</a></li>
+          <li><a href="#mt0003">MT0003 — Modal Identity Preservation</a></li>
+          <li><a href="#mt0004">MT0004 — Field Similarity</a></li>
+          <li><a href="#mt0005">MT0005 — Modal Transition</a></li>
+          <li><a href="#t014">T014 — Robust Modal Identity</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- Axioms intro -->
+    <section id="ax-why" aria-labelledby="why-axioms">
+      <h2 id="why-axioms">Why start with axioms?</h2>
+      <p>
+        Axioms give us testable starting points. In HHM the foundation is not space, time, or matter, but <strong>Ψ(x,t)</strong>—the structured field that collapses into what we observe. Axioms specify how Ψ is allowed to behave so we can measure, compare, and falsify claims.
+      </p>
+      <div class="callout">
+        <strong>How we use them:</strong> Each axiom ties to operators (e.g., OP001 <code>CollapsePattern</code>, OP003 <code>Echo</code>, OP002 <code>Rec</code>, OP006 <code>UnifiedEntropy</code>) and components. Results are reported via the schemas in <code>HHM_bundle.json</code>.
+      </div>
+    </section>
+
+    <!-- AX000 -->
+    <section id="ax000" aria-labelledby="ax000-title">
+      <h3 id="ax000-title">AX000 — Epistemic Primacy of Ψ</h3>
+      <p><strong>Statement:</strong> All observation begins with Ψ(x,t)—the modal field of the moment.</p>
+      <h4>Why it’s needed</h4>
+      <p>Rather than assume a fixed background (space/time), we start from structured patterns that are actually measured.</p>
+      <h4>How it’s tested</h4>
+      <p>Analyses proceed directly on field data (EEG segments, glyph sequences, harmonic maps) prior to external clocks or coordinates.</p>
+      <h4>What it changes</h4>
+      <p>Reality is read as structure-first; time/space emerge from relations among Ψ-states.</p>
+    </section>
+
+    <!-- AX001 -->
+    <section id="ax001" aria-labelledby="ax001-title">
+      <h3 id="ax001-title">AX001 — Hilbert-Based Projection</h3>
+      <p><strong>Statement:</strong> Ψ must be measured via projection into a basis (harmonic, symbolic, spatial) in a Hilbert-like space.</p>
+      <h4>Why it’s needed</h4>
+      <p>Ψ is too rich to observe “raw.” Basis projections make it computable and comparable.</p>
+      <h4>How it’s tested</h4>
+      <ul>
+        <li>EEG: Fourier/wavelet bands</li>
+        <li>Symbols: vectorized glyph streams</li>
+        <li>Cosmology: spherical harmonics a<sub>ℓm</sub></li>
+      </ul>
+      <h4>What it changes</h4>
+      <p>Truth is structure-through-projection; multiple valid views can agree on the same underlying Ψ.</p>
+    </section>
+
+    <!-- AX002 -->
+    <section id="ax002" aria-labelledby="ax002-title">
+      <h3 id="ax002-title">AX002 — Rhythmic Recurrence</h3>
+      <p><strong>Statement:</strong> Ψ(x,t) recurs. Repetition underlies measurement, memory, and meaning.</p>
+      <h4>How it’s tested</h4>
+      <ul>
+        <li>OP003 <code>Echo</code> (autocorrelation / RQA)</li>
+        <li>OP002 <code>Rec</code> (similarity across steps)</li>
+        <li>OP014 <code>CollapseOrbit</code> (cycle length)</li>
+      </ul>
+      <h4>Implication</h4>
+      <p>“New vs old” shifts to “recurs vs not”—identity grows with recurrence strength.</p>
+    </section>
+
+    <!-- AX003 -->
+    <section id="ax003" aria-labelledby="ax003-title">
+      <h3 id="ax003-title">AX003 — Modal Collapse Stability</h3>
+      <p><strong>Statement:</strong> Collapses tend to stabilize into consistent modal forms (loops/orbits).</p>
+      <h4>How it’s tested</h4>
+      <ul>
+        <li>OP014 <code>CollapseOrbit</code> for orbit length</li>
+        <li>OP004 <code>CollapseInfinity</code> for convergence</li>
+      </ul>
+      <h4>Implication</h4>
+      <p>Predictable attractors enable memory and long-form patterning across domains.</p>
+    </section>
+
+    <!-- AX004 -->
+    <section id="ax004" aria-labelledby="ax004-title">
+      <h3 id="ax004-title">AX004 — Scale-Invariant Dynamics</h3>
+      <p><strong>Statement:</strong> The same modal dynamics appear across scales and domains.</p>
+      <h4>How it’s tested</h4>
+      <p>Cross-domain comparisons using OP002/OP003/OP014 show matched structure despite differing units/frequencies/symbols.</p>
+      <h4>Implication</h4>
+      <p>Insights transfer between neuroscience, cosmology, bioacoustics, and symbols.</p>
+    </section>
+
+    <!-- AX005 -->
+    <section id="ax005" aria-labelledby="ax005-title">
+      <h3 id="ax005-title">AX005 — Information Conservation in Ψ</h3>
+      <p><strong>Statement:</strong> Information is transformed, not destroyed, across collapses.</p>
+      <h4>How it’s tested</h4>
+      <ul>
+        <li>OP002 <code>Rec</code> and OP015 <code>TraceSignature</code> show persistence across transformations</li>
+        <li>OP003 <code>Echo</code> / OP014 <code>CollapseOrbit</code> reveal reactivation after drift</li>
+      </ul>
+      <h4>Implication</h4>
+      <p>Identity and meaning can reappear after change; “loss” often measures as structural redistribution.</p>
+    </section>
+
+    <section aria-labelledby="download-axioms">
+      <h4 id="download-axioms">📥 Download Axiom Dataset</h4>
+      <p>JSON structure of the axioms and links to validations:</p>
+      <a class="button" href="/downloads/HHM_Axioms_Metatheorems_T14.json" download>Download HHM_Axioms_Metatheorems_T14.json</a>
+    </section>
+
+    <!-- Metatheorems intro -->
+    <section id="mt" aria-labelledby="mt-intro">
+      <h2 id="mt-intro">Metatheorems of HHM</h2>
+      <p>
+        Metatheorems are cross-domain consequences of the axioms. Each has measurable criteria using HHM operators and can be extended or falsified with new data.
+      </p>
+      <ul>
+        <li>Derived from one or more axioms</li>
+        <li>Stated with operator-level tests and thresholds</li>
+        <li>Validated across multiple domains/scales where possible</li>
+      </ul>
+    </section>
+
+    <!-- MT0001 -->
+    <section id="mt0001" aria-labelledby="mt0001-title">
+      <h3 id="mt0001-title">MT0001 — Axial Saturation</h3>
+      <p><strong>Definition:</strong> Under iterative application, Ψ tends toward a stable modal amplitude (attractor).</p>
+      <h4>Tests</h4>
+      <ul>
+        <li>OP004 <code>CollapseInfinity</code> convergence</li>
+        <li>Entropy plateau via OP006 <code>UnifiedEntropy</code></li>
+      </ul>
+      <h4>Domains</h4>
+      <p>EEG (meditation loops), CMB bands, compressed streams, decohering quantum states, gene oscillators.</p>
+      <h4>Depends on</h4>
+      <p>AX000, AX003, AX004</p>
+    </section>
+
+    <!-- MT0002 -->
+    <section id="mt0002" aria-labelledby="mt0002-title">
+      <h3 id="mt0002-title">MT0002 — Temporal Recurrence</h3>
+      <p><strong>Definition:</strong> Ψ exhibits measurable recurrence across time.</p>
+      <h4>Tests</h4>
+      <ul>
+        <li>OP003 <code>Echo</code> (lag correlation / RQA)</li>
+        <li>OP002 <code>Rec</code> between Ψ<sub>t</sub> and Ψ<sub>t+n</sub></li>
+        <li>OP014 <code>CollapseOrbit</code> (cycle length)</li>
+      </ul>
+      <h4>Depends on</h4>
+      <p>AX000, AX002</p>
+    </section>
+
+    <!-- MT0003 -->
+    <section id="mt0003" aria-labelledby="mt0003-title">
+      <h3 id="mt0003-title">MT0003 — Modal Identity Preservation</h3>
+      <p><strong>Definition:</strong> Identity persists under transformation when structural metrics remain within bounds.</p>
+      <h4>Typical bounds</h4>
+      <ul>
+        <li>Rec ≥ 0.85 (OP002)</li>
+        <li>|ΔEntropy| ≤ 0.15 (OP006)</li>
+        <li>TraceSignature overlap ≥ 90% (OP015)</li>
+      </ul>
+      <h4>Depends on</h4>
+      <p>AX001, AX005</p>
+    </section>
+
+    <!-- MT0004 -->
+    <section id="mt0004" aria-labelledby="mt0004-title">
+      <h3 id="mt0004-title">MT0004 — Field Similarity</h3>
+      <p><strong>Definition:</strong> Structurally similar Ψ-states can be recognized across domains.</p>
+      <h4>Tests</h4>
+      <ul>
+        <li>OP002 <code>Rec</code>, OP003 <code>Echo</code></li>
+        <li>Optional: OP018 <code>ModalCoherence</code> if defined in your bundle</li>
+      </ul>
+      <h4>Depends on</h4>
+      <p>AX002, AX005</p>
+    </section>
+
+    <!-- MT0005 -->
+    <section id="mt0005" aria-labelledby="mt0005-title">
+      <h3 id="mt0005-title">MT0005 — Modal Transition</h3>
+      <p><strong>Definition:</strong> Transitions follow measurable pathways in modal space.</p>
+      <h4>Tests</h4>
+      <ul>
+        <li>OP011 <code>ModalGradient</code> (rate/direction)</li>
+        <li>OP008 <code>CollapseDelay</code>, OP012 <code>RhythmBoundary</code>, OP019 <code>DriftPath</code> (if present)</li>
+      </ul>
+      <h4>Depends on</h4>
+      <p>AX002, AX004</p>
+    </section>
+
+    <!-- T014 -->
+    <section id="t014" aria-labelledby="t014-title">
+      <h3 id="t014-title">Metatheorem T014 — Robust Modal Identity</h3>
+      <p><strong>Statement:</strong> If two Ψ-states cross agreed thresholds on structure metrics, they are expressions of the same identity, independent of domain/scale/substrate.</p>
+      <h4>Operator thresholds (typical)</h4>
+      <ul>
+        <li>OP002 <strong>Rec</strong> ≥ 0.85</li>
+        <li>OP003 <strong>Echo</strong> ≥ 0.90</li>
+        <li>OP006 <strong>|ΔEntropy|</strong> ≤ 0.15</li>
+        <li>OP014 <strong>CollapseOrbit</strong> within ±1 step</li>
+      </ul>
+      <div class="muted">Exact thresholds can vary by dataset; see your <code>HHM_bundle.json</code> for the Result Card schema and null models.</div>
+
+      <h4>Why it matters</h4>
+      <p>Identity is structural. When structure recurs, identity persists—even across media, systems, or eras.</p>
+
+      <h4>Download</h4>
+      <a class="button" href="/downloads/HHM_Axioms_Metatheorems_T14.json" download>
+        Download HHM_Axioms_Metatheorems_T14.json
+      </a>
+    </section>
+
+    <section aria-labelledby="safety">
+      <div class="callout warning" id="safety">
+        <strong>Safety & claims:</strong> HHM measures patterns; it does not diagnose disease, guarantee forecasts, or replace professional judgment. Treat outputs as research signals until independently validated.
+      </div>
+    </section>
+  </main>
+
+  <footer>
+  <span class="tagline">Built from resonance. Measured by rhythm. Remembered by the field.</span>
+  <p>
+    Designed with love by the HHM Initiative —
+    <a href="/about.html">Read more</a> |
+    <a href="/license.html">License & Use</a>
+  </p>
+</footer>
+
+</body>
+</html>

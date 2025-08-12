@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "HHM CI (confidence intervals) v2",
+  "type": "object",
+  "required": ["schema", "confidence_level", "n_boot", "metrics"],
+  "properties": {
+    "schema": { "type": "string", "pattern": "^hhm\\.ci\\.v2$" },
+    "confidence_level": { "type": "number", "minimum": 0.5, "maximum": 0.999 },
+    "n_boot": { "type": "integer", "minimum": 100 },
+    "method": { "type": "string", "enum": ["percentile", "bca", "t"] },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["lo", "hi", "estimate"],
+        "properties": {
+          "estimate": { "type": "number" },
+          "lo": { "type": "number" },
+          "hi": { "type": "number" }
+        }
+      }
+    }
+  }
+}

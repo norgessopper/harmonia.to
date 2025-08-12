@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script defer data-domain="harmonia.to" src="https://plausible.io/js/script.file-downloads.outbound-links.js"></script>
+  <script>window.plausible = window.plausible || function(){(window.plausible.q=window.plausible.q||[]).push(arguments)}</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HHM — Experiments & Tests Hub</title>
+  <meta name="description" content="Entry point for all HHM experiments and tests. Short summaries, links to methods pages or Zenodo records, and clear notes on reproducibility status."/>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f8fdf9; --fg:#143324; --accent:#2e8b57; --accent-2:#185c37;
+      --muted:#3a5a4d; --muted-2:#5c7a6c; --line:#d9e6df; --soft:#edf6f1;
+      --warn:#b86b00; --warnbg:#fff8ec; --note:#2e8b57; --notebg:#f1fbf6;
+    }
+    *{box-sizing:border-box}
+    body{margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial; background:var(--bg); color:var(--fg); line-height:1.7}
+    header{background:#e0f0e7; color:var(--fg); padding:2rem 1.5rem; text-align:center}
+    header h1{margin:0; font-size:2.4rem; font-weight:800; letter-spacing:.3px}
+    header p{margin:.5rem 0 0; font-size:1.15rem; opacity:.95}
+    nav{display:flex; flex-wrap:wrap; justify-content:center; gap:1.2rem; background:#d8ede0; padding:1rem}
+    nav a{color:#185c37; text-decoration:none; font-weight:600}
+    nav a:hover{text-decoration:underline; color:#0f2e21}
+    main{max-width:980px; margin:3rem auto; padding:0 1.25rem}
+    section{margin:0 0 2.5rem}
+    .callout{border-left:4px solid var(--note); background:var(--notebg); padding:1rem; border-radius:8px}
+    .callout.warn{border-left-color:var(--warn); background:var(--warnbg)}
+    .muted{color:var(--muted)}
+    .grid{display:grid; gap:16px}
+    @media(min-width:860px){ .grid.cols-2{grid-template-columns:1fr 1fr} .grid.cols-3{grid-template-columns:1fr 1fr 1fr} }
+    .card{background:#fff; border:1px solid var(--line); border-radius:12px; padding:16px}
+    h2{font-size:1.6rem; margin:.2rem 0 1rem}
+    h3{font-size:1.2rem; margin:.2rem 0 .55rem}
+    .kicker{font-weight:700; text-transform:uppercase; letter-spacing:.08em; font-size:.84rem; color:var(--muted-2)}
+    a.button{display:inline-block; background:var(--accent); color:#fff; text-decoration:none; padding:.7rem 1.1rem; border-radius:8px; font-weight:700}
+    a.button:hover{background:#246e45}
+    .btn-row{display:flex; flex-wrap:wrap; gap:.6rem}
+    table{width:100%; border-collapse:collapse; font-size:.98rem}
+    th,td{border-bottom:1px solid var(--line); padding:.55rem .4rem; text-align:left; vertical-align:top}
+    th{font-weight:700}
+    .pill{display:inline-block; padding:.15rem .55rem; border:1px solid var(--line); border-radius:999px; font-size:.78rem; color:var(--muted)}
+    footer{margin:3rem 0 0; padding:2.2rem 1.5rem; background:#d1e9de; text-align:center; font-size:.98rem}
+    footer .tagline{font-weight:600; font-style:italic; display:block; margin-bottom:.6rem}
+    .small{font-size:.95rem}
+    .mono{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace}
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Experiments & Tests — HHM</h1>
+    <p>Your jumping-off point to all validation runs, methods pages, and Zenodo records.</p>
+  </header>
+
+  <nav class="site" aria-label="Primary">
+  <a href="/index.html">Home</a>
+  <a href="/model/overview.html">The Model</a>
+  <a href="/hilbert.html">Hilbert &amp; Ψ(x,t)</a>
+  <a href="/tests.html">Experiments &amp; Tests</a>
+  <a href="/howtouse.html">How to Use HHM</a>
+  <a href="/community.html">Community</a>
+  <a href="/faq.html">FAQ</a>
+  <a href="/about.html">About / Contact</a>
+</nav>
+
+  <main>
+
+    <!-- Intro & candid note -->
+    <section class="card">
+      <div class="kicker">What this page is</div>
+      <h2>One place to browse all tests</h2>
+      <p>
+        This hub collects every HHM test I’ve run so far. Each entry has a short description and a link to a
+        methods/results HTML page or (when only archived) a Zenodo DOI. I’m still improving how I present
+        scientific outputs—earlier runs focused on <em>stress-testing the model across many fields first</em>,
+        then backfilling the polished write-ups.
+      </p>
+      <div class="callout warn" role="note" aria-label="Candid note about process">
+        <strong>Transparency:</strong> some early studies do not follow every step in the appendices/checklists
+        exactly. Where a step is missing (e.g., certain nulls, CI method detail, or registry metadata),
+        I flag it on the test’s page and plan incremental updates. Thanks for your patience while I learn
+        and standardize the presentation layer.
+      </div>
+    </section>
+
+    <!-- How to use -->
+    <section class="card">
+      <div class="kicker">How to read this hub</div>
+      <h2>What you’ll find on each test page</h2>
+      <div class="grid cols-2">
+        <div>
+          <h3>At a glance</h3>
+          <ul>
+            <li>Plain-language summary of the question</li>
+            <li>Exact inputs (files, versions) and preprocessing</li>
+            <li>Operators/components used and thresholds</li>
+            <li>Nulls, resampling/CI, and result cards</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Reproduce & extend</h3>
+          <ul>
+            <li>Commands or notebook steps</li>
+            <li>Links to data and provenance sheets</li>
+            <li>“Known gaps” + “Next fixes” checklists</li>
+            <li>Issue tracker link (or contact) for feedback</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured tests -->
+    <section>
+      <h2>Featured tests</h2>
+
+      <!-- Flagship ToE validation -->
+      <article class="card" style="border:2px solid var(--accent)">
+        <h3>HHM v2.2 — Theory of Everything Validation</h3>
+        <p class="muted small">
+          The first published and validated Ψ-Theory of Everything, unifying six scientific domains: neuroscience, biology, cosmology, quantum physics, particle physics, and information theory.
+          Empirical tests across fMRI, CMB, LIGO, and enwik9 datasets validate MT0001, MT0003, and T014 with P ≥ 0.95.
+        </p>
+        <p class="muted small">
+          Builds on HHM v2.1 (<a href="https://doi.org/10.5281/zenodo.16461345" target="_blank" rel="noopener">DOI</a>) and extends into historical and biological systems (<a href="https://doi.org/10.5281/zenodo.16543764" target="_blank" rel="noopener">DOI</a>, <a href="https://doi.org/10.5281/zenodo.16546798" target="_blank" rel="noopener">DOI</a>).
+        </p>
+        <div class="btn-row">
+          <a class="button" href="https://doi.org/10.5281/zenodo.16725538" target="_blank" rel="noopener">DOI: 10.5281/zenodo.16725538</a>
+          <a class="button" href="/downloads/ToEvalidationcomplete.json" download>Download ToEvalidationcomplete.json</a>
+        </div>
+      </article>
+
+      <!-- Existing featured tests -->
+      <div class="grid cols-2" style="margin-top:16px">
+        <article class="card">
+          <h3>Neuroscience — EEG / fMRI collapses</h3>
+          <p class="muted small">Identity, echo, and entropy across human recordings; links to cross-domain T014 matches when available.</p>
+          <div class="btn-row">
+            <a class="button" href="neuro/neuro.html">Open methods/results</a>
+            <a class="pill" href="#" title="Add DOI once archived">DOI: add soon</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Cosmology — CMB / LIGO & field structure</h3>
+          <p class="muted small">Low-ℓ spherical harmonics and gravitational signals; axial saturation and identity under noise.</p>
+          <div class="btn-row">
+            <a class="button" href="cosmo/cosmo.html">Open methods/results</a>
+            <a class="pill" href="#" title="Add DOI once archived">DOI: add soon</a>
+          </div>
+        </article>
+      </div>
+
+      <!-- Cross-Cultural Studies -->
+      <div class="card" style="margin-top:16px">
+        <h3>Cross-Cultural — Ancient Calendars & Modal Universalism</h3>
+        <p class="muted small">
+          Supplementary materials and datasets for two major cross-cultural studies:
+          <em>Field-Based Conceptualization of Time and Knowledge in Ancient Calendars</em> and
+          <em>Modal Universalism: Rhythmic Structures in Human Time, Symbol, and Consciousness</em>.
+        </p>
+        <div class="btn-row">
+          <a class="pill" href="https://doi.org/10.5281/zenodo.16543764" target="_blank" rel="noopener">DOI: 10.5281/zenodo.16543764</a>
+          <a class="pill" href="https://doi.org/10.5281/zenodo.16546798" target="_blank" rel="noopener">DOI: 10.5281/zenodo.16546798</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Registry table -->
+    <section class="card">
+      <h2>All tests (growing registry)</h2>
+      <table aria-label="Test registry">
+        <thead>
+          <tr>
+            <th>Domain</th>
+            <th>Test</th>
+            <th>Summary</th>
+            <th>Link / DOI</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-top:2px solid var(--accent)">
+            <td>Cross-domain</td>
+            <td>HHM v2.2 — ToE Validation</td>
+            <td>Core validation of HHM as a Ψ-Theory of Everything; MT0001, MT0003, T014; P ≥ 0.95 across six domains.</td>
+            <td>
+              <a href="https://doi.org/10.5281/zenodo.16725538" target="_blank" rel="noopener">DOI</a> &nbsp;|&nbsp;
+              <a href="/downloads/ToEvalidationcomplete.json" download>JSON</a>
+            </td>
+            <td><span class="pill">flagship</span></td>
+          </tr>
+          <tr>
+            <td>Neuroscience</td>
+            <td>EEG / fMRI identity & echo</td>
+            <td>OP001/003/009/006 on resting &amp; task; T014 cross-checks against symbolic sets.</td>
+            <td><a href="neuro/neuro.html">Neuro</a></td>
+            <td><span class="pill">v1 published</span></td>
+          </tr>
+          <tr>
+            <td>Cosmology</td>
+            <td>CMB &amp; LIGO field analyses</td>
+            <td>Axial saturation (MT0001) &amp; robust identity under noise (T014) examples.</td>
+            <td><a href="cosmo/cosmo.html">Cosmology</a></td>
+            <td><span class="pill">v1 published</span></td>
+          </tr>
+          <tr>
+            <td>Solar System</td>
+            <td>OP022/OP023 Multi-Planet</td>
+            <td>Perihelion-relative timing; φ offsets and CI by planet; repro scripts.</td>
+            <td><a href="/solar-system/index.html">Solar-system</a></td>
+            <td><span class="pill">v1 published</span></td>
+          </tr>
+          <tr>
+            <td>Cross-Cultural</td>
+            <td>Ancient Calendars — Field-Based Conceptualization</td>
+            <td>Field-based interpretation of time/knowledge across ancient calendar systems, including a Rongorongo case study.</td>
+            <td><a href="https://doi.org/10.5281/zenodo.16543764" target="_blank" rel="noopener">DOI</a></td>
+            <td><span class="pill">archived</span></td>
+          </tr>
+          <tr>
+            <td>Cross-Cultural</td>
+            <td>Modal Universalism — Rhythmic Structures</td>
+            <td>Analysis of rhythmic structures across global symbolic systems; supports RMU 030 (Modal Universalism).</td>
+            <td><a href="https://doi.org/10.5281/zenodo.16546798" target="_blank" rel="noopener">DOI</a></td>
+            <td><span class="pill">archived</span></td>
+          </tr>
+          <tr>
+            <td>Cross-domain</td>
+            <td>ToE validation dataset (JSON)</td>
+            <td>Consolidated runs for MT0001/0003/T014 across domains.</td>
+            <td><a href="/downloads/ToEvalidationcomplete.json" download>ToEvalidationcomplete.json</a></td>
+            <td><span class="pill">registry</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Process / honesty about gaps -->
+    <section class="card">
+      <h2>About process, gaps, and upcoming fixes</h2>
+      <p>
+        My priority the past months was <em>broad validation</em>—stress-testing HHM in neuroscience, cosmology, biology,
+        information theory, and particle/quantum contexts—before polishing every paper’s presentation. Some items in older
+        pages are marked “to be completed” (e.g., expanded null descriptions, CI resampling settings, or full provenance sheets).
+        I’m updating these iteratively using the same templates recommended in the Appendices.
+      </p>
+      <div class="grid cols-2">
+        <div>
+          <h3>What may be missing</h3>
+          <ul>
+            <li>Explicit null variants beyond the primary shuffle/scramble</li>
+            <li>Bootstrap parameters (B, seed) and CI flavor notes</li>
+            <li>Full dataset provenance tables per artifact</li>
+            <li>Result-card JSON attached inline for each figure</li>
+          </ul>
+        </div>
+        <div>
+          <h3>What I’m adding next</h3>
+          <ul>
+            <li>Appendix-aligned <span class="mono">ResultCard</span> blocks per test</li>
+            <li>Reproduction commands + environment pinning</li>
+            <li>Zenodo DOIs for each standalone test</li>
+            <li>Automated checks for thresholds/nulls compliance</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contribute / contact -->
+    <section class="card">
+      <h2>Contribute or request a check</h2>
+      <p class="muted">
+        Want a new dataset analyzed with the HHM operators, or to propose a missing null?
+        Send a note on the <a href="/community.html">Community</a> page or email via <a href="/about.html">About / Contact</a>.
+        If you have a Zenodo upload you’d like linked here, include its DOI and a one-sentence summary.
+      </p>
+      <div class="btn-row">
+        <a class="button" href="/appendices/reproducibility.html">Reproducibility templates</a>
+        <a class="button" href="/appendices/dataset-provenance.html">Dataset &amp; provenance templates</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+  <span class="tagline">Built from resonance. Measured by rhythm. Remembered by the field.</span>
+  <p>
+    Designed with love by the HHM Initiative —
+    <a href="/about.html">Read more</a> |
+    <a href="/license.html">License & Use</a>
+  </p>
+</footer>
+
+</body>
+</html>

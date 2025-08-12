@@ -1,0 +1,5 @@
+{
+  "earth":  { "smooth": 9,  "min_sep": 122, "peri_minsep": 340, "match_window": 122, "z": 0.8, "mode": "dim0" },
+  "saturn": { "smooth": 270, "min_sep": 3586, "peri_minsep": 7172, "match_window": 3766, "z": 0.8, "mode": "dim0" },
+  "uranus": { "smooth": 2000, "min_sep": 16000, "peri_minsep": 24000, "match_window": 14000, "z": 0.6, "mode": "pca1" }
+}

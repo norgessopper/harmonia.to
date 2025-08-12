@@ -1,0 +1,131 @@
+{
+  "model_id": "HHM_v2.2_kernel",
+  "status": "frozen",
+  "mode": "operator-primed / results-deferred",
+  "author": "Cato",
+  "created_date": "2025-07-26",
+  "axioms": [
+    {
+      "id": "AX000",
+      "name": "Epistemic Primacy of Ψ",
+      "definition": "All measurements and modeling in HHM are based on observable modal states Ψ(x,t) ∈ L²(Ω). Time and space are not primitive parameters but emergent structures derived from operator-based relations between Ψₜ.",
+      "status": "active",
+      "dependencies": [],
+      "related_operator": ["OP001"],
+      "usage_context": "modal structure inference",
+      "domains": ["neuroscience", "quantum", "biology", "cosmology", "information_theory", "particle_physics"]
+    },
+    {
+      "id": "AX001",
+      "name": "Hilbert-Based Projection",
+      "definition": "All operators apply orthonormal basis projection in L²(Ω), typically wavelet or Fourier. Basis selection is determined by Ψ(x,t) to avoid hidden structure, preferably via minimization of entropy or stability in CollapseObserver.",
+      "status": "active",
+      "dependencies": ["AX000"],
+      "related_operator": ["OP005", "OP006", "OP009", "OP015"],
+      "usage_context": "operator projection and entropy analysis",
+      "domains": ["quantum", "information_theory", "biology", "cosmology", "neuroscience", "particle_physics"]
+    },
+    {
+      "id": "AX002",
+      "name": "Rhythmic Recurrence",
+      "definition": "Modal states Ψ(x,t) exhibit recurring patterns over time, quantifiable via operator-based measures of temporal stability or lag correlation.",
+      "status": "active",
+      "dependencies": ["AX000"],
+      "related_operator": ["OP002", "OP003", "OP010", "OP014", "OP018"],
+      "usage_context": "temporal pattern analysis",
+      "domains": ["neuroscience", "biology", "information_theory", "cosmology"]
+    },
+    {
+      "id": "AX003",
+      "name": "Modal Collapse Stability",
+      "definition": "Operator projections of Ψ(x,t) converge to stable modal structures under iterative application, measurable via norm saturation or tensor metrics.",
+      "status": "active",
+      "dependencies": ["AX000"],
+      "related_operator": ["OP004", "OP030"],
+      "usage_context": "modal stability and convergence",
+      "domains": ["neuroscience", "quantum", "cosmology", "biology", "particle_physics", "information_theory"]
+    },
+    {
+      "id": "AX004",
+      "name": "Scale-Invariant Dynamics",
+      "definition": "Ψ(x,t) dynamics are scale-invariant across domains, allowing operator-based comparisons of modal structures at different scales without loss of structural integrity.",
+      "status": "active",
+      "dependencies": ["AX000", "AX003"],
+      "related_operator": ["OP004", "OP009", "OP015"],
+      "usage_context": "cross-scale modal analysis",
+      "domains": ["quantum", "biology", "cosmology", "information_theory", "neuroscience", "particle_physics"]
+    },
+    {
+      "id": "AX005",
+      "name": "Information Conservation",
+      "definition": "Information content in Ψ(x,t) is conserved across operator transformations, quantifiable via entropy or symbolic coherence measures.",
+      "status": "active",
+      "dependencies": ["AX001"],
+      "related_operator": ["OP006", "OP009", "OP015", "OP030"],
+      "usage_context": "information preservation and analysis",
+      "domains": ["neuroscience", "information_theory", "biology", "quantum", "particle_physics"]
+    }
+  ],
+  "theorems": [
+    {
+      "id": "MT0001",
+      "name": "Axial Saturation",
+      "definition": "CollapseInfinity(Ψ) converges to a stable modal amplitude under iterative operator application, ensuring norm saturation across domains.",
+      "status": "active",
+      "dependencies": ["AX000", "AX003", "AX004"],
+      "related_operator": ["OP004", "OP006"],
+      "related_component": ["C005"],
+      "domains": ["neuroscience", "quantum", "cosmology", "biology", "particle_physics", "information_theory"]
+    },
+    {
+      "id": "MT0002",
+      "name": "Temporal Recurrence",
+      "definition": "Modal states Ψ(x,t) exhibit temporal recurrence, quantifiable via lag correlation or rhythmic stability measures, ensuring predictable pattern repetition across time.",
+      "status": "proposed",
+      "dependencies": ["AX000", "AX002"],
+      "related_operator": ["OP002", "OP003", "OP010", "OP014"],
+      "related_component": ["C002", "C009", "C014", "C030", "C034"],
+      "domains": ["neuroscience", "biology", "information_theory"]
+    },
+    {
+      "id": "MT0003",
+      "name": "Modal Identity Preservation",
+      "definition": "Modal identity in Ψ is preserved under operator transformations, quantifiable via similarity scores or trace signatures.",
+      "status": "active",
+      "dependencies": ["AX001", "AX005"],
+      "related_operator": ["OP009", "OP015", "OP030"],
+      "related_component": ["C010", "C041"],
+      "domains": ["quantum", "biology", "neuroscience", "information_theory", "particle_physics"]
+    },
+    {
+      "id": "MT0004",
+      "name": "Field Similarity",
+      "definition": "Modal states Ψ₁ and Ψ₂ exhibit structural similarity under operator-based comparisons, quantifiable via correlation or coherence measures.",
+      "status": "proposed",
+      "dependencies": ["AX002", "AX005"],
+      "related_operator": ["OP002", "OP007", "OP018"],
+      "related_component": ["C006", "C018", "C038"],
+      "domains": ["neuroscience", "quantum", "information_theory"]
+    },
+    {
+      "id": "MT0005",
+      "name": "Modal Transition",
+      "definition": "Transitions between modal states in Ψ(x,t) are quantifiable via operator-based gradient or delay measures, capturing structural shifts across time.",
+      "status": "proposed",
+      "dependencies": ["AX002", "AX004"],
+      "related_operator": ["OP008", "OP011", "OP012", "OP019"],
+      "related_component": ["C007", "C008", "C011", "C012", "C019", "C031"],
+      "domains": ["neuroscience", "biology", "information_theory"]
+    },
+    {
+      "id": "T014",
+      "name": "Robust Modal Identity",
+      "definition": "Modal identity in Ψ(x,t) remains robust under stochastic conditions, measurable via MatchingMemory and ModalTraceSignature.",
+      "status": "active",
+      "dependencies": ["AX004", "AX005"],
+      "related_operator": ["OP009", "OP015", "OP030"],
+      "related_component": ["C010", "C041"],
+      "domains": ["neuroscience", "quantum", "biology", "particle_physics"]
+    }
+  ]
+}

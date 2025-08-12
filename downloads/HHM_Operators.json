@@ -1,0 +1,719 @@
+{
+  "model_id": "HHM_v2.2_kernel",
+  "version": "2.2",
+  "metadata": {
+    "author": "Cato",
+    "frozen_date": "2025-07-26",
+    "status": "frozen",
+    "purpose": "Defines operators (OP001–OP030) for HHM v2.2 as a ToE blueprint",
+    "waves": [
+      {"wave": "operator_wave_1", "operators": ["OP001–OP009"]},
+      {"wave": "operator_wave_2", "operators": ["OP010–OP029"]},
+      {"wave": "operator_wave_3", "operators": ["OP030"]}
+    ]
+  },
+  "operators": [
+    {
+      "id": "OP001",
+      "name": "CollapsePattern",
+      "metadata": {
+        "author": "Cato",
+        "created_date": "2025-07-26",
+        "version": "1.0",
+        "used_in": [],
+        "wave": "operator_wave_1",
+        "computational_requirements": "Standard numpy",
+        "status": "pending"
+      },
+      "definition": "Projects modal state Ψₜ to a vector [p₁, p₂, ..., pₙ] in L²(Ω), representing the primary measurement surface.",
+      "input": {"Ψₜ": "[T × V] matrix, dtype: float32"},
+      "output": "Vector: float32[]",
+      "parameters": {},
+      "supports_axioms": ["AX000", "AX003"],
+      "supports_theorems": [],
+      "domains": ["neuroscience", "quantum", "biology"],
+      "keywords": ["EEG pattern", "wavelet projection", "modal collapse"],
+      "notes": "Under evaluation. Results deferred to future versions."
+    },
+    {
+      "id": "OP002",
+      "name": "Rec",
+      "metadata": {
+        "author": "Cato",
+        "created_date": "2025-07-26",
+        "version": "1.0",
+        "used_in": [],
+        "wave": "operator_wave_1",
+        "computational_requirements": "Standard numpy",
+        "status": "available"
+      },
+      "definition": "Measures symbolic coherence between two modal states Ψ₁ and Ψ₂, returning a similarity score (0–1).",
+      "input": {
+        "Ψ₁": "[T × V] matrix, dtype: float32",
+        "Ψ₂": "[T × V] matrix, dtype: float32"
+      },
+      "output": "Score: float32, [0, 1]",
+      "parameters": {},
+      "supports_axioms": ["AX002", "AX005"],
+      "supports_theorems": [],
+      "domains": ["neuroscience", "information_theory"],
+      "keywords": ["symbol coherence", "neural matching", "bio-rhythm"],
+      "notes": "Under evaluation. Results deferred to future versions."
+    },
+    {
+      "id": "OP003",
+      "name": "Echo",
+      "metadata": {
+        "author": "Cato",
+        "created_date": "2025-07-26",
+        "version": "1.0",
+        "used_in": [],
+        "wave": "operator_wave_1",
+        "computational_requirements": "Standard numpy",
+        "status": "pending"
+      },
+      "definition": "Measures temporal stability in Ψₜ series, based on recurring patterns over time.",
+      "input": {"Ψₜ": "[T × V] matrix, dtype: float32"},
+      "output": "Score: float32, [0, 1]",
+      "parameters": {},
+      "supports_axioms": ["AX002", "AX005"],
+      "supports_theorems": [],
+      "domains": ["neuroscience", "quantum", "information_theory"],
+      "keywords": ["temporal stability", "echo state network", "rhythm"],
+      "notes": "Under evaluation. Results deferred to future versions."
+    },
+    {
+      "id": "OP004",
+      "name": "CollapseInfinity",
+      "metadata": {
+        "author": "Cato",
+        "created_date": "2025-07-26",
+        "version": "1.0",
+        "used_in": ["TEST005"],
+        "wave": "operator_wave_1",
+        "computational_requirements": "Standard numpy",
+        "status": "active"
+      },
+      "definition": "Iteratively collapses Ψ to a stable modal amplitude, measured relative to the total norm ∥Ψ∥₂.",
+      "input": {"Ψ": "[T × V] matrix, dtype: float32"},
+      "output": "Score: float32, [0, 1]",
+      "parameters": {},
+      "supports_axioms": ["AX003", "AX004"],
+      "supports_theorems": ["MT0001"],
+      "domains": ["neuroscience", "quantum", "cosmology", "biology", "particle_physics", "information_theory"],
+      "keywords": ["modal collapse", "stability", "norm saturation"],
+      "notes": "Validated in v2.2 with TEST005."
+    },
+    {
+      "id": "OP005",
+      "name": "CollapseObserver",
+      "metadata": {
+        "author": "Cato",
+        "created_date": "2025-07-26",
+        "version": "1.0",
+        "used_in": [],
+        "wave": "operator_wave_1",
+        "computational_requirements": "Standard numpy",
+        "status": "pending"
+      },
+      "definition": "Compares Ψₜ against Ψ_ref or Ψₜ₋₁ to measure structural similarity, quantified via entropy-based alignment with Ψ_ref.",
+      "input": {
+        "Ψₜ": "[T × V] matrix, dtype: float32",
+        "Ψ_ref": "[T × V] matrix, dtype: float32"
+      },
+      "output": "Score: float32, [0, 1]",
+      "parameters": {},
+      "supports_axioms": ["AX001", "AX005"],
+      "supports_theorems": [],
+      "domains": ["neuroscience", "quantum", "biology"],
+      "keywords": ["structural similarity", "quantum coherence", "observer effect"],
+      "notes": "Under evaluation. Results deferred to future versions."
+    },
+    {
+      "id": "OP006",
+      "name": "UnifiedEntropy",
+      "metadata": {
+        "author": "Cato",
+        "created_date": "2025-07-26",
+        "version": "1.0",
+        "used_in": ["TEST005"],
+        "wave": "operator_wave_1",
+        "computational_requirements": "Standard numpy",
+        "status": "active"
+      },
+      "definition": "Computes entropy of Ψ(x,t) or symbolic sequences to quantify information content and complexity in L²(Ω).",
+      "input": {
+        "data": "[T × V] or [T × S] matrix, dtype: float32"
+      },
+      "output": "Entropy: float32, [0, ∞)",
+      "parameters": {},
+      "supports_axioms": ["AX001", "AX004", "AX005"],
+      "supports_theorems": ["MT0001", "T014"],
+      "domains": ["neuroscience", "information_theory", "biology", "cosmology", "particle_physics"],
+      "keywords": ["entropy", "information content", "symbol complexity", "L²(Ω)"],
+      "notes": "Validated in v2.2 with TEST005."
+    },
+    {
+      "id": "OP007",
+      "name": "FieldSimilarity",
+      "metadata": {
+        "author": "Cato",
+        "created_date": "2025-07-26",
+        "version": "1.0",
+        "used_in": [],
+        "wave": "operator_wave_1",
+        "computational_requirements": "Standard numpy",
+        "status": "pending"
+      },
+      "definition": "Measures similarity between Ψ and existing FMS classes for symbolic compression.",
+      "input": {
+        "Ψ": "[T × V] matrix, dtype: float32",
+        "FMS_i": "[T × V] matrix, dtype: float32"
+      },
+      "output": "Score: float32, [0, 1]",
+      "parameters": {},
+      "supports_axioms": ["AX004", "AX005"],
+      "supports_theorems": [],
+      "domains": ["neuroscience", "quantum", "biology"],
+      "keywords": ["field similarity", "symbol compression", "FMS"],
+      "notes": "Under evaluation. Results deferred to future versions."
+    },
+    {
+      "id": "OP008",
+      "name": "CollapseDelayGradient",
+      "metadata": {
+        "author": "Cato",
+        "created_date": "2025-07-26",
+        "version": "1.0",
+        "used_in": [],
+        "wave": "operator_wave_1",
+        "computational_requirements": "Standard numpy",
+        "status": "available"
+      },
+      "definition": "Measures the gradient of delay in Ψₜ to detect rhythm breaks.",
+      "input": {"Ψₜ": "[T × V] matrix, dtype: float32"},
+      "output": "Vector: float32[]",
+      "parameters": {},
+      "supports_axioms": ["AX004", "AX005"],
+      "supports_theorems": [],
+      "domains": ["neuroscience", "information_theory"],
+      "keywords": ["delay gradient", "rhythm break", "temporal analysis"],
+      "notes": "Under evaluation. Results deferred to future versions."
+    },
+    {
+      "id": "OP009",
+      "name": "MatchingMemory",
+      "metadata": {
+        "author": "Cato",
+        "created_date": "2025-07-26",
+        "version": "1.0",
+        "used_in": ["TEST010"],
+        "wave": "operator_wave_1",
+        "computational_requirements": "Standard numpy",
+        "status": "active"
+      },
+      "definition": "Measures symbolic identity in Ψ series, based on long-term pattern recognition under stochastic conditions.",
+      "input": {"Ψ": "[T × V] matrix, dtype: float32"},
+      "output": "Score: float32, [0, 1]",
+      "parameters": {},
+      "supports_axioms": ["AX005"],
+      "supports_theorems": ["MT0003", "T014"],
+      "domains": ["neuroscience", "quantum", "biology", "information_theory", "particle_physics"],
+      "keywords": ["matching memory", "noise robustness", "pattern recognition"],
+      "notes": "Validated in v2.2 with TEST010."
+    },
+    {
+      "id": "OP010",
+      "name": "RhythmEcho",
+      "metadata": {
+        "author": "Cato",
+        "created_date": "2025-07-26",
+        "version": "1.0",
+        "used_in": [],
+        "wave": "operator_wave_2",
+        "computational_requirements": "Standard numpy",
+        "status": "available"
+      },
+      "definition": "Measures recurring modal rhythm in Ψ(x,t) via lag correlation to detect periodic coherence in Ψₜ series.",
+      "input": {"Ψₜ": "[T × V] matrix, dtype: float32"},
+      "output": "Score: float32, [0, 1]",
+      "parameters": {},
+      "supports_axioms": ["AX002", "AX005"],
+      "supports_theorems": [],
+      "domains": ["neuroscience", "information_theory"],
+      "keywords": ["rhythm echo", "lag correlation", "periodic coherence"],
+      "notes": "Under evaluation. Results deferred to future versions."
+    },
+    {
+      "id": "OP011",
+      "name": "ModalRhythmGradient",
+      "metadata": {
+        "author": "Cato",
+        "created_date": "2025-07-26",
+        "version": "1.0",
+        "used_in": [],
+        "wave": "operator_wave_2",
+        "computational_requirements": "Standard numpy",
+        "status": "available"
+      },
+      "definition": "Computes the gradient of rhythmic variation in Ψ(x,t) to measure transitions in modal structure.",
+      "input": {"Ψ": "[T × V] matrix, dtype: float32"},
+      "output": "Vector: float32[]",
+      "parameters": {},
+      "supports_axioms": ["AX003", "AX004"],
+      "supports_theorems": [],
+      "domains": ["neuroscience", "biology"],
+      "keywords": ["modal rhythm", "gradient analysis", "neural transition"],
+      "notes": "Under evaluation. Results deferred to future versions."
+    },
+    {
+      "id": "OP012",
+      "name": "RhythmSymbolGradient",
+      "metadata": {
+        "author": "Cato",
+        "created_date": "2025-07-26",
+        "version": "1.0",
+        "used_in": [],
+        "wave": "operator_wave_2",
+        "computational_requirements": "Standard numpy",
+        "status": "available"
+      },
+      "definition": "Computes the gradient of rhythm and symbol variation in Ψ to measure transitions in modal and symbol structure.",
+      "input": {"Ψ": "[T × V] matrix, dtype: float32"},
+      "output": "Vector: float32[]",
+      "parameters": {},
+      "supports_axioms": ["AX003", "AX005"],
+      "supports_theorems": [],
+      "domains": ["information_theory", "biology"],
+      "keywords": ["rhythm gradient", "symbol variation", "modal structure"],
+      "notes": "Under evaluation. Results deferred to future versions."
+    },
+    {
+      "id": "OP013",
+      "name": "NoiseRobustCollapse",
+      "metadata": {
+        "author": "Cato",
+        "created_date": "2025-07-26",
+        "version": "1.0",
+        "used_in": [],
+        "wave": "operator_wave_2",
+        "computational_requirements": "Standard numpy",
+        "status": "available"
+      },
+      "definition": "Projects Ψ under stochastic noise to analyze stability in modal structure.",
+      "input": {
+        "Ψ": "[T × V] matrix, dtype: float32",
+        "noise_level": "float32, [0, 1]"
+      },
+      "output": "Score: float32, [0, 1] or Vector: float32[]",
+      "parameters": {"noise_level": "float32, [0, 1]"},
+      "supports_axioms": ["AX001", "AX004"],
+      "supports_theorems": [],
+      "domains": ["neuroscience", "quantum"],
+      "keywords": ["noise robustness", "modal collapse", "stochastic projection"],
+      "notes": "Under evaluation. Results deferred to future versions."
+    },
+    {
+      "id": "OP014",
+      "name": "StokastiskEcho",
+      "metadata": {
+        "author": "Cato",
+        "created_date": "2025-07-26",
+        "version": "1.0",
+        "used_in": [],
+        "wave": "operator_wave_2",
+        "computational_requirements": "Standard numpy",
+        "status": "pending"
+      },
+      "definition": "Measures stochastic rhythm in Ψ(x,t) via probabilistic lag correlation in stochastic conditions.",
+      "input": {
+        "Ψₜ": "[T × V] matrix, dtype: float32",
+        "noise": "float32, [0, 1]"
+      },
+      "output": "Score: float32, [0, 1]",
+      "parameters": {"noise": "float32, [0, 1]"},
+      "supports_axioms": ["AX002", "AX005"],
+      "supports_theorems": [],
+      "domains": ["neuroscience", "quantum", "biology"],
+      "keywords": ["stochastic rhythm", "lag correlation", "uncertainty"],
+      "notes": "Under evaluation. Results deferred to future versions."
+    },
+    {
+      "id": "OP015",
+      "name": "RobustIdentityMatcher",
+      "metadata": {
+        "author": "Cato",
+        "created_date": "2025-07-26",
+        "version": "1.0",
+        "used_in": ["TEST010"],
+        "wave": "operator_wave_2",
+        "computational_requirements": "Standard numpy",
+        "status": "active"
+      },
+      "definition": "Matches identity in Ψ under stochastic conditions via observation of pattern preservation.",
+      "input": {
+        "Ψ": "[T × V] matrix, dtype: float32",
+        "Ψ_ref": "[T × V] matrix, dtype: float32",
+        "noise": "float32, [0, 1]"
+      },
+      "output": "Score: float32, [0, 1]",
+      "parameters": {"noise": "float32, [0, 1]"},
+      "supports_axioms": ["AX004", "AX005"],
+      "supports_theorems": ["MT0003", "T014"],
+      "domains": ["biology", "quantum", "information_theory", "particle_physics"],
+      "keywords": ["identity matching", "noise robustness", "pattern preservation"],
+      "notes": "Validated in v2.2 with TEST010."
+    },
+    {
+      "id": "OP016",
+      "name": "SymbolPatternCollapse",
+      "metadata": {
+        "author": "Cato",
+        "created_date": "2025-07-26",
+        "version": "1.0",
+        "used_in": [],
+        "wave": "operator_wave_2",
+        "computational_requirements": "Standard numpy",
+        "status": "available"
+      },
+      "definition": "Projects symbolic sequences from FRL to a collapsed vector for symbol structure analysis.",
+      "input": {"Symbol sequence": "[T × S] matrix, dtype: float32"},
+      "output": "Vector: float32[]",
+      "parameters": {},
+      "supports_axioms": ["AX005"],
+      "supports_theorems": [],
+      "domains": ["information_theory", "biology"],
+      "keywords": ["symbol collapse", "FRL sequence", "symbol structure"],
+      "notes": "Under evaluation. Results deferred to future versions."
+    },
+    {
+      "id": "OP017",
+      "name": "SymbolEcho",
+      "metadata": {
+        "author": "Cato",
+        "created_date": "2025-07-26",
+        "version": "1.0",
+        "used_in": [],
+        "wave": "operator_wave_2",
+        "computational_requirements": "Standard numpy",
+        "status": "available"
+      },
+      "definition": "Measures recurring symbol patterns in FRL sequences for rhythmic symbol analysis.",
+      "input": {"Symbol sequence": "[T × S] matrix, dtype: float32"},
+      "output": "Score: float32, [0, 1]",
+      "parameters": {},
+      "supports_axioms": ["AX005"],
+      "supports_theorems": [],
+      "domains": ["information_theory", "biology"],
+      "keywords": ["symbol echo", "FRL rhythm", "symbol analysis"],
+      "notes": "Under evaluation. Results deferred to future versions."
+    },
+    {
+      "id": "OP018",
+      "name": "FieldIdentityPreserver",
+      "metadata": {
+        "author": "Cato",
+        "created_date": "2025-07-26",
+        "version": "1.0",
+        "used_in": [],
+        "wave": "operator_wave_2",
+        "computational_requirements": "Standard numpy",
+        "status": "available"
+      },
+      "definition": "Preserves field identity in Ψ via operator-based matching over transformations.",
+      "input": {
+        "Ψ": "[T × V] matrix, dtype: float32",
+        "Ψ_ref": "[T × V] matrix, dtype: float32"
+      },
+      "output": "Score: float32, [0, 1]",
+      "parameters": {},
+      "supports_axioms": ["AX002", "AX005"],
+      "supports_theorems": [],
+      "domains": ["neuroscience", "quantum"],
+      "keywords": ["field identity", "transformation matching", "quantum"],
+      "notes": "Under evaluation. Results deferred to future versions."
+    },
+    {
+      "id": "OP019",
+      "name": "IdentityDelayGradient",
+      "metadata": {
+        "author": "Cato",
+        "created_date": "2025-07-26",
+        "version": "1.0",
+        "used_in": [],
+        "wave": "operator_wave_2",
+        "computational_requirements": "Standard numpy",
+        "status": "available"
+      },
+      "definition": "Measures the gradient of identity shift in Ψ sequence to detect identity breaks.",
+      "input": {"Ψₜ": "[T × V] matrix, dtype: float32"},
+      "output": "Vector: float32[]",
+      "parameters": {},
+      "supports_axioms": ["AX004"],
+      "supports_theorems": [],
+      "domains": ["neuroscience", "quantum"],
+      "keywords": ["identity shift", "gradient analysis", "neural identity"],
+      "notes": "Under evaluation. Results deferred to future versions."
+    },
+    {
+      "id": "OP020",
+      "name": "QuantumIdentityMatcher",
+      "metadata": {
+        "author": "Cato",
+        "created_date": "2025-07-26",
+        "version": "1.0",
+        "used_in": [],
+        "wave": "operator_wave_2",
+        "computational_requirements": "Standard numpy",
+        "status": "available"
+      },
+      "definition": "Matches identity in Ψ with quantum coherence via non-local correlation.",
+      "input": {
+        "Ψ": "[T × V] matrix, dtype: float32",
+        "Ψ_ref": "[T × V] matrix, dtype: float32"
+      },
+      "output": "Score: float32, [0, 1]",
+      "parameters": {},
+      "supports_axioms": ["AX001", "AX003"],
+      "supports_theorems": [],
+      "domains": ["quantum", "cosmology"],
+      "keywords": ["quantum coherence", "non-local correlation", "identity"],
+      "notes": "Under evaluation. Results deferred to future versions."
+    },
+    {
+      "id": "OP021",
+      "name": "QuantumCoherenceMeasure",
+      "metadata": {
+        "author": "Cato",
+        "created_date": "2025-07-26",
+        "version": "1.0",
+        "used_in": [],
+        "wave": "operator_wave_2",
+        "computational_requirements": "Standard numpy",
+        "status": "available"
+      },
+      "definition": "Measures quantum coherence in Ψ(x,t) via operator product in L²(Ω).",
+      "input": {"Ψ": "[T × V] matrix, dtype: float32"},
+      "output": "Score: float32, [0, 1]",
+      "parameters": {},
+      "supports_axioms": ["AX001", "AX003"],
+      "supports_theorems": [],
+      "domains": ["quantum", "biology"],
+      "keywords": ["quantum coherence", "operator product", "L²(Ω)"],
+      "notes": "Under evaluation. Results deferred to future versions."
+    },
+    {
+      "id": "OP022",
+      "name": "BioInformationFlow",
+      "metadata": {
+        "author": "Cato",
+        "created_date": "2025-07-26",
+        "version": "1.0",
+        "used_in": [],
+        "wave": "operator_wave_2",
+        "computational_requirements": "Standard numpy",
+        "status": "available"
+      },
+      "definition": "Measures the flow of bioinformation in Ψ via sequential entropy analysis.",
+      "input": {"Ψₜ": "[T × V] matrix, dtype: float32"},
+      "output": "Vector: float32[]",
+      "parameters": {},
+      "supports_axioms": ["AX005"],
+      "supports_theorems": [],
+      "domains": ["biology", "information_theory"],
+      "keywords": ["bioinformation flow", "sequential entropy", "biological rhythm"],
+      "notes": "Under evaluation. Results deferred to future versions."
+    },
+    {
+      "id": "OP023",
+      "name": "QuantumBioEcho",
+      "metadata": {
+        "author": "Cato",
+        "created_date": "2025-07-26",
+        "version": "1.0",
+        "used_in": [],
+        "wave": "operator_wave_2",
+        "computational_requirements": "Standard numpy",
+        "status": "available"
+      },
+      "definition": "Measures recurring quantum-bio patterns in Ψ for rhythmic coherence.",
+      "input": {"Ψₜ": "[T × V] matrix, dtype: float32"},
+      "output": "Score: float32, [0, 1]",
+      "parameters": {},
+      "supports_axioms": ["AX002", "AX005"],
+      "supports_theorems": [],
+      "domains": ["biology", "quantum"],
+      "keywords": ["quantum-bio rhythm", "coherence", "pattern repetition"],
+      "notes": "Under evaluation. Results deferred to future versions."
+    },
+    {
+      "id": "OP024",
+      "name": "BioQuantumTensor",
+      "metadata": {
+        "author": "Cato",
+        "created_date": "2025-07-26",
+        "version": "1.0",
+        "used_in": [],
+        "wave": "operator_wave_2",
+        "computational_requirements": "Dask-compatible",
+        "status": "pending"
+      },
+      "definition": "Computes variance in bio-quantum structure in Ψ for nesting and complexity.",
+      "input": {"Ψ": "[T × V] matrix, dtype: float32"},
+      "output": "Tensor: float32[N × M]",
+      "parameters": {},
+      "supports_axioms": ["AX001", "AX004"],
+      "supports_theorems": [],
+      "domains": ["biology", "quantum", "cosmology"],
+      "keywords": ["bio-quantum variance", "tensor analysis", "complexity"],
+      "notes": "Under evaluation. Results deferred to future versions."
+    },
+    {
+      "id": "OP025",
+      "name": "ScaleInvariantCollapse",
+      "metadata": {
+        "author": "Cato",
+        "created_date": "2025-07-26",
+        "version": "1.0",
+        "used_in": [],
+        "wave": "operator_wave_2",
+        "computational_requirements": "Standard numpy",
+        "status": "pending"
+      },
+      "definition": "Projects Ψ to a scale-invariant state for analysis of modal structures.",
+      "input": {"Ψ": "[T × V] matrix, dtype: float32"},
+      "output": "Score: float32, [0, 1]",
+      "parameters": {},
+      "supports_axioms": ["AX002", "AX003", "AX004"],
+      "supports_theorems": [],
+      "domains": ["cosmology", "quantum", "biology"],
+      "keywords": ["scale invariance", "universal patterns", "cosmology"],
+      "notes": "Under evaluation. Results deferred to future versions."
+    },
+    {
+      "id": "OP026",
+      "name": "TensorMetricObserver",
+      "metadata": {
+        "author": "Cato",
+        "created_date": "2025-07-26",
+        "version": "1.0",
+        "used_in": [],
+        "wave": "operator_wave_2",
+        "computational_requirements": "Dask-compatible",
+        "status": "available"
+      },
+      "definition": "Measures tensor metrics in Ψ to detect gravitational effects in scale-invariant structures.",
+      "input": {"Ψ": "[T × V] matrix, dtype: float32"},
+      "output": "Tensor: float32[N × M]",
+      "parameters": {},
+      "supports_axioms": ["AX002", "AX003", "AX004"],
+      "supports_theorems": [],
+      "domains": ["cosmology", "quantum"],
+      "keywords": ["tensor metrics", "gravitational effects", "scale invariance"],
+      "notes": "Under evaluation. Results deferred to future versions."
+    },
+    {
+      "id": "OP027",
+      "name": "EntanglementMeasure",
+      "metadata": {
+        "author": "Cato",
+        "created_date": "2025-07-26",
+        "version": "1.0",
+        "used_in": [],
+        "wave": "operator_wave_2",
+        "computational_requirements": "Standard numpy",
+        "status": "available",
+        "related_operator": ["OP005", "OP018"]
+      },
+      "definition": "Measures quantum entanglement in Ψ(x,t) via Bell inequalities or CHSH correlations.",
+      "input": {
+        "Ψ": "[T × V] matrix, dtype: float32",
+        "Ψ_ref": "[T × V] matrix, dtype: float32"
+      },
+      "output": "Score: float32, [0, 1]",
+      "parameters": {},
+      "supports_axioms": ["AX001", "AX002", "AX003"],
+      "supports_theorems": [],
+      "domains": ["quantum", "cosmology"],
+      "keywords": ["quantum entanglement", "Bell inequalities", "CHSH correlation"],
+      "notes": "Under evaluation. Results deferred to future versions.",
+      "interpretation_note": "Entanglement here must be understood as operator-based convergence between CollapsePattern(Ψ) and CollapsePattern(Ψ_ref), not as classical particle coupling."
+    },
+    {
+      "id": "OP028",
+      "name": "DarkEnergyTensor",
+      "metadata": {
+        "author": "Cato",
+        "created_date": "2025-07-26",
+        "version": "1.0",
+        "used_in": [],
+        "wave": "operator_wave_2",
+        "computational_requirements": "Dask-compatible",
+        "status": "available"
+      },
+      "definition": "Computes tensors related to dark energy in Ψ to model cosmological expansion.",
+      "input": {"Ψ": "[T × V] matrix, dtype: float32"},
+      "output": "Tensor: float32[N × M]",
+      "parameters": {},
+      "supports_axioms": ["AX002", "AX003", "AX004"],
+      "supports_theorems": [],
+      "domains": ["cosmology", "quantum"],
+      "keywords": ["dark energy", "cosmological expansion", "tensor analysis"],
+      "notes": "Under evaluation. Results deferred to future versions.",
+      "interpretation_note": "This operator must be interpreted as measuring rhythmic nesting and expansion structure in Ψ, not as simulating classical dark energy."
+    },
+    {
+      "id": "OP029",
+      "name": "BioQuantumCoupling",
+      "metadata": {
+        "author": "Cato",
+        "created_date": "2025-07-26",
+        "version": "1.0",
+        "used_in": [],
+        "wave": "operator_wave_2",
+        "computational_requirements": "Dask-compatible",
+        "status": "available"
+      },
+      "definition": "Measures couplings between biological and quantum processes in Ψ to detect cross-domain phenomena.",
+      "input": {
+        "Ψ_bio": "[T × V] matrix, dtype: float32",
+        "Ψ_quantum": "[T × V] matrix, dtype: float32"
+      },
+      "output": "Score: float32, [0, 1]",
+      "parameters": {},
+      "supports_axioms": ["AX001", "AX005"],
+      "supports_theorems": [],
+      "domains": ["biology", "quantum"],
+      "keywords": ["bio-quantum coupling", "cross-domain phenomena", "coherence"],
+      "notes": "Under evaluation. Results deferred to future versions.",
+      "interpretation_note": "This operator aims to identify covariance in modal rhythm and structure between Ψ_bio and Ψ_quantum via CollapsePattern and Rec."
+    },
+    {
+      "id": "OP030",
+      "name": "ModalTraceSignature",
+      "metadata": {
+        "author": "Cato",
+        "created_date": "2025-08-01",
+        "version": "2.0",
+        "wave": "operator_wave_3",
+        "computational_requirements": "Standard numpy",
+        "status": "active",
+        "used_in": ["TEST050"]
+      },
+      "definition": "Detects modal identity in Ψ(x,t) by computing higher-order trace correlations within modal pattern clusters, with tolerance for nonstationarity.",
+      "input": {
+        "Ψ": "[T × V] matrix, dtype: float32"
+      },
+      "output": "Score: float32, [0, 1]",
+      "parameters": {
+        "window": "int, default=500",
+        "stride": "int, default=100"
+      },
+      "supports_axioms": ["AX003", "AX005"],
+      "supports_theorems": ["MT0003", "T014"],
+      "domains": ["biology", "quantum", "information_theory", "cosmology", "particle_physics", "neuroscience"],
+      "keywords": ["trace correlation", "modal identity", "pattern memory"],
+      "notes": "Validated in v2.2 with TEST050."
+    }
+  ]
+}

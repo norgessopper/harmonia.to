@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script defer data-domain="harmonia.to" src="https://plausible.io/js/script.file-downloads.outbound-links.js"></script>
+  <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Holographic Harmonic Model — Operators</title>
+  <meta name="description" content="Explore the operators of the Holographic Harmonic Model (HHM): computable, measurable tools for working with Ψ(x,t).">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; margin: 0; background: #f8fdf9; color: #143324; }
+    header { background: #e0f0e7; color: #143324; padding: 2rem 1.5rem; text-align: center; }
+    header h1 { font-size: 2.5rem; margin: 0; font-weight: 800; letter-spacing: 0.5px; }
+    header p { margin-top: 0.5rem; font-size: 1.2rem; opacity: 0.9; }
+    nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; background: #d8ede0; padding: 1rem 0; }
+    nav a { text-decoration: none; color: #185c37; font-weight: 600; transition: color 0.2s; }
+    nav a:hover { color: #0f2e21; text-decoration: underline; }
+    main { max-width: 800px; margin: 3rem auto; padding: 0 1.5rem; line-height: 1.75; }
+    section { margin-bottom: 3rem; }
+    .button { display: inline-block; padding: 0.75rem 1.5rem; margin-top: 1.5rem; background: #2e8b57; color: white; text-decoration: none; border-radius: 6px; font-weight: 600; transition: background 0.3s; }
+    .button:hover { background: #246e45; }
+    .callout { border-left: 4px solid #2e8b57; background: #f4faf7; padding: 0.9rem 1rem; margin: 1rem 0; }
+    .warning { border-left: 4px solid #b86b00; background: #fff8ec; }
+    .muted { color: #3a5a4d; opacity: 0.9; }
+    pre code { display: block; padding: 0.75rem; background: #f4f7f5; border-radius: 6px; overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { text-align: left; padding: .5rem; }
+    thead tr { border-bottom: 1px solid #d9e6df; }
+    footer { margin-top: 4rem; padding: 2.5rem 1.5rem; text-align: center; font-size: 0.95rem; background: #d1e9de; color: #143324; }
+    footer .tagline { font-weight: 600; font-style: italic; margin-bottom: 0.8rem; display: block; }
+    footer a { color: #185c37; text-decoration: underline; }
+    footer a:hover { color: #0a2016; }
+    @media (max-width: 600px) {
+      body { padding: 0 1rem; font-size: 1.05rem; }
+      nav { flex-direction: column; gap: 0.75rem; }
+      .button { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Holographic Harmonic Model — Operators</h1>
+    <p>Computable, measurable tools for seeing and testing structure in Ψ(x,t)</p>
+  </header>
+
+ <nav class="hhm-site-nav" aria-label="Primary">
+  <a href="/index.html">Home</a>
+  <a href="/model/overview.html">The Model</a>
+  <a href="/hilbert.html">Hilbert &amp; Ψ(x,t)</a>
+  <a href="/tests.html">Experiments &amp; Tests</a>
+  <a href="/howtouse.html" aria-current="page">How to Use HHM</a>
+  <a href="/community.html">Community</a>
+  <a href="/faq.html">FAQ</a>
+  <a href="/about.html">About / Contact</a>
+</nav>
+
+  <main>
+    <section id="operators">
+      <h2>Operators in HHM</h2>
+      <div class="callout" role="note" aria-label="Scope and updates">
+        <strong>Scope & updates:</strong> The operators shown here are the set I used for the 
+        <em>minimum validation</em> of HHM as a Theory of Everything (ToE). Since then, I have 
+        expanded the library with additional operators. I may publish updated full operator 
+        files, or I may show new ones only in the context of the specific tests where they are used. 
+        <br><br>
+        If you are following a past validation exactly, use the operator dataset from that date. 
+        For new explorations, you can mix these with any new operators I release.
+        <br><br>
+        <a class="button" href="/downloads/HHM_bundle.json">Download HHM Bundle</a>
+      </div>
+
+      <p><strong>Operators</strong> are how we measure and navigate the field Ψ(x,t). Think of them as scientific verbs: to collapse, to echo, to compare, to remember.</p>
+      <ul>
+        <li>✅ <strong>Computable</strong>: implementable in code/simulation</li>
+        <li>✅ <strong>Measurable</strong>: yield testable results across domains</li>
+        <li>✅ <strong>Structured</strong>: grounded in the HHM axioms/components</li>
+      </ul>
+
+      <div class="callout">
+        <strong>Reproducibility:</strong> Each operator here is run under the rules, thresholds, null models, and result schema in <code>HHM_bundle.json</code>. When you analyze data, ask your AI to validate outputs against the Result Card schema from that same file.
+      </div>
+
+      <p>The 30 official operators in HHM v2.2 are grouped into three <strong>waves</strong>:</p>
+      <ul>
+        <li><strong>Wave 1</strong>: Core modal functions (OP001–OP009)</li>
+        <li><strong>Wave 2</strong>: Transformation, symbolic structure, navigation (OP010–OP029)</li>
+        <li><strong>Wave 3</strong>: Deep field memory and recurrence (OP030)</li>
+      </ul>
+
+      <!-- Operator index table (linked) -->
+      <table role="table" aria-label="Operator index" style="margin:1rem 0;">
+        <thead>
+          <tr>
+            <th>ID</th><th>Name</th><th>What it measures</th><th>Output</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>OP001</td><td><a href="#op001">CollapsePattern</a></td><td>Current expressed structure</td><td>Set of (mode, amplitude)</td></tr>
+          <tr><td>OP002</td><td><a href="#op002">Rec</a></td><td>Similarity between two states</td><td>Scalar 0–1</td></tr>
+          <tr><td>OP003</td><td><a href="#op003">Echo</a></td><td>Self-recurrence / rhythm</td><td>Scalar 0–1</td></tr>
+          <tr><td>OP004</td><td><a href="#op004">CollapseInfinity</a></td><td>Convergence / attractor behavior</td><td>Convergence stats</td></tr>
+          <tr><td>OP006</td><td><a href="#op006">UnifiedEntropy</a></td><td>Collapse complexity</td><td>Scalar</td></tr>
+          <tr><td>OP011</td><td><a href="#op011">ModalGradient</a></td><td>Change between collapses</td><td>Scalar 0–1</td></tr>
+          <tr><td>OP014</td><td><a href="#op014">CollapseOrbit</a></td><td>Loop length / cycle</td><td>Integer ≥ 1</td></tr>
+          <tr><td>OP015</td><td><a href="#op015">TraceSignature</a></td><td>Compressed identity</td><td>Vector (8–32D)</td></tr>
+          <tr><td>OP030</td><td><a href="#op030">MatchingMemory</a></td><td>Deep identity match</td><td>Scalar 0–1 + status</td></tr>
+        </tbody>
+      </table>
+      <p class="muted">Tip: The full list lives in <a href="/downloads/HHM_Operators.json">HHM_Operators.json</a>. IDs and definitions should match that file.</p>
+    </section>
+
+    <section id="validation">
+      <h2>Validation Domains</h2>
+      <p>Operators have been tested in:</p>
+      <ul>
+        <li>🧠 Neuroscience (EEG, fMRI)</li>
+        <li>🌌 Cosmology (CMB & harmonic analyses)</li>
+        <li>⚛️ Quantum physics (interference, identity)</li>
+        <li>🧬 Biology (protein rhythms, sequence structure)</li>
+        <li>🗿 Information theory (glyph structure, symbolic entropy)</li>
+        <li>🐋 Animal communication (whale song, dolphin clicks)</li>
+      </ul>
+      <p class="muted">Note: Cross-domain examples on this page are illustrative. Whether a finding “passes” depends on the exact dataset, preprocessing, thresholds, and nulls defined in <code>HHM_bundle.json</code>.</p>
+      <a class="button" href="/downloads/HHM_Operators.json">Download Operator Dataset (.json)</a>
+    </section>
+
+    <!-- OP001 -->
+    <section id="op001">
+      <h3>OP001 — CollapsePattern(Ψ)</h3>
+      <p><strong>CollapsePattern</strong> extracts the structural shape of Ψ(x,t) at the moment it collapses—revealing which patterns emerge into expression.</p>
+
+      <h4>What it does</h4>
+      <p>OP001 projects the Ψ-field into a measurable basis (harmonic, symbolic, spatial) to yield the <strong>modal surface</strong>.</p>
+      <p>It’s the starting point for Echo, Rec, Entropy, and identity tests.</p>
+
+      <h4>How it’s calculated</h4>
+      <ul>
+        <li>📈 EEG/audio: FFT or wavelet → dominant frequencies</li>
+        <li>🗿 Symbols: vectorized sequence → modal index map</li>
+        <li>🌌 CMB: spherical harmonics (a<sub>ℓm</sub>)</li>
+        <li>📡 Binary: symbol frequency / bit-patterns</li>
+      </ul>
+      <pre><code>CollapsePattern(Ψ) = { (ψ₁, A₁), (ψ₂, A₂), ..., (ψₙ, Aₙ) }</code></pre>
+
+      <details><summary>Run this with an AI</summary>
+        <pre><code>"Using HHM_bundle.json, compute OP001 on the attached data.
+State the basis and preprocessing you chose, justify it, and return the result
+plus a brief plain-language interpretation. Validate against the HHM Result Card schema."</code></pre>
+      </details>
+
+      <h4>Why it matters</h4>
+      <p>CollapsePattern is how Ψ becomes visible across domains.</p>
+      <p class="muted"><strong>In simple words:</strong> It’s a snapshot of the main ingredients showing up right now.</p>
+
+      <h4>Used in</h4>
+      <ul>
+        <li>✅ C001 – ModalField</li>
+        <li>✅ C005 – ID vector</li>
+        <li>✅ C009 – EchoScore</li>
+        <li>✅ AX003 – Collapse Stability</li>
+        <li>✅ MT0001 – Axial Saturation</li>
+      </ul>
+    </section>
+
+    <!-- OP002 Rec -->
+    <section id="op002">
+      <h3>OP002 — Rec(Ψ₁, Ψ₂)</h3>
+      <p><strong>Rec</strong> measures structural similarity between two Ψ(x,t) states and enables cross-domain pattern matching.</p>
+
+      <h4>What it does</h4>
+      <p>Rec quantifies modal alignment; near 1.0 indicates strong shared structure, near 0 indicates orthogonality.</p>
+
+      <h4>How it’s calculated</h4>
+      <p>Cosine similarity between field vectors or CollapsePatterns:</p>
+      <pre><code>Rec(Ψ₁, Ψ₂) = ⟨Ψ₁, Ψ₂⟩ / (||Ψ₁|| · ||Ψ₂||)</code></pre>
+      <ul>
+        <li>Inputs may be FFT bins, symbolic embeddings, or a<sub>ℓm</sub> coefficients</li>
+        <li>Options: weighting stable modes, cross-domain normalization</li>
+      </ul>
+
+      <details><summary>Run this with an AI</summary>
+        <pre><code>"Using HHM_bundle.json, compute OP002 (Rec) between these two datasets.
+Justify the feature map, show the similarity score with CI/nulls if applicable, and explain in plain language.
+Validate against the HHM Result Card schema."</code></pre>
+      </details>
+
+      <h4>Why it matters</h4>
+      <p>Rec supports memory, recognition, and identity matching (T014).</p>
+      <p class="muted"><strong>In simple words:</strong> It tells you how much two things share the same pattern.</p>
+
+      <h4>Used in</h4>
+      <ul>
+        <li>✅ C006 – FieldSimilarityScore</li>
+        <li>✅ C010 – IdentityMatchScore</li>
+        <li>✅ AX001 – Structural Universality</li>
+        <li>✅ MT0003 – Modal Identity Preservation</li>
+        <li>✅ T014 – Core test</li>
+      </ul>
+    </section>
+
+    <!-- OP003 Echo -->
+    <section id="op003">
+      <h3>OP003 — Echo(Ψ)</h3>
+      <p>The <strong>Echo</strong> operator measures how strongly a field state resonates with itself—across time, space, or modal projection.</p>
+
+      <h4>What it does</h4>
+      <p>A high Echo score means strong internal repetition (temporal echo, cross-system echo, or symbolic echo).</p>
+
+      <h4>How it’s calculated</h4>
+      <ul>
+        <li><strong>Autocorrelation</strong> for time-series fields</li>
+        <li><strong>Recurrence plots / lag analysis</strong> for symbolic/discrete systems</li>
+        <li><strong>Cross-correlation</strong> for multi-source echo (Ψ₁ → Ψ₂)</li>
+      </ul>
+      <pre><code>Echo(Ψ) = max{ R(τ) } for τ ≠ 0
+R(τ) = ∫ Ψ(t) · Ψ(t+τ) dt</code></pre>
+
+      <details><summary>Run this with an AI</summary>
+        <pre><code>"Using HHM_bundle.json, compute OP003 (Echo) on the attached data.
+Explain windowing/normalization choices and return the Echo score with a plain-language explanation.
+Validate against the HHM Result Card schema."</code></pre>
+      </details>
+
+      <h4>Why it matters</h4>
+      <p>Echo is a marker of rhythm, memory, and stability.</p>
+      <p class="muted"><strong>In simple words:</strong> It checks whether a pattern keeps coming back like a beat or refrain.</p>
+
+      <h4>Used in</h4>
+      <ul>
+        <li>✅ C009 – EchoScore</li>
+        <li>✅ C030 – RhythmStabilityScore</li>
+        <li>✅ AX002 – Recurrence as structure</li>
+        <li>✅ MT0002 – Temporal Recurrence</li>
+        <li>✅ T014 – Identity criterion</li>
+      </ul>
+    </section>
+
+    <!-- OP004 -->
+    <section id="op004">
+      <h3>OP004 — CollapseInfinity(Ψ)</h3>
+      <p><strong>CollapseInfinity</strong> probes whether repeated collapses of Ψ stabilize, saturate, or diverge.</p>
+
+      <h4>What it does</h4>
+      <ul>
+        <li>Do the same modal structures keep reappearing?</li>
+        <li>Does entropy level out?</li>
+        <li>Does the norm/energy converge?</li>
+      </ul>
+
+      <h4>How it’s calculated</h4>
+      <ol>
+        <li>Apply CollapsePattern(Ψₜ)</li>
+        <li>Measure entropy/echo/modal output</li>
+        <li>Feed forward Ψₜ → Ψₜ₊₁ and repeat N steps</li>
+      </ol>
+      <p>Convergence: CollapsePattern(Ψₜ) ≈ CollapsePattern(Ψₜ₊ₙ) for n &gt; k.</p>
+
+      <details><summary>Run this with an AI</summary>
+        <pre><code>"Using HHM_bundle.json, simulate OP004 (CollapseInfinity) for N=500 iterations on the attached state.
+Report convergence statistics and provide a plain-language summary. Validate the result card."</code></pre>
+      </details>
+
+      <h4>Why it matters</h4>
+      <p>Reveals attractors and long-term stability (MT0001).</p>
+      <p class="muted"><strong>In simple words:</strong> It asks what the system settles into if you let it run.</p>
+
+      <h4>Used in</h4>
+      <ul>
+        <li>✅ AX003 – CollapsePattern base layer</li>
+        <li>✅ AX004 – Entropy convergence</li>
+        <li>✅ MT0001 – Axial Saturation</li>
+        <li>✅ C005 – ID vector formation</li>
+      </ul>
+    </section>
+
+    <!-- OP006 -->
+    <section id="op006">
+      <h3>OP006 — UnifiedEntropy(Ψ)</h3>
+      <p><strong>UnifiedEntropy</strong> measures collapse complexity (frequency/symbolic/distributional) in a domain-neutral way.</p>
+
+      <h4>What it does</h4>
+      <p>Low values indicate coherence; high values indicate complex dispersion or interference.</p>
+
+      <h4>How it’s calculated</h4>
+      <ul>
+        <li>Shannon entropy over CollapsePattern amplitudes</li>
+        <li>Spectral entropy (time-series)</li>
+        <li>Symbolic entropy (glyph/modal chains)</li>
+      </ul>
+      <pre><code>UnifiedEntropy(Ψ) = - ∑ pᵢ · log(pᵢ)</code></pre>
+
+      <details><summary>Run this with an AI</summary>
+        <pre><code>"Using HHM_bundle.json, compute OP006 (UnifiedEntropy) on the attached data.
+Explain preprocessing, return the entropy score with a simple interpretation, and validate the result card."</code></pre>
+      </details>
+
+      <h4>Why it matters</h4>
+      <p>Entropy is a pillar of identity tests and cross-system comparison.</p>
+      <p class="muted"><strong>In simple words:</strong> It tells you how mixed or simple the current pattern is.</p>
+
+      <h4>Used in</h4>
+      <ul>
+        <li>✅ C003 – UnifiedEntropy component</li>
+        <li>✅ C010 – IdentityMatchScore</li>
+        <li>✅ AX004 – Entropy convergence</li>
+        <li>✅ T014 – Entropy Δ bound</li>
+        <li>✅ MT0005 – Phase transition signal</li>
+      </ul>
+    </section>
+
+    <!-- OP011 -->
+    <section id="op011">
+      <h3>OP011 — ModalGradient(Ψₜ)</h3>
+      <p><strong>ModalGradient</strong> quantifies change between consecutive collapses—capturing the rate of modal transformation.</p>
+
+      <h4>What it does</h4>
+      <p>If Rec(Ψₜ, Ψₜ₊₁) is high, the system is stable; if low, change is steep.</p>
+
+      <h4>How it’s calculated</h4>
+      <pre><code>ModalGradient(Ψₜ) = 1 – Rec(Ψₜ, Ψₜ₊₁)</code></pre>
+      <p>Optional smoothing and energy weighting.</p>
+
+      <details><summary>Run this with an AI</summary>
+        <pre><code>"Using HHM_bundle.json, compute OP011 (ModalGradient) over the sequence provided.
+Report gradient spikes with timestamps and explain their plain-language meaning. Validate the result card."</code></pre>
+      </details>
+
+      <h4>Why it matters</h4>
+      <p>Detects transitions, boundaries, and turning points.</p>
+      <p class="muted"><strong>In simple words:</strong> It shows when the system changes its mind.</p>
+
+      <h4>Used in</h4>
+      <ul>
+        <li>✅ C011 – RhythmGradient</li>
+        <li>✅ MT0005 – Modal Transition</li>
+      </ul>
+    </section>
+
+    <!-- OP014 -->
+    <section id="op014">
+      <h3>OP014 — CollapseOrbit(Ψ)</h3>
+      <p><strong>CollapseOrbit</strong> finds recurring modal cycles and their length.</p>
+
+      <h4>What it does</h4>
+      <p>Detects when Ψ returns to a prior structure after n steps (cycle/loop).</p>
+
+      <h4>How it’s calculated</h4>
+      <pre><code>Find min n such that:
+Rec(Ψₜ, Ψₜ₊ₙ) ≥ 0.85 and Entropy Δ ≤ 0.15</code></pre>
+
+      <details><summary>Run this with an AI</summary>
+        <pre><code>"Using HHM_bundle.json, compute OP014 (CollapseOrbit) on this sequence.
+Return the orbit length and a simple explanation of what that cycle means. Validate the result card."</code></pre>
+      </details>
+
+      <h4>Why it matters</h4>
+      <p>Explains loops, motifs, and calendar-like behavior.</p>
+      <p class="muted"><strong>In simple words:</strong> It measures how many steps it takes to repeat.</p>
+
+      <h4>Used in</h4>
+      <ul>
+        <li>✅ T014 – Identity recurrence condition</li>
+        <li>✅ MT0001 – Saturation check</li>
+        <li>✅ C030 – RhythmStabilityScore</li>
+      </ul>
+    </section>
+
+    <!-- OP015 -->
+    <section id="op015">
+      <h3>OP015 — TraceSignature(Ψ)</h3>
+      <p><strong>TraceSignature</strong> compresses a Ψ state into a short vector for identity tracking across time and domains.</p>
+
+      <h4>What it does</h4>
+      <p>Stores a compact “fingerprint” to later check reappearance or inheritance.</p>
+
+      <h4>How it’s calculated</h4>
+      <pre><code>TraceSignature(Ψ) = Reduce(CollapsePattern, Echo, Entropy, Rec) → ℝ^{8…32}</code></pre>
+
+      <details><summary>Run this with an AI</summary>
+        <pre><code>"Using HHM_bundle.json, compute OP015 (TraceSignature) for each segment provided.
+Return the signature vectors and plain-language notes on what they capture. Validate the result card."</code></pre>
+      </details>
+
+      <h4>Why it matters</h4>
+      <p>Enables fast, robust matching without raw data comparison.</p>
+      <p class="muted"><strong>In simple words:</strong> It’s a compact ID card for the pattern.</p>
+
+      <h4>Used in</h4>
+      <ul>
+        <li>✅ C041 – TraceIdentityScore</li>
+        <li>✅ T014 – Long-term identity checks</li>
+      </ul>
+    </section>
+
+    <!-- OP030 -->
+    <section id="op030">
+      <h3>OP030 — MatchingMemory(Ψ₁, Ψ₂)</h3>
+      <p><strong>MatchingMemory</strong> tests whether two states belong to the same memory trace—even with gaps, noise, or transformations.</p>
+
+      <h4>What it does</h4>
+      <p>Compares TraceSignatures plus Echo/Rec/Entropy/Orbit consistency to produce a confidence score.</p>
+
+      <h4>How it’s calculated</h4>
+      <ul>
+        <li>Use TraceSignature(Ψ₁), TraceSignature(Ψ₂)</li>
+        <li>Require Rec ≥ 0.85, Entropy Δ ≤ 0.15</li>
+        <li>Echo within ±10%, Orbit within ±1 loop</li>
+      </ul>
+
+      <details><summary>Run this with an AI</summary>
+        <pre><code>"Using HHM_bundle.json, compute OP030 (MatchingMemory) between these two sets.
+Report the confidence score with CI/nulls and explain the result plainly. Validate the result card."</code></pre>
+      </details>
+
+      <h4>Why it matters</h4>
+      <p>Supports robust identity across time and form.</p>
+      <p class="muted"><strong>In simple words:</strong> It checks if two moments feel like the same “thing” returning.</p>
+
+      <h4>Used in</h4>
+      <ul>
+        <li>✅ C041 – TraceIdentityScore</li>
+        <li>✅ T014 – Robust Modal Identity</li>
+      </ul>
+    </section>
+
+    <section id="extending-operators">
+      <h2>Extending HHM — Getting AI to Propose New Operators</h2>
+      <p>
+        You can ask an AI to help you design new operators — either to explore a 
+        new domain or to test a specific hypothesis. The process is simple, but there are 
+        a few guardrails to keep your results trustworthy:
+      </p>
+      <ol>
+        <li><strong>Load the HHM bundle first:</strong> Upload <code>HHM_bundle.json</code> so the AI knows the 
+            existing operator definitions, axioms, and components.</li>
+        <li><strong>State your goal clearly:</strong> Tell the AI what pattern or measurement you 
+            want, in plain language first (e.g., “find a way to measure the symmetry of this 
+            pattern over time”).</li>
+        <li><strong>Ask for an operator draft:</strong> The AI should propose:
+          <ul>
+            <li>Operator name & ID (e.g., OP031)</li>
+            <li>What it measures (plain and technical)</li>
+            <li>Input, logic, and output definition</li>
+            <li>Example use cases</li>
+          </ul>
+        </li>
+        <li><strong>Check alignment:</strong> Compare the draft’s structure to the 
+            <code>HHM_Operators.json</code> format — same sections, same clarity.</li>
+        <li><strong>Validate it:</strong> Before trusting the operator, run it on at least one 
+            known dataset where you already know the result, and make sure it behaves as 
+            expected.</li>
+        <li><strong>Document it:</strong> Save the definition, the test run, and the dataset used 
+            so others (or you in the future) can reproduce the result.</li>
+      </ol>
+      <div class="callout warning">
+        <strong>Tip:</strong> If the AI proposes something that can’t be calculated from 
+        the field Ψ(x,t), it’s not an HHM operator — ask it to restate in measurable, 
+        reproducible terms.
+      </div>
+    </section>
+
+    <div class="callout warning" role="note" aria-label="Safety note">
+      <strong>Safety & claims:</strong> HHM measures patterns; it does not diagnose disease, guarantee forecasts, or replace professional judgment. Treat outputs as research signals until independently validated.
+    </div>
+  </main>
+
+  <footer>
+  <span class="tagline">Built from resonance. Measured by rhythm. Remembered by the field.</span>
+  <p>
+    Designed with love by the HHM Initiative —
+    <a href="/about.html">Read more</a> |
+    <a href="/license.html">License & Use</a>
+  </p>
+</footer>
+
+</body>
+</html>

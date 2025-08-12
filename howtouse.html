@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Use HHM + AI Yourself — A Practical Guide (Single JSON Bundle)</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; line-height: 1.7; max-width: 960px; margin: auto; padding: 2rem; }
+  h1, h2, h3 { color: #12345a; line-height: 1.3; }
+  code, .kbd { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background: #f5f5f5; padding: 0.15rem 0.35rem; border-radius: 4px; }
+  pre code { display: block; padding: 1rem; overflow-x: auto; }
+  .callout { border-left: 4px solid #2e8b57; background: #f4faf7; padding: 0.9rem 1rem; margin: 1rem 0; }
+  .warning { border-left: 4px solid #b86b00; background: #fff8ec; }
+  .muted { color: #556; }
+  ul, ol { margin-bottom: 1.25rem; }
+  details { background: #f7f9fc; padding: .75rem 1rem; border-radius: 8px; margin: 1rem 0; border: 1px solid #e6ecf5; }
+  details > summary { cursor: pointer; font-weight: 600; }
+  .grid { display: grid; gap: 1rem; }
+  .grid.two { grid-template-columns: 1fr; }
+  @media (min-width: 900px) { .grid.two { grid-template-columns: 1fr 1fr; } }
+  hr { border: none; border-top: 1px solid #e7e7e7; margin: 2rem 0; }
+  a { color: #0b66c3; }
+  .badge { display:inline-block; background:#134; color:#fff; padding:0.3em 0.6em; border-radius:4px; font-size:0.9em; font-weight:600; cursor:help; }
+  /* Tabs (Questions Library) */
+  #questions-library .tabs { margin-bottom: 1rem; display:flex; flex-wrap:wrap; gap:.5rem; }
+  #questions-library .tab-button { padding: 0.5rem 1rem; cursor: pointer; border: 1px solid #d0d0d0; background: #eee; border-radius: 6px; }
+  #questions-library .tab-button.active { background: #ccc; }
+  #questions-library .tab-content { display: none; }
+  #questions-library .tab-content.active { display: block; }
+  #questions-library .grid.two { grid-template-columns: 1fr; }
+  @media (min-width: 900px) { #questions-library .grid.two { grid-template-columns: repeat(2, minmax(320px, 1fr)); gap: 2rem; } }
+  #questions-library details { margin: 0.35rem 0 0.75rem; }
+  #questions-library details summary { cursor: pointer; color: #134; font-weight: 600; }
+  #questions-library .qa-list li { margin-bottom: 0.75rem; }
+  /* Skip link */
+  .skip-link { position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden; }
+  .skip-link:focus { position:static; width:auto; height:auto; padding:.5rem; background:#12345a; color:#fff; border-radius:6px; }
+</style>
+<!-- Match Home page: font + analytics -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<script defer data-domain="harmonia.to" src="https://plausible.io/js/script.file-downloads.outbound-links.js"></script>
+<script>window.plausible = window.plausible || function(){(window.plausible.q=window.plausible.q||[]).push(arguments)}</script>
+
+<style>
+  /* Home-like header + nav styling  */
+  :root {
+    --bg: #f8fdf9; --fg: #143324; --accent: #2e8b57; --accent-2: #185c37;
+    --muted: #3a5a4d; --muted-2: #5c7a6c; --line: #d9e6df; --soft: #edf6f1;
+  }
+  body { background: var(--bg); color: var(--fg); font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial; }
+  header.hhm-site-header { background:#e0f0e7; color:var(--fg); padding:2rem 1.5rem; text-align:center; }
+  header.hhm-site-header h1 { margin:0; font-size:2.4rem; font-weight:800; letter-spacing:.3px; }
+  header.hhm-site-header p { margin:.5rem 0 0; font-size:1.15rem; opacity:.95; }
+  nav.hhm-site-nav { display:flex; flex-wrap:wrap; justify-content:center; gap:1.2rem; background:#d8ede0; padding:1rem; }
+  nav.hhm-site-nav a { color:#185c37; text-decoration:none; font-weight:600; }
+  nav.hhm-site-nav a:hover { text-decoration:underline; color:#0f2e21; }
+  @media (max-width: 640px){
+    header.hhm-site-header h1 { font-size:2rem; }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+
+<header class="hhm-site-header">
+  <h1>Holographic Harmonic Model</h1>
+  <p>How to Use HHM + AI — a practical, one-file workflow for real measurements</p>
+</header>
+
+<nav class="hhm-site-nav" aria-label="Primary">
+  <a href="/index.html">Home</a>
+  <a href="/model/overview.html">The Model</a>
+  <a href="/hilbert.html">Hilbert &amp; Ψ(x,t)</a>
+  <a href="/tests.html">Experiments &amp; Tests</a>
+  <a href="/howtouse.html" aria-current="page">How to Use HHM</a>
+  <a href="/community.html">Community</a>
+  <a href="/faq.html">FAQ</a>
+  <a href="/about.html">About / Contact</a>
+</nav>
+
+<main id="main">
+  <p>
+    The <strong>Holographic Harmonic Model (HHM)</strong> is built so <em>anyone</em> — from experienced scientists to curious beginners — can uncover hidden patterns in almost any kind of data.
+    By combining HHM with modern AI (ChatGPT-5, Grok-4, Claude-Next, etc.), you can ask big questions, compare results across completely different fields, and explore ideas that once required a full research lab.
+  </p>
+
+  <p>
+    You only need <em>one file</em> — the HHM bundle — to do what we do: represent your data in the HHM framework, run the built-in measurement steps, check results against our reference thresholds, and get clear outputs.
+    If you’re a scientist, it’s a reproducible, falsifiable measurement pipeline.
+    If you’re not a scientist, it’s a “pattern microscope” that helps you explore the unknown without learning all the math first.
+  </p>
+
+  <div class="callout warning" role="note" aria-label="Non-technical users help">
+    <strong>For non-technical users:</strong> You do <em>not</em> need to speak “HHM language” (like Rec, Echo, CollapsePattern) to use the model.
+    Ask in plain English, for example:
+    <ul>
+      <li><em>“Could we use this model to design a machine that breaks down plastic? Show me step-by-step how.”</em></li>
+      <li><em>“Could we use this model to explore the Maya glyphs? What would we do and what could we learn?”</em></li>
+      <li><em>“Can you help me find real brain data I can study? Tell me where to download it and how to get started.”</em></li>
+    </ul>
+    If the AI answers with technical terms you don’t understand, reply:
+    <em>“Explain what you tested, what you found, and what it means, in everyday language.”</em>
+  </div>
+
+  <hr/>
+
+  <section aria-labelledby="need-one-file">
+    <h2 id="need-one-file">1) What you need (just one file)</h2>
+    <p>Download the single bundle from our <a href="/appendices.html">Appendices</a>:</p>
+    <ul>
+      <li><code>HHM_bundle.json</code> — contains axioms, metatheorems, T014, operators, components, thresholds, null models, prompts/runbooks, and the HHM Result Card schema — everything required to run HHM in one file.</li>
+    </ul>
+    <div class="callout" role="note" aria-label="Why single file">
+      <strong>Why only one file?</strong> Everything is inside — no mismatched files, no missing pieces, and fewer mistakes when working with AI.
+    </div>
+  </section>
+
+  <hr/>
+
+  <section aria-labelledby="which-ai">
+    <h2 id="which-ai">2) Which AI works best?</h2>
+    <ul>
+      <li><strong>ChatGPT-5</strong> — careful step-by-step reasoning + good tool integration</li>
+      <li><strong>Grok-4</strong> — fast idea generation + creative connections</li>
+      <li><strong>Claude-Next</strong> — great at handling long, complex documents</li>
+    </ul>
+    <div class="callout warning" role="note" aria-label="AI tip">
+      <strong>Tip:</strong> Choose an AI that supports file uploads. Python execution helps for running operators, but isn’t required for planning and interpretation.
+    </div>
+  </section>
+
+  <hr/>
+
+  <section aria-labelledby="load-bundle">
+    <h2 id="load-bundle">3) Load the bundle into the AI</h2>
+    <ol>
+      <li>Open a new chat with your chosen AI.</li>
+      <li>Upload <code>HHM_bundle.json</code>.</li>
+      <li>Paste this message:
+        <blockquote>
+          “This file contains the full HHM framework — rules, tests, and instructions. You are now an HHM analysis assistant.
+          Represent any dataset I give you in the HHM format, run the built-in measurements, compare results to the thresholds, and give me a structured result card.
+          Confirm you have loaded the file and briefly summarize what’s inside.”
+        </blockquote>
+      </li>
+    </ol>
+  </section>
+
+  <hr/>
+
+  <section aria-labelledby="talk-ai">
+    <h2 id="talk-ai">4) How to talk to the AI</h2>
+
+    <div class="grid two">
+      <div>
+        <h3>Scientist-style prompt</h3>
+        <pre><code>"Here is my dataset (attached).
+Declare H and basis, build Ψ(x,t), compute CollapsePattern (OP001),
+then Echo (OP003/OP010), Rec (OP002), Entropy (OP006).
+Run nulls + 1000 bootstraps, compare to thresholds,
+and emit a result card JSON that matches the HHM schema."</code></pre>
+      </div>
+      <div>
+        <h3>Plain-language prompt</h3>
+        <pre><code>"I’ve attached a dataset of bird songs.
+Use the HHM model I uploaded to find patterns and similarities
+with other animals. Then explain what those patterns might mean
+in everyday language."</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <hr/>
+
+  <section aria-labelledby="too-technical">
+    <h2 id="too-technical">5) If the AI gets too technical</h2>
+    <p>If you don’t understand the terms, just ask:</p>
+    <pre><code>"Please explain what you tested, what you found, and what it means,
+without using HHM jargon. Use analogies or simple examples."</code></pre>
+  </section>
+
+  <hr/>
+
+  <section aria-labelledby="hello-world">
+    <h2 id="hello-world">6) Minimal “Hello World” run</h2>
+    <ol>
+      <li>Upload <code>HHM_bundle.json</code> and a small dataset (CSV or JSON works well).</li>
+      <li>Plain-language prompt:
+        <pre><code>"Here’s a short dataset of heartbeats.
+Check if there are repeating patterns or unusual changes,
+and explain what they might mean in normal words."</code></pre>
+      </li>
+    </ol>
+  </section>
+
+  <hr/>
+
+  <section aria-labelledby="pitfalls">
+    <h2 id="pitfalls">7) Pitfalls & guardrails</h2>
+    <ul>
+      <li><strong>Scientists:</strong> Don’t change thresholds after seeing results; declare your setup first.</li>
+      <li><strong>General users:</strong> Always ask for a plain-language version before making decisions.</li>
+      <li><strong>Everyone:</strong> HHM always uses built-in checks to avoid “AI guessing.” Every answer is backed by measurable patterns.</li>
+    </ul>
+  </section>
+
+  <hr/>
+
+  <section aria-labelledby="next-steps">
+    <h2 id="next-steps">8) What you can do next</h2>
+    <ul>
+      <li>Scientists — benchmark your data against our library.</li>
+      <li>Non-technical users — ask fun “what if” questions about nature, history, or technology.</li>
+      <li>Mix styles — get the scientific version for accuracy, then have the AI rephrase it in plain language for sharing.</li>
+    </ul>
+  </section>
+
+  <section id="questions-library" aria-labelledby="questions">
+    <h2 id="questions">Plain Language Question Library</h2>
+    <p>
+      You don’t need HHM jargon to explore. Once the AI has loaded <code>HHM_bundle.json</code>, ask questions in everyday language—
+      it will handle the technical steps.
+    </p>
+
+    <p>
+      If the AI replies with terms like <em>Rec</em>, <em>Echo</em>, or <em>CollapsePattern</em> and you’re not sure what that means, say:
+      <em>“Please re-explain what you tested, what you found, and what it means in simple language.”</em>
+    </p>
+
+    <div class="tabs" role="tablist" aria-label="Questions tabs">
+      <button class="tab-button active" data-tab="everyday" role="tab" aria-selected="true" aria-controls="tab-everyday">Everyday Questions</button>
+      <button class="tab-button" data-tab="big-bank" role="tab" aria-selected="false" aria-controls="tab-big-bank">Big Question Bank</button>
+    </div>
+
+    <!-- Everyday Questions -->
+    <div id="tab-everyday" class="tab-content active" role="tabpanel" aria-labelledby="tab-everyday">
+      <ol class="qa-list">
+        <li>
+          Could we use this model to make a device that could eliminate plastic? Show me how.
+          <details><summary>Ask this next</summary>
+            <ul>
+              <li>Explain the steps we’d take and what sensors we’d need—no math, plain language.</li>
+              <li>List safe outputs (e.g., monomers) and how we’d prove no microplastics escape.</li>
+              <li>Make a simple shopping list for a benchtop prototype and a 4-hour test plan.</li>
+              <li>What early-warning alarms would stop the device if it starts producing bad by-products?</li>
+            </ul>
+          </details>
+        </li>
+
+        <li>
+          Could we use this model to analyze the Maya glyphs? What steps would we follow, and what might we learn?
+          <details><summary>Ask this next</summary>
+            <ul>
+              <li>Show me a step-by-step plan to turn images of glyphs into data we can compare.</li>
+              <li>If patterns show up, what would that suggest about meaning or grammar?</li>
+              <li>Point me to public glyph datasets and a quick “hello world” analysis.</li>
+              <li>Explain results in everyday language—no specialist terms.</li>
+            </ul>
+          </details>
+        </li>
+
+        <li>
+          Could you help me find real valid brain data to study? Tell me where to download it and how to work with it.
+          <details><summary>Ask this next</summary>
+            <ul>
+              <li>Give me 3 beginner-friendly datasets and how to load them.</li>
+              <li>Walk me through a 30-minute starter analysis and what to look for.</li>
+              <li>How do I avoid common mistakes (like over-filtering)?</li>
+              <li>Explain any technical words you use in simple terms.</li>
+            </ul>
+          </details>
+        </li>
+
+        <li>
+          Could we look for patterns in ancient texts that match modern communication systems?
+          <details><summary>Ask this next</summary>
+            <ul>
+              <li>Show me how to prepare text for analysis without coding.</li>
+              <li>What might strong cross-matches actually mean (in plain words)?</li>
+              <li>Give a safe-interpretation checklist to avoid overclaiming.</li>
+            </ul>
+          </details>
+        </li>
+
+        <li>
+          Could we compare whale songs to human music to see if they share structure?
+          <details><summary>Ask this next</summary>
+            <ul>
+              <li>Where do I get whale song audio and example music clips?</li>
+              <li>Make me a 1-page plan: preparation → comparison → interpretation.</li>
+              <li>Explain possible outcomes in everyday language.</li>
+            </ul>
+          </details>
+        </li>
+
+        <li>
+          Can we use this model to predict earthquakes earlier than current systems?
+          <details><summary>Ask this next</summary>
+            <ul>
+              <li>What public data can we use today, and what’s realistic vs hype?</li>
+              <li>Show a simple baseline we can test without special hardware.</li>
+              <li>Explain limitations and false-alarm handling in simple terms.</li>
+            </ul>
+          </details>
+        </li>
+
+        <li>
+          Could we study weather records to find long-term hidden cycles?
+          <details><summary>Ask this next</summary>
+            <ul>
+              <li>Which weather archives should I download first?</li>
+              <li>Give me a starter analysis I can run in under an hour.</li>
+              <li>How do I avoid mistaking coincidence for a real pattern?</li>
+            </ul>
+          </details>
+        </li>
+
+        <li>
+          Can you check if two different species’ brain scans have similar activity patterns?
+          <details><summary>Ask this next</summary>
+            <ul>
+              <li>What public animal and human datasets can we align?</li>
+              <li>Explain alignment and comparison without technical terms.</li>
+              <li>What would “similar” actually imply—and not imply?</li>
+            </ul>
+          </details>
+        </li>
+
+        <li>
+          Could we see if famous paintings share the same hidden structure?
+          <details><summary>Ask this next</summary>
+            <ul>
+              <li>Show me how to turn images into comparable features.</li>
+              <li>Give example museums/collections with open images.</li>
+              <li>Explain outcomes in plain language with a few hypothetical examples.</li>
+            </ul>
+          </details>
+        </li>
+
+        <li>
+          Could this model tell me if a climate shift is starting before it becomes obvious?
+          <details><summary>Ask this next</summary>
+            <ul>
+              <li>What signals should I track that are early and reliable?</li>
+              <li>Describe an alert rule I can understand and trust.</li>
+              <li>How do we avoid false positives and panic?</li>
+            </ul>
+          </details>
+        </li>
+      </ol>
+      <p><em>Tip:</em> If any reply feels too technical, ask the AI to “restate the methods and results in simple language, with a real-world analogy.”</p>
+    </div>
+
+    <!-- Big Question Bank -->
+    <div id="tab-big-bank" class="tab-content" role="tabpanel" aria-labelledby="tab-big-bank">
+      <div class="grid two qa-list">
+        <div>
+          <h3>Exploring Mysteries & Understanding Reality (50)</h3>
+          <ol>
+           <li>Could we find hidden rhythms in Earth’s magnetic field?
+            <details><summary>Ask this next</summary><ul>
+              <li>Point me to public geomagnetic data and a 30-minute starter analysis.</li>
+              <li>Explain what a “hidden rhythm” would mean in everyday terms.</li>
+            </ul></details>
+          </li>
+          <li>Do whale songs change in a predictable way before migration?
+            <details><summary>Ask this next</summary><ul>
+              <li>Show me where to download seasonal whale audio.</li>
+              <li>Describe what “predictable change” would look like to a non-expert.</li>
+            </ul></details>
+          </li>
+          <li>Do ancient stone circles share design patterns across continents?
+            <details><summary>Ask this next</summary><ul>
+              <li>List photo/map sources I can use today.</li>
+              <li>Explain outcomes without archaeological jargon.</li>
+            </ul></details>
+          </li>
+          <li>Is there a global pattern in earthquake timing?
+            <details><summary>Ask this next</summary><ul>
+              <li>Link me to global quake catalogs and a simple comparison plan.</li>
+              <li>Explain how to avoid fooling myself with randomness.</li>
+            </ul></details>
+          </li>
+          <li>Do certain plant growth cycles match the lunar cycle?
+            <details><summary>Ask this next</summary><ul>
+              <li>Where to get plant growth and lunar phase data?</li>
+              <li>Explain “match” in plain language with an example.</li>
+            </ul></details>
+          </li>
+          <li>Have human heartbeat patterns changed over the last century?
+            <details><summary>Ask this next</summary><ul>
+              <li>What archives exist and how to make a fair comparison?</li>
+              <li>Plain-language interpretation of possible outcomes.</li>
+            </ul></details>
+          </li>
+          <li>Can we spot signals in cosmic background radiation that current models miss?
+            <details><summary>Ask this next</summary><ul>
+              <li>List beginner-friendly CMB datasets and a safe analysis path.</li>
+              <li>Explain what a “missed signal” would actually mean.</li>
+            </ul></details>
+          </li>
+          <li>Do paintings from different eras share structural similarities?
+            <details><summary>Ask this next</summary><ul>
+              <li>Suggest open art image sources and fair preprocessing.</li>
+              <li>Explain similarity without math talk.</li>
+            </ul></details>
+          </li>
+          <li>Could we detect signs of lost civilizations in seafloor maps?
+            <details><summary>Ask this next</summary><ul>
+              <li>Where to get bathymetry data and how to avoid false positives?</li>
+              <li>What non-mysterious patterns might look similar?</li>
+            </ul></details>
+          </li>
+          <li>Is there a link between deep ocean currents and hurricane frequency?
+            <details><summary>Ask this next</summary><ul>
+              <li>Give me aligned datasets to download.</li>
+              <li>Explain “link” in plain language with practical meaning.</li>
+            </ul></details>
+          </li>
+          <li>Do volcanic eruptions have subtle atmospheric precursors?
+            <details><summary>Ask this next</summary><ul>
+              <li>List free satellite/atmospheric feeds we can test.</li>
+              <li>Explain an early-warning rule I can understand.</li>
+            </ul></details>
+          </li>
+          <li>Are there common features in music across cultures?
+            <details><summary>Ask this next</summary><ul>
+              <li>Point to open music corpora.</li>
+              <li>Explain results in non-technical language with examples.</li>
+            </ul></details>
+          </li>
+          <li>Do migratory birds adjust routes before major climate shifts?
+            <details><summary>Ask this next</summary><ul>
+              <li>Where to get bird tracking data and climate baselines?</li>
+              <li>What would “adjust route” look like to a layperson?</li>
+            </ul></details>
+          </li>
+          <li>Do brain activity patterns differ when dreaming about past vs future?
+            <details><summary>Ask this next</summary><ul>
+              <li>What datasets or experiments would be feasible?</li>
+              <li>Explain any outcome in simple, careful language.</li>
+            </ul></details>
+          </li>
+          <li>Can we detect early reef stress from underwater sounds?
+            <details><summary>Ask this next</summary><ul>
+              <li>Where to get reef audio and how to label examples?</li>
+              <li>Describe what “stress” would sound like conceptually.</li>
+            </ul></details>
+          </li>
+          <li>Is there a connection between planetary positions and solar flare timing?
+            <details><summary>Ask this next</summary><ul>
+              <li>Provide public solar flare datasets.</li>
+              <li>Explain a fair, skeptic-friendly test plan.</li>
+            </ul></details>
+          </li>
+          <li>Do ancient calendars still match real astronomical cycles?
+            <details><summary>Ask this next</summary><ul>
+              <li>Where to find calendar encodings and modern ephemerides?</li>
+              <li>Explain “match” without technical detail.</li>
+            </ul></details>
+          </li>
+          <li>Could some “random” space noise be structured signals?
+            <details><summary>Ask this next</summary><ul>
+              <li>Show data sources and a conservative screening workflow.</li>
+              <li>List common false-structure traps to avoid.</li>
+            </ul></details>
+          </li>
+          <li>Do animal group movements follow universal rules?
+            <details><summary>Ask this next</summary><ul>
+              <li>Link to open animal movement datasets.</li>
+              <li>Explain “universal rule” in simple language.</li>
+            </ul></details>
+          </li>
+          <li>Is there shared structure between language and dolphin clicks?
+            <details><summary>Ask this next</summary><ul>
+              <li>Data sources for dolphin audio + human speech.</li>
+              <li>Explain any detected similarity without jargon.</li>
+            </ul></details>
+          </li>
+          <li>Can we track cultural shifts by analyzing literature over centuries?
+            <details><summary>Ask this next</summary><ul>
+              <li>Where to get books/metadata and a fair sampling plan?</li>
+              <li>Explain outcomes in clear, neutral language.</li>
+            </ul></details>
+          </li>
+          <li>Do ecosystems have a minimum complexity threshold?
+            <details><summary>Ask this next</summary><ul>
+              <li>Point to biodiversity/time-series datasets.</li>
+              <li>Explain what a threshold would mean practically.</li>
+            </ul></details>
+          </li>
+          <li>Is there a repeating pattern in galaxy clusters?
+            <details><summary>Ask this next</summary><ul>
+              <li>Suggest catalogs and a basic comparison plan.</li>
+              <li>Translate any result into everyday terms.</li>
+            </ul></details>
+          </li>
+          <li>Could extreme weather timing reveal hidden cycles?
+            <details><summary>Ask this next</summary><ul>
+              <li>List archives (storms, droughts) to start with.</li>
+              <li>Explain “cycle” carefully—no overclaiming.</li>
+            </ul></details>
+          </li>
+          <li>Do newborn cries have universal features?
+            <details><summary>Ask this next</summary><ul>
+              <li>Where to find ethically approved datasets?</li>
+              <li>Explain possible findings responsibly.</li>
+            </ul></details>
+          </li>
+          <li>Could quantum measurement results hide structure?
+            <details><summary>Ask this next</summary><ul>
+              <li>Point to public experimental logs.</li>
+              <li>Explain what “structure” would—and wouldn’t—mean.</li>
+            </ul></details>
+          </li>
+          <li>Do heart and brain rhythms sync under emotion?
+            <details><summary>Ask this next</summary><ul>
+              <li>Datasets for simultaneous heart/brain recordings.</li>
+              <li>Plain-language meaning of “sync.”</li>
+            </ul></details>
+          </li>
+          <li>Is there a universal branching pattern in rivers?
+            <details><summary>Ask this next</summary><ul>
+              <li>Map sources and a simple measurement plan.</li>
+              <li>Explain what “universal” would imply.</li>
+            </ul></details>
+          </li>
+          <li>Do myths share measurable structures across cultures?
+            <details><summary>Ask this next</summary><ul>
+              <li>Open myth/folklore corpora suggestions.</li>
+              <li>Explain similarities cautiously, without hype.</li>
+            </ul></details>
+          </li>
+          <li>Can we detect climate tipping points early?
+            <details><summary>Ask this next</summary><ul>
+              <li>Which indicators are useful for early signals?</li>
+              <li>Describe a simple alert a community could use.</li>
+            </ul></details>
+          </li>
+          <li>Do seismic pre-quake patterns share a “signature”?
+            <details><summary>Ask this next</summary><ul>
+              <li>Public pre-event datasets to try.</li>
+              <li>Explain false-alarm safeguards clearly.</li>
+            </ul></details>
+          </li>
+          <li>Could Mars dust storms show unknown dynamics?
+            <details><summary>Ask this next</summary><ul>
+              <li>Mars weather/image archives to use now.</li>
+              <li>Explain findings in plain language.</li>
+            </ul></details>
+          </li>
+          <li>Do famous buildings share hidden rhythms?
+            <details><summary>Ask this next</summary><ul>
+              <li>Open architectural plan/image sources.</li>
+              <li>What would a “hidden rhythm” practically mean?</li>
+            </ul></details>
+          </li>
+          <li>Can we find links between music and orbits?
+            <details><summary>Ask this next</summary><ul>
+              <li>Planetary ephemerides + music datasets.</li>
+              <li>Explain coincidences vs genuine links.</li>
+            </ul></details>
+          </li>
+          <li>Do extinction events have early-warning patterns?
+            <details><summary>Ask this next</summary><ul>
+              <li>Fossil/time-series sources to begin with.</li>
+              <li>Translate results into practical policy hints.</li>
+            </ul></details>
+          </li>
+          <li>Is there a cycle in ocean nutrient flows?
+            <details><summary>Ask this next</summary><ul>
+              <li>Where to get nutrient and current data?</li>
+              <li>Explain policy-relevant interpretations simply.</li>
+            </ul></details>
+          </li>
+          <li>Could artifacts trace ancient human migration?
+            <details><summary>Ask this next</summary><ul>
+              <li>Open museum datasets and mapping steps.</li>
+              <li>Explain uncertainties in accessible terms.</li>
+            </ul></details>
+          </li>
+          <li>Do supernova light curves form “families”?
+            <details><summary>Ask this next</summary><ul>
+              <li>Light-curve databases to download.</li>
+              <li>Explain “family” gently, no equations.</li>
+            </ul></details>
+          </li>
+          <li>Can traffic patterns match brain networks?
+            <details><summary>Ask this next</summary><ul>
+              <li>City traffic + brain network datasets.</li>
+              <li>Explain any analogy responsibly.</li>
+            </ul></details>
+          </li>
+          <li>Do species’ sleep cycles share traits?
+            <details><summary>Ask this next</summary><ul>
+              <li>Animal sleep databases to browse.</li>
+              <li>Explain similarities without overreach.</li>
+            </ul></details>
+          </li>
+          <li>Could animal calls forecast ecosystem stress?
+            <details><summary>Ask this next</summary><ul>
+              <li>Bioacoustic datasets to try now.</li>
+              <li>Describe a practical conservation alert.</li>
+            </ul></details>
+          </li>
+          <li>Do collapsing societies share a pattern?
+            <details><summary>Ask this next</summary><ul>
+              <li>Historical datasets and fair comparisons.</li>
+              <li>Avoid simplistic conclusions; provide nuance.</li>
+            </ul></details>
+          </li>
+          <li>Do drought patterns match solar cycles?
+            <details><summary>Ask this next</summary><ul>
+              <li>Open drought indices + solar records.</li>
+              <li>Explain “match” with caution.</li>
+            </ul></details>
+          </li>
+          <li>Could ghost signals be old space probes?
+            <details><summary>Ask this next</summary><ul>
+              <li>Space signal archives and checks to rule out noise.</li>
+              <li>How to avoid pattern-seeking errors?</li>
+            </ul></details>
+          </li>
+          <li>Do mountains form in rhythmic phases?
+            <details><summary>Ask this next</summary><ul>
+              <li>Geologic uplift/time datasets.</li>
+              <li>Explain any rhythm in simple terms.</li>
+            </ul></details>
+          </li>
+          <li>Is there a “heartbeat” in ecosystems?
+            <details><summary>Ask this next</summary><ul>
+              <li>Which biodiversity time series to start with?</li>
+              <li>Explain what “heartbeat” would practically mean.</li>
+            </ul></details>
+          </li>
+          <li>Do market crashes match disaster build-ups?
+            <details><summary>Ask this next</summary><ul>
+              <li>Public financial + disaster timelines.</li>
+              <li>Explain limits; no financial advice.</li>
+            </ul></details>
+          </li>
+          <li>Could climate anomalies be dust cycles?
+            <details><summary>Ask this next</summary><ul>
+              <li>Dust/aerosol datasets to test the idea.</li>
+              <li>Plain-language implications if true.</li>
+            </ul></details>
+          </li>
+          <li>Is genetic code structure like ancient scripts?
+            <details><summary>Ask this next</summary><ul>
+              <li>Genome + script corpora suggestions.</li>
+              <li>Explain similarities without mysticism.</li>
+            </ul></details>
+          </li>
+          <li>Could our galaxy arms follow a hidden cycle?
+            <details><summary>Ask this next</summary><ul>
+              <li>Point to catalogs/surveys to start.</li>
+              <li>Explain outcomes without equations.</li>
+            </ul></details>
+          </li>
+          </ol>
+        </div>
+
+        <div>
+          <h3>Advancing Technology & Practical Solutions (50)</h3>
+          <ol start="51">
+            <li>Could we design wind turbines for max lifetime?
+            <details><summary>Ask this next</summary><ul>
+              <li>List data to collect and a simple test to run.</li>
+              <li>Explain trade-offs in plain language.</li>
+            </ul></details>
+          </li>
+          <li>Can HHM optimize greenhouse lighting for yield?
+            <details><summary>Ask this next</summary><ul>
+              <li>What sensors and schedules should I start with?</li>
+              <li>Explain a beginner-friendly weekly plan.</li>
+            </ul></details>
+          </li>
+          <li>Could we make washers use minimal water?
+            <details><summary>Ask this next</summary><ul>
+              <li>What signals should a smart washer measure?</li>
+              <li>Explain a safe “water-save” mode for users.</li>
+            </ul></details>
+          </li>
+          <li>Can we make adaptive hearing aids?
+            <details><summary>Ask this next</summary><ul>
+              <li>Data we’d need and a 2-week prototype plan.</li>
+              <li>Explain user privacy and safety simply.</li>
+            </ul></details>
+          </li>
+          <li>Could HHM improve quake early-warning?
+            <details><summary>Ask this next</summary><ul>
+              <li>Which feeds to fuse and how to avoid false alarms?</li>
+              <li>Explain a clear community alert rule.</li>
+            </ul></details>
+          </li>
+          <li>Could we predict fatigue before it’s felt?
+            <details><summary>Ask this next</summary><ul>
+              <li>Safe wearable signals to track.</li>
+              <li>Explain non-medical, everyday guidance.</li>
+            </ul></details>
+          </li>
+          <li>Can we tune 3D printers to avoid defects?
+            <details><summary>Ask this next</summary><ul>
+              <li>What to log during prints; a quick tuning script.</li>
+              <li>Explain results without engineering jargon.</li>
+            </ul></details>
+          </li>
+          <li>Could HHM improve building cooling naturally?
+            <details><summary>Ask this next</summary><ul>
+              <li>What sensors and simple retrofits help most?</li>
+              <li>Plain-language savings estimate approach.</li>
+            </ul></details>
+          </li>
+          <li>Could we build rescue drone swarms?
+            <details><summary>Ask this next</summary><ul>
+              <li>Minimal gear list for a field test.</li>
+              <li>Explain safety and coordination plainly.</li>
+            </ul></details>
+          </li>
+          <li>Could HHM guide city traffic design?
+            <details><summary>Ask this next</summary><ul>
+              <li>Open traffic feeds and a pilot corridor plan.</li>
+              <li>Explain what success would look like.</li>
+            </ul></details>
+          </li>
+          <li>Can we charge batteries faster without harm?
+            <details><summary>Ask this next</summary><ul>
+              <li>What to measure during charging to stay safe?</li>
+              <li>Explain a user-friendly charging profile.</li>
+            </ul></details>
+          </li>
+          <li>Could HHM stabilize power grids?
+            <details><summary>Ask this next</summary><ul>
+              <li>Which grid signals to watch first?</li>
+              <li>Explain a practical early-warning threshold.</li>
+            </ul></details>
+          </li>
+          <li>Could it train robots to mimic experts?
+            <details><summary>Ask this next</summary><ul>
+              <li>Data to record from experts and how to align it.</li>
+              <li>Explain a simple imitation score to check progress.</li>
+            </ul></details>
+          </li>
+          <li>Could HHM improve building quake resistance?
+            <details><summary>Ask this next</summary><ul>
+              <li>What sensors to add and how to test safely?</li>
+              <li>Explain retrofit choices in simple terms.</li>
+            </ul></details>
+          </li>
+          <li>Could it make ships save fuel in rough seas?
+            <details><summary>Ask this next</summary><ul>
+              <li>Which ship + ocean signals to monitor?</li>
+              <li>Explain plain-language routing advice.</li>
+            </ul></details>
+          </li>
+          <li>Could it improve noise-cancelling tech?
+            <details><summary>Ask this next</summary><ul>
+              <li>Data to collect and a quick A/B test plan.</li>
+              <li>Explain “better” in user-experience terms.</li>
+            </ul></details>
+          </li>
+          <li>Could HHM design low-waste factories?
+            <details><summary>Ask this next</summary><ul>
+              <li>What streams to instrument first?</li>
+              <li>Explain a week-one improvement roadmap.</li>
+            </ul></details>
+          </li>
+          <li>Could it predict aircraft part failures?
+            <details><summary>Ask this next</summary><ul>
+              <li>Which vibration/usage signals matter most?</li>
+              <li>Explain maintenance scheduling in plain terms.</li>
+            </ul></details>
+          </li>
+          <li>Could HHM make self-driving safer?
+            <details><summary>Ask this next</summary><ul>
+              <li>What signals predict risky scenarios?</li>
+              <li>Explain how to test safety claims responsibly.</li>
+            </ul></details>
+          </li>
+          <li>Could it optimize farm irrigation?
+            <details><summary>Ask this next</summary><ul>
+              <li>Sensors to buy now and a weekend pilot plan.</li>
+              <li>Explain weather-aware watering in simple words.</li>
+            </ul></details>
+          </li>
+          <li>Could HHM detect cyberattacks early?
+            <details><summary>Ask this next</summary><ul>
+              <li>Safe network signals to monitor today.</li>
+              <li>Explain a basic, low-false-alarm alert rule.</li>
+            </ul></details>
+          </li>
+          <li>Could we make clothing that self-adjusts?
+            <details><summary>Ask this next</summary><ul>
+              <li>What body/environment signals are useful?</li>
+              <li>Explain a simple prototype anyone can build.</li>
+            </ul></details>
+          </li>
+          <li>Could HHM guide safe drug dosing?
+            <details><summary>Ask this next</summary><ul>
+              <li>Which biometric signals to track at home?</li>
+              <li>Explain non-medical, research-only caveats clearly.</li>
+            </ul></details>
+          </li>
+          <li>Could it boost biofuel microbe growth?
+            <details><summary>Ask this next</summary><ul>
+              <li>What to log in a small fermenter?</li>
+              <li>Explain a 2-week optimization plan plainly.</li>
+            </ul></details>
+          </li>
+          <li>Could HHM design perfect acoustics?
+            <details><summary>Ask this next</summary><ul>
+              <li>Measurements and a weekend room-tuning plan.</li>
+              <li>Explain trade-offs a non-expert can grasp.</li>
+            </ul></details>
+          </li>
+          <li>Could it optimize train timetables?
+            <details><summary>Ask this next</summary><ul>
+              <li>Open data to try and fairness considerations.</li>
+              <li>Explain success in rider-centric terms.</li>
+            </ul></details>
+          </li>
+          <li>Could we make smart elevators?
+            <details><summary>Ask this next</summary><ul>
+              <li>What to measure and a lobby-level pilot.</li>
+              <li>Explain benefits in everyday language.</li>
+            </ul></details>
+          </li>
+          <li>Could HHM plan bridge maintenance?
+            <details><summary>Ask this next</summary><ul>
+              <li>Sensors/inspections to start with.</li>
+              <li>Explain how to prioritize fixes simply.</li>
+            </ul></details>
+          </li>
+          <li>Could it tune wind farms automatically?
+            <details><summary>Ask this next</summary><ul>
+              <li>Signals for turbine coordination.</li>
+              <li>Explain a safe, stepwise rollout plan.</li>
+            </ul></details>
+          </li>
+          <li>Could HHM guide space probe paths?
+            <details><summary>Ask this next</summary><ul>
+              <li>What telemetry matters most first?</li>
+              <li>Explain gains without deep math.</li>
+            </ul></details>
+          </li>
+          <li>Could it make better solar panels?
+            <details><summary>Ask this next</summary><ul>
+              <li>Which lab measurements to track?</li>
+              <li>Explain a quick A/B test line.</li>
+            </ul></details>
+          </li>
+          <li>Could HHM improve recycling?
+            <details><summary>Ask this next</summary><ul>
+              <li>Sorting signals to add and why.</li>
+              <li>Explain a simple performance metric.</li>
+            </ul></details>
+          </li>
+          <li>Could it optimize internet traffic?
+            <details><summary>Ask this next</summary><ul>
+              <li>Safe telemetry to analyze.</li>
+              <li>Explain a low-risk improvement trial.</li>
+            </ul></details>
+          </li>
+          <li>Could HHM detect city water leaks?
+            <details><summary>Ask this next</summary><ul>
+              <li>What pressure/flow data to log?</li>
+              <li>Explain alerts a utility crew can use.</li>
+            </ul></details>
+          </li>
+          <li>Could it improve sports training?
+            <details><summary>Ask this next</summary><ul>
+              <li>Wearables to start with and a 4-week plan.</li>
+              <li>Explain feedback a coach can apply tomorrow.</li>
+            </ul></details>
+          </li>
+          <li>Could HHM guide ship routing?
+            <details><summary>Ask this next</summary><ul>
+              <li>Ocean/weather feeds to fuse.</li>
+              <li>Explain savings clearly (time/fuel/safety).</li>
+            </ul></details>
+          </li>
+          <li>Could it tune chemical reactors?
+            <details><summary>Ask this next</summary><ul>
+              <li>Which signals indicate drift?</li>
+              <li>Explain a simple stability rule.</li>
+            </ul></details>
+          </li>
+          <li>Could HHM improve home heat pumps?
+            <details><summary>Ask this next</summary><ul>
+              <li>What to log (temp, humidity, cycles)?</li>
+              <li>Explain comfort vs cost in plain words.</li>
+            </ul></details>
+          </li>
+          <li>Could we make mood-based lighting?
+            <details><summary>Ask this next</summary><ul>
+              <li>Ethical signals we can use at home.</li>
+              <li>Explain a gentle, privacy-first design.</li>
+            </ul></details>
+          </li>
+          <li>Could HHM plan battery storage?
+            <details><summary>Ask this next</summary><ul>
+              <li>What usage/weather signals matter?</li>
+              <li>Explain a simple daily schedule plan.</li>
+            </ul></details>
+          </li>
+          <li>Could it detect wildfires sooner?
+            <details><summary>Ask this next</summary><ul>
+              <li>Which satellite/ground sensors help?</li>
+              <li>Explain a community alert threshold.</li>
+            </ul></details>
+          </li>
+          <li>Could HHM make quake-proof shelving?
+            <details><summary>Ask this next</summary><ul>
+              <li>How to test designs at home safely?</li>
+              <li>Explain a quick improvement checklist.</li>
+            </ul></details>
+          </li>
+          <li>Could we design better desalination?
+            <details><summary>Ask this next</summary><ul>
+              <li>What plant signals indicate fouling early?</li>
+              <li>Explain a simple operator decision tree.</li>
+            </ul></details>
+          </li>
+          <li>Could HHM time sustainable fishing?
+            <details><summary>Ask this next</summary><ul>
+              <li>Which ocean/stock signals to watch?</li>
+              <li>Explain a safe harvest “go/no-go” idea.</li>
+            </ul></details>
+          </li>
+          <li>Could it extend drone battery life?
+            <details><summary>Ask this next</summary><ul>
+              <li>Logs to capture and settings to try.</li>
+              <li>Explain gains in flight minutes plainly.</li>
+            </ul></details>
+          </li>
+          <li>Could HHM train AI on mixed data?
+            <details><summary>Ask this next</summary><ul>
+              <li>How to align audio, video, and sensors?</li>
+              <li>Explain a simple quality check.</li>
+            </ul></details>
+          </li>
+          <li>Could it pace lessons in education?
+            <details><summary>Ask this next</summary><ul>
+              <li>What classroom signals are practical?</li>
+              <li>Explain a humane pacing rule.</li>
+            </ul></details>
+          </li>
+          <li>Could HHM tune train braking?
+            <details><summary>Ask this next</summary><ul>
+              <li>Which train signals to monitor?</li>
+              <li>Explain a safe, gradual rollout plan.</li>
+            </ul></details>
+          </li>
+          <li>Could it plan safe crowd movement?
+            <details><summary>Ask this next</summary><ul>
+              <li>What sensors are ethical and useful?</li>
+              <li>Explain easy-to-follow venue guidance.</li>
+            </ul></details>
+          </li>
+          <li>Could HHM sharpen medical imaging?
+            <details><summary>Ask this next</summary><ul>
+              <li>Which settings/signals improve clarity?</li>
+              <li>Explain benefits without medical claims.</li>
+            </ul></details>
+          </li>
+          <li>Could it balance satellite orbits?
+            <details><summary>Ask this next</summary><ul>
+              <li>Telemetry to analyze first.</li>
+              <li>Explain a basic correction schedule in plain terms.</li>
+            </ul></details>
+          </li>
+          <li>Could HHM guide green roof placement?
+            <details><summary>Ask this next</summary><ul>
+              <li>City data layers to combine.</li>
+              <li>Explain quick wins a city can act on.</li>
+            </ul></details>
+          </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="why-different" aria-labelledby="why-different-h">
+    <h2 id="why-different-h">Why HHM Answers Are Different from “Normal” AI Replies</h2>
+    <p>
+      A lot of people worry that AI can “hallucinate” — give an answer that sounds good but isn’t true.
+      That can happen when an AI is guessing based only on patterns in text. HHM changes the game because the AI isn’t guessing — it’s <strong>measuring</strong>.
+    </p>
+
+    <div class="callout" role="note" aria-label="Key difference">
+      <strong>Key difference:</strong>
+      Instead of predicting words, HHM forces the AI to:
+      <ol>
+        <li>Represent your data as a mathematical object called <code>Ψ(x,t)</code> (the “modal field”).</li>
+        <li>Run specific, pre-defined <em>operators</em> (from the HHM file) that produce actual numbers.</li>
+        <li>Compare those numbers to <em>preregistered thresholds</em> with <em>null hypothesis tests</em> and <em>confidence intervals</em>.</li>
+        <li>Emit results in a strict JSON format that can be checked against the HHM schema.</li>
+      </ol>
+    </div>
+
+    <p>This means:</p>
+    <ul>
+      <li>Every “pass” or “fail” is based on data, not the AI’s opinion.</li>
+      <li>The steps, thresholds, and rules are baked into the file — the AI can’t silently change them mid-analysis.</li>
+      <li>You can validate the output yourself by re-running the operators or checking the numbers against the schema.</li>
+      <li>Even when the AI suggests ideas or cross-domain analogies, it must start from these measured results.</li>
+    </ul>
+
+    <h3>Plain-language example</h3>
+    <p>Imagine you ask: <em>“Do these two whale songs share structure?”</em></p>
+    <ul>
+      <li>Normal AI might say: “Yes, they sound similar — both have rising tones.”</li>
+      <li>HHM-powered AI will:
+        <ol>
+          <li>Convert the sound into <code>Ψ(x,t)</code> features (e.g., frequency patterns over time).</li>
+          <li>Apply operators to measure similarity.</li>
+          <li>Run a null test to check if that similarity could happen by chance.</li>
+          <li>Only say “pass” if it beats the threshold and the chance level with 95% confidence.</li>
+        </ol>
+      </li>
+    </ul>
+
+    <h3>For scientists</h3>
+    <p>HHM answers are tied to a reproducible pipeline: fixed operators, explicit thresholds, null models, and bootstrap CIs. There’s no silent parameter drift — everything needed for replication is in the file.</p>
+
+    <h3>For everyone else</h3>
+    <p>Think of HHM as giving the AI a “lab manual” and forcing it to follow the experiment step-by-step, so the answers are grounded in actual measurements, not guesswork.</p>
+
+    <p class="muted">You can always say: <em>“Explain in plain language what you tested, what you found, and what it means.”</em></p>
+  </section>
+
+  <!-- Harmonia-ZFC -->
+  <section aria-labelledby="harmonia-zfc">
+    <h2 id="harmonia-zfc">11) Going Further — Harmonia-ZFC (Beta) for Formal Proofs (Coming soon)</h2>
+
+    <p>
+      HHM is for <strong>measurement, comparison, and prediction</strong>. When your HHM result suggests a general rule you want to
+      <strong>prove</strong> (or check for internal consistency), add <strong>Harmonia-ZFC (beta)</strong>.
+    </p>
+
+    <div class="callout" role="note" aria-label="What is Harmonia-ZFC">
+      <strong>What it is:</strong> a minified, extended Zermelo–Fraenkel with Choice (ZFC) knowledge base encoding definitions, axioms, and inference patterns so an AI can do step-by-step symbolic reasoning. <br/>
+      <strong>File:</strong> <code>harmonia-zfc-beta-v1.0.json</code> (minified). <em>Beta — expect updates; see “Versioning &amp; Updates.”</em>
+    </div>
+
+    <div class="callout warning" role="note" aria-label="ZFC Beta warning">
+      <strong>Beta status &amp; caution:</strong> This beta includes <em>hundreds</em> of axioms/entries. That size is intentional for coverage, but it raises risks:
+      redundancy, near-duplicate axioms, accidental over-strengthening, naming drift, and hidden dependencies.
+      <br/><br/>
+      <strong>What this means for you:</strong> Treat Harmonia-ZFC as a powerful <em>assistant</em>, not an oracle. Before trusting a proof, run the
+      <em>Minimize → Audit → Prove</em> workflow below—or ask the AI to do it for you.
+    </div>
+
+    <h3>Why combine HHM + Harmonia-ZFC?</h3>
+    <ul>
+      <li><strong>Empirical → Formal:</strong> HHM detects a robust pattern (with CI + nulls). Harmonia-ZFC tries to show <em>why</em> it must hold.</li>
+      <li><strong>Safety rail for theory:</strong> Either derive your claim from axioms or expose the exact extra assumption you’re making.</li>
+      <li><strong>Productive failure:</strong> If the proof blocks, ZFC tells you what’s missing—then you test that missing condition empirically with HHM.</li>
+    </ul>
+
+    <h3>How to load Harmonia-ZFC (beta)</h3>
+    <ol>
+      <li>Open a <em>new</em> chat (clean context).</li>
+      <li>Upload <code>harmonia-zfc-beta-v1.0.json</code>.</li>
+      <li>Send this primer:
+        <blockquote>
+          “This file contains the Harmonia-ZFC (beta) axiomatic framework. You are a formal reasoning assistant.
+          Use only definitions, axioms, and rules from this file. When proving, produce a step-by-step derivation;
+          cite axiom/definition IDs at each step and emit a machine-checkable proof outline at the end. Confirm when loaded.”
+        </blockquote>
+      </li>
+    </ol>
+
+    <h3>Recommended order: run HHM first, ZFC second</h3>
+    <ol>
+      <li><strong>HHM first (empirical):</strong> run <em>R1_minimal_pipeline</em>. If results clear thresholds with CI, extract a candidate rule (conjecture).</li>
+      <li><strong>Then ZFC (formal):</strong> restate the conjecture precisely and ask for a derivation plan <em>before</em> a full proof.</li>
+      <li><strong>Loop:</strong> if the proof blocks, ask for the <em>minimal extra assumption</em> and test that with HHM as a new measurable condition.</li>
+    </ol>
+
+    <h3>Before proving: minimize &amp; audit the beta file</h3>
+    <p>If you’re not comfortable running these prompts yourself, ask the AI to do them interactively.</p>
+
+    <p><em>Minimize (find a small, sufficient core)</em></p>
+    <pre><code>"Load harmonia-zfc-beta-v1.0.json. Build a dependency graph from definitions → axioms → theorems.
+Propose a minimal sound core for my target domain (set theory + the operators I reference), preserving derivability.
+Remove duplicates/aliases; fold equivalent schemas. Output:
+1) kept axioms (IDs); 2) pruned axioms (IDs with reason); 3) alias/rename map; 4) a replay plan to re-derive key lemmas."</code></pre>
+
+    <p><em>Audit (consistency, independence, naming)</em></p>
+    <pre><code>"Using the minimized core, attempt:
+(a) independence checks (for each axiom A, try to derive A from the rest; if derivable, flag as redundant),
+(b) naming audit (report near-duplicate names/IDs),
+(c) model sanity (search for trivial models or contradictions in toy fragments).
+Emit a short 'risk report' and recommended fixes."</code></pre>
+
+    <p><em>Proof plan (only after minimize + audit)</em></p>
+    <pre><code>"Now synthesize a derivation plan for my conjecture. List lemmas in dependency order,
+the axiom schema each uses, and any potential gaps. Stop before the full proof."</code></pre>
+
+    <h3>Cookbook prompts</h3>
+    <p><em>Bridge from HHM card → ZFC conjecture</em></p>
+    <pre><code>"From this HHM result card (JSON attached), extract the minimal formal statement that would explain
+why Echo ≥ 0.90 and MatchingMemory ≥ 0.95 hold together under the same preprocessing.
+Translate that into a conjecture in Harmonia-ZFC language with explicit quantifiers and side conditions."</code></pre>
+
+    <p><em>Proceed to a machine-parsable proof</em></p>
+    <pre><code>"Proceed with the proof using only axioms from the minimized core.
+For each step: state, justify with axiom/rule IDs. At the end, emit:
+{ 'theorem':'...', 'steps':[ {'id':1,'uses':['Ax_...','Schema_...'],'yields':'...'}, ... ], 'core_version':'harmonia-zfc-beta-v1.0|min-core-YYYYMMDD' }"</code></pre>
+
+    <h3>What to prove (and what not to)</h3>
+    <ul>
+      <li><strong>Good targets:</strong> equivalences between HHM invariants, bounds linking Rec and Entropy, abstract operator properties.</li>
+      <li><strong>Avoid:</strong> numeric claims about specific datasets (empirical), or introducing ad-hoc primitives not defined in the file.</li>
+    </ul>
+
+    <h3 class="warning">Pitfalls &amp; Warnings (Beta)</h3>
+    <ul class="warning">
+      <li><strong>Size &amp; redundancy:</strong> The beta’s breadth can hide duplicate or near-duplicate axioms. Always run the minimize step first.</li>
+      <li><strong>Over-strengthening:</strong> Too many strong schemas can make some “proofs” vacuous. Prefer a small, transparent core.</li>
+      <li><strong>Role confusion:</strong> Don’t use ZFC for raw data; that’s HHM’s job. ZFC is for <em>symbols</em>, not <em>sensors</em>.</li>
+      <li><strong>“Looks right” ≠ proof:</strong> Demand axiom/definition IDs per step. If a step cites anything outside the file (or the minimized core), stop.</li>
+      <li><strong>Version drift:</strong> Pin the exact file name and hash in your proof outline. Re-prove after upgrades.</li>
+    </ul>
+
+    <h3>Versioning &amp; Updates</h3>
+    <ul>
+      <li><strong>Status:</strong> <code>harmonia-zfc-beta-v1.0.json</code> (beta). A more polished release may follow soon.</li>
+      <li><strong>Stability promise:</strong> No silent changes to theorem-critical definitions in patch updates. Breaking changes bump the version.</li>
+      <li><strong>Your action:</strong> If a proof fails due to naming mismatch, ask the AI to propose a <em>minimal alias/rename map</em> and re-run the audit before retrying.</li>
+    </ul>
+
+    <div class="callout" role="note" aria-label="Bottom line">
+      <strong>Bottom line:</strong> Use HHM to find patterns you can trust (<em>empirical strength</em>). Use Harmonia-ZFC to pressure-test ideas in logic space (<em>formal rigor</em>).
+      Because Harmonia-ZFC is a <em>beta</em>, <u>minimize and audit first</u>—then prove.
+    </div>
+  </section>
+</main>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('.tab-button');
+    const tabs = document.querySelectorAll('.tab-content');
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        buttons.forEach(btn => {
+          btn.classList.remove('active');
+          btn.setAttribute('aria-selected', 'false');
+        });
+        tabs.forEach(tab => tab.classList.remove('active'));
+
+        button.classList.add('active');
+        button.setAttribute('aria-selected', 'true');
+        const target = document.querySelector('#tab-' + button.dataset.tab);
+        if (target) target.classList.add('active');
+      });
+    });
+  });
+</script>
+
+<footer>
+  <span class="tagline">Built from resonance. Measured by rhythm. Remembered by the field.</span>
+  <p>
+    Designed with love by the HHM Initiative —
+    <a href="/about.html">Read more</a> |
+    <a href="/license.html">License & Use</a>
+  </p>
+</footer>
+</body>
+</html>

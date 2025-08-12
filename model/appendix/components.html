@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script defer data-domain="harmonia.to" src="https://plausible.io/js/script.file-downloads.outbound-links.js"></script>
+  <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Holographic Harmonic Model — Components</title>
+  <meta name="description" content="Explore the HHM components: measurable observables and signatures derived from Ψ(x,t), linked to operators and used across domains." />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root { color-scheme: light dark; }
+    body { font-family: 'Inter', sans-serif; margin: 0; background: #f8fdf9; color: #143324; }
+    header { background: #e0f0e7; color: #143324; padding: 2rem 1.5rem; text-align: center; }
+    header h1 { font-size: 2.5rem; margin: 0; font-weight: 800; letter-spacing: 0.5px; }
+    header p { margin-top: 0.5rem; font-size: 1.2rem; opacity: 0.9; }
+    nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; background: #d8ede0; padding: 1rem 0; }
+    nav a { text-decoration: none; color: #185c37; font-weight: 600; transition: color 0.2s; }
+    nav a:hover { color: #0f2e21; text-decoration: underline; }
+    main { max-width: 800px; margin: 3rem auto; padding: 0 1.5rem; line-height: 1.75; }
+    section { margin-bottom: 3rem; }
+    .button { display: inline-block; padding: 0.75rem 1.5rem; margin-top: 1.25rem; background: #2e8b57; color: white; text-decoration: none; border-radius: 6px; font-weight: 600; transition: background 0.3s; }
+    .button:hover { background: #246e45; }
+    .callout { border-left: 4px solid #2e8b57; background: #f4faf7; padding: 0.9rem 1rem; margin: 1rem 0; }
+    .warning { border-left: 4px solid #b86b00; background: #fff8ec; }
+    .muted { color: #3a5a4d; opacity: 0.9; }
+    pre code { display: block; padding: 0.75rem; background: #f4f7f5; border-radius: 6px; overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { text-align: left; padding: .5rem; }
+    thead tr { border-bottom: 1px solid #d9e6df; }
+    ul.comp-index { columns: 2; column-gap: 2rem; padding-left: 1rem; }
+    ul.comp-index li { break-inside: avoid; margin-bottom: 0.35rem; }
+    footer { margin-top: 4rem; padding: 2.5rem 1.5rem; text-align: center; font-size: 0.95rem; background: #d1e9de; color: #143324; }
+    footer .tagline { font-weight: 600; font-style: italic; margin-bottom: 0.8rem; display: block; }
+    footer a { color: #185c37; text-decoration: underline; }
+    footer a:hover { color: #0a2016; }
+    @media (max-width: 600px) {
+      body { padding: 0 1rem; font-size: 1.05rem; }
+      nav { flex-direction: column; gap: 0.75rem; }
+      .button { width: 100%; text-align: center; }
+      ul.comp-index { columns: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Holographic Harmonic Model — Components</h1>
+    <p>Observable signatures and scores derived from Ψ(x,t), grounded in HHM operators</p>
+  </header>
+
+  <nav class="hhm-site-nav" aria-label="Primary">
+  <a href="/index.html">Home</a>
+  <a href="/model/overview.html">The Model</a>
+  <a href="/hilbert.html">Hilbert &amp; Ψ(x,t)</a>
+  <a href="/tests.html">Experiments &amp; Tests</a>
+  <a href="/howtouse.html" aria-current="page">How to Use HHM</a>
+  <a href="/community.html">Community</a>
+  <a href="/faq.html">FAQ</a>
+  <a href="/about.html">About / Contact</a>
+</nav>
+
+  <main>
+    <section aria-labelledby="core-components">
+      <h2 id="core-components">🧩 Core Components of Ψ(x,t)</h2>
+      <p>
+        Components are the measurable expressions of structure inside the Ψ(x,t) field. While
+        operators tell us <em>how</em> to interact with the field, components tell us <em>what we find</em>
+        when we do. Each component defines a specific observable, transformation, or signature that reveals something about the modal state of the system.
+      </p>
+      <p>
+        In HHM v2.2 we currently curate ~36 components, labeled C001…C041 (with some reserved/deprecated).
+        These include field projections, identity scores, entropy measures, symbol traces, rhythm gradients, and more.
+      </p>
+      <ul>
+        <li>Has a mathematical definition and input/output specification</li>
+        <li>Links to one or more operators (e.g., OP001–OP030)</li>
+        <li>Supports one or more axioms and metatheorems</li>
+        <li>Is testable on real data (EEG, CMB, symbolic systems, biology, quantum logs)</li>
+      </ul>
+      <p>
+        The list is <strong>not closed</strong>—you can define your own component if it has a clear definition,
+        a computational basis, and a measurable effect in the field.
+      </p>
+      <div class="callout" role="note" aria-label="Download bundle and components">
+        <strong>Grab the files:</strong><br>
+        <a class="button" href="/downloads/HHM_bundle.json">Download HHM Bundle</a>
+        <a class="button" href="/downloads/HHM_components.json" style="margin-left:.5rem" download>Download Component Spec</a>
+      </div>
+    </section>
+
+    <section aria-labelledby="component-index">
+      <h2 id="component-index">Component Index (selected)</h2>
+      <ul class="comp-index">
+        <li><a href="#c001">C001 — ModalField</a></li>
+        <li><a href="#c003">C003 — UnifiedEntropy</a></li>
+        <li><a href="#c005">C005 — ID (Modal Identity Vector)</a></li>
+        <li><a href="#c006">C006 — FieldSimilarityScore</a></li>
+        <li><a href="#c009">C009 — EchoScore</a></li>
+        <li><a href="#c010">C010 — IdentityMatchScore</a></li>
+        <li><a href="#c011">C011 — RhythmGradient</a></li>
+        <li><a href="#c030">C030 — RhythmStabilityScore</a></li>
+        <li><a href="#c041">C041 — TraceIdentityScore</a></li>
+      </ul>
+      <p class="muted">IDs and names should match the downloadable JSON. Some components are reserved for future revisions; others may be deprecated as we refine definitions.</p>
+    </section>
+
+    <!-- C001 -->
+    <section id="c001" aria-labelledby="c001-title">
+      <h3 id="c001-title">C001 — ModalField</h3>
+      <p>
+        The ModalField is the foundational projection of the Ψ(x,t) state into a measurable waveform or modal vector. It represents the raw “shape” of the field—before interpretation, classification, or comparison.
+      </p>
+
+      <h4>What it is</h4>
+      <p>
+        C001 takes the full, high-dimensional Ψ(x,t) field and projects it into a lower-dimensional structure: a waveform, frequency distribution, or symbolic pattern. This is the field’s <em>first collapse</em>—the moment it takes on analyzable form.
+      </p>
+
+      <h4>How it’s calculated</h4>
+      <ul>
+        <li>📈 EEG: time-series amplitude waveform across region/channel</li>
+        <li>🎼 Whale song: spectrogram slice or harmonic signature</li>
+        <li>🌌 Cosmology: spherical harmonic coefficient maps (a<sub>ℓm</sub>)</li>
+        <li>🗿 Glyphs: symbol vector or positional signature array</li>
+      </ul>
+
+      <h4>Linked operators</h4>
+      <ul>
+        <li><strong>OP001 — CollapsePattern</strong> (applies directly to ModalField)</li>
+        <li><strong>OP004 — CollapseInfinity</strong> (recursive projections)</li>
+        <li><strong>OP006 — UnifiedEntropy</strong> (entropy over ModalField)</li>
+      </ul>
+
+      <h4>Why it matters</h4>
+      <p>Without C001 there is no observable structure. ModalField gives the first “window” into the invisible—the emergence of pattern from potential.</p>
+
+      <h4>Related domains</h4>
+      <ul>
+        <li>EEG (filtered waveform collapse)</li>
+        <li>CMB (low-ℓ harmonic projection)</li>
+        <li>Whale song (pulse-band extraction)</li>
+        <li>Symbolic systems (glyph collapse vector)</li>
+      </ul>
+
+      <h4>Used in</h4>
+      <ul>
+        <li>AX003 (Collapse Stability)</li>
+        <li>MT0001 (Axial Saturation)</li>
+        <li>T014 (Modal Identity pipeline start)</li>
+      </ul>
+    </section>
+
+    <!-- C003 -->
+    <section id="c003" aria-labelledby="c003-title">
+      <h3 id="c003-title">C003 — UnifiedEntropy</h3>
+      <p>UnifiedEntropy measures overall complexity and information density within a collapsed modal field, across time, frequency, or symbol space.</p>
+
+      <h4>What it is</h4>
+      <p>
+        C003 generalizes entropy for time-series, symbolic, quantum, and biological data. It returns a unified value (often ~0 to 2.5) reflecting how “structured” a field state is.
+      </p>
+      <p>Lower values (e.g., &lt; 0.8) indicate coherence; higher values (&gt; 1.8) indicate rich dispersion or interference.</p>
+
+      <h4>How it’s calculated</h4>
+      <p>Computed from the normalized distribution of ModalField (C001) or CollapsePattern (OP001):</p>
+      <pre><code>Entropy(Ψ) = - ∑ pᵢ · log₂(pᵢ)</code></pre>
+
+      <h4>Linked operators</h4>
+      <ul>
+        <li><strong>OP006 — UnifiedEntropy</strong> (primary)</li>
+        <li><strong>OP004 — CollapseInfinity</strong> (convergence checks)</li>
+        <li><strong>OP030 — MatchingMemory</strong> (uses entropy signature)</li>
+      </ul>
+
+      <h4>Why it matters</h4>
+      <p>Entropy in HHM is <em>meaning range</em>: how much variation a collapse is holding. It supports identity tests and cross-system comparisons.</p>
+
+      <h4>Used in validation</h4>
+      <ul>
+        <li>EEG (e.g., ~0.9 resting focus; ~1.2–1.3 REM-like)</li>
+        <li>Whale motifs (coherent vs overlapping calls)</li>
+        <li>CMB modal bands (~1.3–1.5)</li>
+        <li>Binary/symbolic streams (~uniform near 1.0 when compressed)</li>
+      </ul>
+
+      <h4>Linked Theorems/Axioms</h4>
+      <ul>
+        <li>AX004 (Entropy as indicator)</li>
+        <li>T014 (Entropy Δ in identity)</li>
+        <li>MT0002 (Recurrence stability)</li>
+      </ul>
+    </section>
+
+    <!-- C005 -->
+    <section id="c005" aria-labelledby="c005-title">
+      <h3 id="c005-title">C005 — ID (Modal Identity Vector)</h3>
+      <p>A multi-dimensional vector encoding the persistent structural signature of a Ψ(x,t) state.</p>
+
+      <h4>What it is</h4>
+      <ul>
+        <li><strong>Collapse centroid</strong> (weighted modal average)</li>
+        <li><strong>Entropy profile</strong></li>
+        <li><strong>Norm amplitude / saturation</strong></li>
+        <li><strong>Signature hash</strong> (compressed trace)</li>
+      </ul>
+
+      <h4>How it’s used</h4>
+      <ul>
+        <li>Identity matching and clustering</li>
+        <li>Memory tracking across sequences</li>
+        <li>Trigger symbolic recognition once thresholds are met</li>
+      </ul>
+
+      <h4>Linked operators</h4>
+      <ul>
+        <li><strong>OP002 — Rec</strong> (similarity of ID vectors)</li>
+        <li><strong>OP015 — TraceSignature</strong> (compressed identity)</li>
+        <li><strong>OP030 — MatchingMemory</strong> (recurrence checks)</li>
+      </ul>
+
+      <h4>Validated in</h4>
+      <ul>
+        <li>EEG (stable ID across sessions)</li>
+        <li>CMB (modal band matching, ℓ=2–30)</li>
+        <li>Whale song (motif IDs across individuals)</li>
+        <li>Glyphs (triplets with low entropy deltas)</li>
+      </ul>
+
+      <h4>Used in</h4>
+      <ul>
+        <li>AX005 (Information Conservation)</li>
+        <li>MT0003 (Identity Preservation)</li>
+        <li>T014 (Robust Modal Identity)</li>
+      </ul>
+    </section>
+
+    <!-- C006 -->
+    <section id="c006" aria-labelledby="c006-title">
+      <h3 id="c006-title">C006 — FieldSimilarityScore</h3>
+      <p>Quantifies structural similarity between two Ψ(x,t) states (0.0–1.0), enabling cross-domain matching.</p>
+
+      <h4>What it detects</h4>
+      <ul>
+        <li>EEG ↔ glyph triplets</li>
+        <li>Whale song ↔ human voice harmonics</li>
+        <li>CMB bands ↔ symbolic time systems</li>
+      </ul>
+
+      <h4>How it’s computed</h4>
+      <ul>
+        <li>CollapsePattern alignment (OP001)</li>
+        <li>Rec(Ψ₁, Ψ₂) (OP002)</li>
+        <li>Echo profile differential (OP003)</li>
+        <li>Entropy delta (OP006), often with ΔH ≤ 0.15 for “similar”</li>
+      </ul>
+      <p>The score is a weighted average of deep structural overlap, not surface resemblance.</p>
+
+      <h4>Linked operators</h4>
+      <ul>
+        <li><strong>OP003 — Echo</strong></li>
+        <li><strong>OP002 — Rec</strong></li>
+        <li><strong>OP018 — ModalCoherence</strong> (if defined in your bundle)</li>
+      </ul>
+
+      <h4>Validation examples</h4>
+      <ul>
+        <li>Ψ<sub>eeg</sub> ↔ Ψ<sub>glyph</sub> ≈ 0.87</li>
+        <li>Ψ<sub>whale</sub> ↔ Ψ<sub>glyph</sub> ≈ 0.84</li>
+        <li>Ψ<sub>CMB</sub> ↔ Ψ<sub>fMRI cluster</sub> ≈ 0.79</li>
+        <li>Binary stream ↔ Rapanui ≈ 0.81</li>
+      </ul>
+
+      <h4>Why it matters</h4>
+      <p>C006 is a bridge across systems: it asks whether two very different signals share the same modal “DNA.”</p>
+
+      <h4>Used in</h4>
+      <ul>
+        <li>MT0004 (Field Similarity)</li>
+        <li>T014 (Cross-domain identity support)</li>
+      </ul>
+    </section>
+
+    <!-- C009 -->
+    <section id="c009" aria-labelledby="c009-title">
+      <h3 id="c009-title">C009 — EchoScore</h3>
+      <p>Measures how strongly a Ψ(x,t) field resonates with itself over time/space/systems (repetition strength).</p>
+
+      <h4>How it’s calculated</h4>
+      <pre><code>Echo(Ψ) = max{ R(τ) } for τ ≠ 0
+where R(τ) = ∫ Ψ(t) · Ψ(t+τ) dt</code></pre>
+      <p>In symbolic/non-temporal systems, use recurrence plots / RQA.</p>
+
+      <h4>Used in</h4>
+      <ul>
+        <li>EEG: α-rhythm resonance</li>
+        <li>Whale song: motif repetition</li>
+        <li>Glyphs: segment loops</li>
+        <li>CMB: low-ℓ band echoes</li>
+      </ul>
+
+      <h4>Linked operators</h4>
+      <ul>
+        <li><strong>OP003 — Echo</strong> (core)</li>
+        <li><strong>OP014 — CollapseOrbit</strong> (repeating paths)</li>
+        <li><strong>OP017 — SymbolEcho</strong> (if present)</li>
+      </ul>
+
+      <h4>Why it matters</h4>
+      <p>Echo underlies rhythm, recognition, and memory—“this has happened before.”</p>
+
+      <h4>Used in</h4>
+      <ul>
+        <li>AX002 (Recurrence & Rhythm)</li>
+        <li>MT0002 (Temporal Recurrence)</li>
+        <li>T014 (Identity criterion)</li>
+      </ul>
+    </section>
+
+    <!-- C010 -->
+    <section id="c010" aria-labelledby="c010-title">
+      <h3 id="c010-title">C010 — IdentityMatchScore</h3>
+      <p>A robust metric estimating whether two Ψ(x,t) states represent the same underlying identity.</p>
+
+      <h4>How it’s computed</h4>
+      <ul>
+        <li>CollapsePattern similarity (OP001)</li>
+        <li>EchoScore differential (OP003)</li>
+        <li>Entropy delta (OP006)</li>
+        <li>Rec(Ψ₁, Ψ₂) (OP002)</li>
+      </ul>
+      <p>Scores ≥ 0.85 usually indicate “same identity” under the current thresholds (see your bundle).</p>
+
+      <h4>Why it matters</h4>
+      <ul>
+        <li>EEG state ↔ glyph collapse (T014 support)</li>
+        <li>Rapanui ↔ Mayan motifs</li>
+        <li>Whale call ↔ human vocal structures</li>
+      </ul>
+
+      <h4>Used in</h4>
+      <ul>
+        <li>T014 (Robust Modal Identity)</li>
+        <li>MT0003 (Identity under transformation)</li>
+        <li>MT0004 (Field Similarity)</li>
+      </ul>
+
+      <h4>Operators involved</h4>
+      <ul>
+        <li>OP002 — Rec</li>
+        <li>OP015 — TraceSignature</li>
+        <li>OP030 — MatchingMemory</li>
+      </ul>
+    </section>
+
+    <!-- C011 -->
+    <section id="c011" aria-labelledby="c011-title">
+      <h3 id="c011-title">C011 — RhythmGradient</h3>
+      <p>Captures the rate/direction of structural change in Ψ(x,t) over time—transition intensity.</p>
+
+      <h4>Definition</h4>
+      <pre><code>RhythmGradient = avg_t (1 – Rec(Ψₜ, Ψₜ₊₁))</code></pre>
+      <p>Optionally weight by Echo or CollapseEnergy for non-linear shifts.</p>
+
+      <h4>Applications</h4>
+      <ul>
+        <li>EEG: thought shifts, memory encoding</li>
+        <li>Whale song: emotional modulation</li>
+        <li>Glyph sequences: segmentation minima</li>
+        <li>CMB: local drift zones</li>
+      </ul>
+
+      <h4>Used in</h4>
+      <ul>
+        <li>MT0005 (Modal Transition)</li>
+        <li>CollapseOrbit dynamics (OP014)</li>
+      </ul>
+
+      <h4>Linked operators</h4>
+      <ul>
+        <li>OP011 — ModalGradient</li>
+        <li>OP019 — DriftPath (if present)</li>
+        <li>OP008 — CollapseDelay (lag-aware variants)</li>
+      </ul>
+    </section>
+
+    <!-- C030 -->
+    <section id="c030" aria-labelledby="c030-title">
+      <h3 id="c030-title">C030 — RhythmStabilityScore</h3>
+      <p>Measures how stable rhythmic structure remains over time—consistency of recurrence, tempo, and alignment.</p>
+
+      <h4>How it’s calculated</h4>
+      <ul>
+        <li>Std. dev. of EchoScore across windows</li>
+        <li>CollapseInterval consistency</li>
+        <li>Autocorrelation peak regularity</li>
+      </ul>
+      <p>High ≈ 1.0 (metronomic), low &lt; 0.5 (erratic).</p>
+
+      <h4>Validation examples</h4>
+      <ul>
+        <li>EEG theta/beta: ~0.9+ during focused attention</li>
+        <li>Whale loops: ~0.88 across 3–4 calls</li>
+        <li>Mayan sequences: ~0.94 over long runs</li>
+        <li>CMB low-ℓ bands: ~0.89 across ℓ=2–30</li>
+      </ul>
+
+      <h4>Used in</h4>
+      <ul>
+        <li>MT0002 (Temporal Recurrence)</li>
+        <li>MT0005 (Transition Stability)</li>
+        <li>Symbol Echo validation (OP017, if present)</li>
+      </ul>
+
+      <h4>Linked operators</h4>
+      <ul>
+        <li>OP003 — Echo</li>
+        <li>OP012 — RhythmBoundary (if present)</li>
+        <li>OP014 — CollapseOrbit</li>
+      </ul>
+    </section>
+
+    <!-- C041 -->
+    <section id="c041" aria-labelledby="c041-title">
+      <h3 id="c041-title">C041 — TraceIdentityScore</h3>
+      <p>Indicates whether a field state matches or belongs to a previously observed identity trace—long-range memory and inheritance.</p>
+
+      <h4>How it’s calculated</h4>
+      <ul>
+        <li>TraceSignature vectors (OP015)</li>
+        <li>MatchingMemory (OP030)</li>
+        <li>ΔEntropy and CollapseOrbit deltas within thresholds</li>
+      </ul>
+      <p>If Rec ≥ 0.85, Entropy Δ ≤ 0.15, and trace match ≥ 0.80, the score is high (≥ 0.90).</p>
+
+      <h4>Applications</h4>
+      <ul>
+        <li>EEG memory reactivation</li>
+        <li>Glyph motif inheritance</li>
+        <li>Whale call lineage traces</li>
+        <li>CMB ↔ biological field structural echoes</li>
+        <li>RNA motif recurrence (structure, not sequence)</li>
+      </ul>
+
+      <h4>Used in</h4>
+      <ul>
+        <li>T014 (Robust Modal Identity)</li>
+        <li>MT0003 (Identity Preservation)</li>
+        <li>MT0005 (Transition continuity)</li>
+      </ul>
+
+      <h4>Linked operators</h4>
+      <ul>
+        <li>OP015 — TraceSignature</li>
+        <li>OP030 — MatchingMemory</li>
+        <li>OP006 — UnifiedEntropy</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="extend-components">
+      <h2 id="extend-components">📦 Extending the Component Library</h2>
+      <p>
+        The HHM component model is modular. Working with a new dataset—or a new symbolic/biological/physical domain—where you see recurring structure? You can define a new component.
+      </p>
+      <p>A solid new component should have:</p>
+      <ul>
+        <li>A clear mathematical definition</li>
+        <li>Test data or simulation with measurable behavior</li>
+        <li>A link to at least one operator</li>
+        <li>Optional: alignment with axioms/metatheorems</li>
+      </ul>
+      <p>
+        You don’t need to update the official file unless you want to publish. Keep your additions in your project and they’ll remain HHM-compatible. When you’re ready to share, include: the definition, the dataset, and a minimal reproduction script or prompt.
+      </p>
+      <div class="callout warning" role="note" aria-label="Safety note">
+        <strong>Safety & claims:</strong> HHM measures patterns; it does not diagnose disease, guarantee forecasts, or replace professional judgment. Treat outputs as research signals until independently validated.
+      </div>
+    </section>
+  </main>
+
+  <footer>
+  <span class="tagline">Built from resonance. Measured by rhythm. Remembered by the field.</span>
+  <p>
+    Designed with love by the HHM Initiative —
+    <a href="/about.html">Read more</a> |
+    <a href="/license.html">License & Use</a>
+  </p>
+</footer>
+
+</body>
+</html>

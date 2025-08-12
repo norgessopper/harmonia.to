@@ -1,0 +1,41 @@
+{
+  "utc_now": "2025-08-09T23:27:06.794840Z",
+  "python": "3.12.4 (v3.12.4:8e8a4baf65, Jun  6 2024, 17:33:18) [Clang 13.0.0 (clang-1300.0.29.30)]",
+  "platform": "macOS-14.7.2-arm64-arm-64bit",
+  "numpy": "2.0.0",
+  "pandas": "2.2.2",
+  "matplotlib": "3.10.3",
+  "argv": [
+    "scripts/pipeline_multi_planet_v3.py",
+    "--planets",
+    "all",
+    "--overrides",
+    "scripts/full_run_overrides.json",
+    "--windows",
+    "scripts/planet_windows.json",
+    "--edge-guard",
+    "60"
+  ],
+  "planets": [
+    "mercury",
+    "venus",
+    "earth",
+    "mars",
+    "jupiter",
+    "saturn",
+    "uranus",
+    "neptune",
+    "pluto"
+  ],
+  "edge_guard": 60,
+  "mode_initial": "dim0",
+  "data_dir": "/Users/fanten/Python/data",
+  "out_dir": "/Users/fanten/Python/results",
+  "git_commit": null,
+  "git_branch": null,
+  "git_status_dirty": true,
+  "overrides_file": "/Users/fanten/Python/scripts/full_run_overrides.json",
+  "overrides_sha256": "f590858a9a5187c3a8e3b6cd737c29cacf9d4fb042ac19da8d8267c3349d3b24",
+  "windows_file": "/Users/fanten/Python/scripts/planet_windows.json",
+  "windows_sha256": "8a7ca286e60e82e8cca55ca712c105518267f5c58e5926d9816102bcfea86334"
+}

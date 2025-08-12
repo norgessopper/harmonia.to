@@ -1,0 +1,80 @@
+{
+  "planet": "jupiter",
+  "period_days": 4332.589,
+  "params": {
+    "smooth": 15,
+    "min_sep": 1516,
+    "peri_minsep": 3033,
+    "match_window": 2166,
+    "z": 0.5
+  },
+  "signal_mode": "dim0",
+  "N_peri": 11,
+  "N_peaks": 21,
+  "matched": 11,
+  "coverage": 1.0,
+  "mean_dt_days": 932.9090909090909,
+  "median_dt_days": 933.0,
+  "std_dt_days": 1.2210278829367867,
+  "min_dt_days": 931.0,
+  "max_dt_days": 935.0,
+  "phase_frac": 0.21532369927290373,
+  "strength": 0.9997182156346764,
+  "matched_dt": [
+    934.0,
+    934.0,
+    935.0,
+    933.0,
+    932.0,
+    933.0,
+    933.0,
+    933.0,
+    933.0,
+    931.0,
+    931.0
+  ],
+  "matched_years": [
+    1901,
+    1913,
+    1925,
+    1937,
+    1948,
+    1960,
+    1972,
+    1984,
+    1996,
+    2008,
+    2020
+  ],
+  "phi_series": [
+    0.21557549077468463,
+    0.21557549077468463,
+    0.21580629965131704,
+    0.21534468189805223,
+    0.2151138730214197,
+    0.21534468189805223,
+    0.21534468189805223,
+    0.21534468189805223,
+    0.21534468189805223,
+    0.2148830641447873,
+    0.2148830641447873
+  ],
+  "lag_sweep": {
+    "best_lag_days": 1209,
+    "best_r": 0.9846111165941157
+  },
+  "csv_path": "/Users/fanten/Python/data/jupiter_1900to2025.csv",
+  "csv_sha256": "ed274d8c48e9e0277aba3d97b360d9821a5f18ef6d8e28fe2203a5e8c2889ac1",
+  "csv_mtime_utc": "2025-08-07T14:10:23.593552Z",
+  "csv_span_years": {
+    "start_year": 1900,
+    "end_year": 2025
+  },
+  "date0_iso": "1900-01-01",
+  "horizons_header": {
+    "center": "Sun (10)",
+    "frame": "Ecliptic of J2000.0, GEOMETRIC",
+    "units": "AU, AU/day",
+    "step": "1440 min (1 day)"
+  }
+}

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script defer data-domain="harmonia.to" src="https://plausible.io/js/script.file-downloads.outbound-links.js"></script>
+  <script>window.plausible = window.plausible || function(){(window.plausible.q=window.plausible.q||[]).push(arguments)}</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HHM — Reproducibility & Pipelines</title>
+  <meta name="description" content="How to run HHM analyses reproducibly: pipelines, environment capture, seeds, nulls/CI, result-card validation, and CI/CD checks."/>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root { color-scheme: light dark; }
+    body { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: 0; background:#f8fdf9; color:#143324; }
+    header { background:#e0f0e7; color:#143324; padding:2rem 1.5rem; text-align:center; }
+    header h1 { font-size:2.4rem; margin:0; font-weight:800; letter-spacing:.4px; }
+    header p { margin:.5rem 0 0; font-size:1.1rem; opacity:.9; }
+    nav { display:flex; flex-wrap:wrap; justify-content:center; gap:1.2rem; background:#d8ede0; padding:1rem 0; }
+    nav a { text-decoration:none; color:#185c37; font-weight:600; }
+    nav a:hover { color:#0f2e21; text-decoration:underline; }
+    main { max-width: 980px; margin: 2.5rem auto 3.5rem; padding: 0 1.2rem; line-height: 1.75; }
+    section { margin-bottom: 3rem; }
+    h2 { font-size:1.7rem; margin:.2rem 0 1rem; }
+    h3 { font-size:1.25rem; margin:1.2rem 0 .6rem; }
+    .muted { color:#2e5344; opacity:.9; }
+    .button { display:inline-block; padding:.7rem 1.1rem; margin-top:.8rem; background:#2e8b57; color:#fff; text-decoration:none; border-radius:8px; font-weight:700; }
+    .button:hover { background:#246e45; }
+    .secondary { background:#185c37; }
+    .danger { background:#b64b34; }
+    .callout { border-left:4px solid #2e8b57; background:#f4faf7; padding: .85rem 1rem; border-radius: 6px; }
+    .callout.warning { border-left-color:#b86b00; background:#fff8ec; }
+    .callout.beta { border-left-color:#5a3ab8; background:#f3f0ff; }
+    code, kbd { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background:#f4f7f5; padding:.15rem .35rem; border-radius:4px; }
+    pre code { display:block; padding:1rem; overflow-x:auto; border-radius:10px; background:#f4f7f5; }
+    table { width:100%; border-collapse:collapse; margin: .6rem 0 1rem; }
+    thead tr { border-bottom:1px solid #d9e6df; }
+    th, td { text-align:left; padding:.55rem; vertical-align:top; }
+    hr { border:none; border-top:1px solid #d7e6de; margin:2rem 0; }
+    details { background:#f7fbf8; border:1px solid #dfece6; border-radius:8px; padding:.7rem .9rem; margin:.7rem 0; }
+    details > summary { cursor:pointer; font-weight:700; color:#134; }
+    .badge { display:inline-block; background:#134; color:#fff; padding:.28rem .5rem; border-radius:6px; font-size:.9rem; font-weight:700; cursor:help; }
+    footer { margin-top: 4rem; padding:2.2rem 1.5rem; text-align:center; font-size:.95rem; background:#d1e9de; color:#143324; }
+    footer .tagline { font-weight:600; font-style:italic; margin-bottom:.6rem; display:block; }
+    @media (max-width:680px){ header h1{font-size:2rem} main{font-size:1.02rem} .button{width:100%; text-align:center} }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Reproducibility & Pipelines</h1>
+  <p>Make every HHM analysis rerunnable, auditable, and shareable — same inputs, same rules, same outputs.</p>
+</header>
+
+<nav class="hhm-site-nav" aria-label="Primary">
+  <a href="/index.html">Home</a>
+  <a href="/model/overview.html">The Model</a>
+  <a href="/hilbert.html">Hilbert &amp; Ψ(x,t)</a>
+  <a href="/tests.html">Experiments &amp; Tests</a>
+  <a href="/howtouse.html" aria-current="page">How to Use HHM</a>
+  <a href="/community.html">Community</a>
+  <a href="/faq.html">FAQ</a>
+  <a href="/about.html">About / Contact</a>
+</nav>
+
+<main>
+
+<section>
+  <span class="badge" title="HHM Verified Analysis — Results come from a fixed measurement pipeline using the HHM bundle’s operators, thresholds, null models, and result-card schema. Re-run = same outcome (within CI).">✅ HHM Verified Analysis</span>
+  <h2>What “Reproducible” Means Here</h2>
+  <p>
+    HHM analyses are reproducible when any independent person can re-run the steps and obtain the same decisions (<em>pass/fail</em>) and statistically consistent numbers (within confidence intervals).
+  </p>
+  <ul>
+    <li><strong>Single source of truth:</strong> <code>HHM_bundle.json</code> pins operators, thresholds, nulls/CI, and the result-card schema.</li>
+    <li><strong>Sealed inputs:</strong> dataset manifest + hashes; provenance graph for every derived file.</li>
+    <li><strong>Deterministic runs:</strong> seeded randomness; fixed windowing; declared preprocessing.</li>
+    <li><strong>Schema-checked outputs:</strong> machine-validated result cards, not free text.</li>
+  </ul>
+  <div class="callout">
+    TL;DR — no silent parameter drift, no movable thresholds, no hidden preprocessing. If anything changes, the version changes.
+  </div>
+</section>
+
+<section>
+  <h2>Pipeline at a Glance</h2>
+  <table aria-label="pipeline overview">
+    <thead><tr><th>Stage</th><th>What it does</th><th>Artifacts</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>1) Intake</td>
+        <td>Load dataset + manifest; verify hashes and licenses; record consent/PII status.</td>
+        <td><code>dataset.json</code>, <code>manifest.json</code>, <code>provenance.json</code></td>
+      </tr>
+      <tr>
+        <td>2) Prep</td>
+        <td>Declared preprocessing (filters, resampling, windowing) with parameters pinned.</td>
+        <td><code>prep_config.yaml</code>, <code>prep_log.jsonl</code></td>
+      </tr>
+      <tr>
+        <td>3) Measure</td>
+        <td>Apply HHM operators (OP001, OP003, OP002, OP006, …) from the bundle.</td>
+        <td><code>ops_metrics.parquet</code></td>
+      </tr>
+      <tr>
+        <td>4) Nulls & CI</td>
+        <td>Generate nulls, run bootstraps, compute CI; compare with preregistered thresholds.</td>
+        <td><code>null_runs.parquet</code>, <code>ci.json</code></td>
+      </tr>
+      <tr>
+        <td>5) Result Card</td>
+        <td>Emit schema-valid JSON with metrics, decisions, seeds, versions, hashes.</td>
+        <td><code>result_card.json</code></td>
+      </tr>
+      <tr>
+        <td>6) Audit</td>
+        <td>Automatic checks (schema, determinism, thresholds locked); export run report.</td>
+        <td><code>audit_report.html</code>, <code>replay_cmd.txt</code></td>
+      </tr>
+    </tbody>
+  </table>
+  <a class="button" href="/downloads/templates/HHM_Pipeline_Template.yaml" download>Download Pipeline YAML Template</a>
+  <a class="button secondary" href="/downloads/HHM_bundle.json" download>Download HHM Bundle</a>
+</section>
+
+<section>
+  <h2>Minimal Runbook</h2>
+  <p class="muted">Use this when you just want to get a clean, reproducible “Hello, World” pass/fail with CIs.</p>
+  <details><summary>Runbook R1 — Minimal Pipeline</summary>
+    <pre><code># R1_minimal_pipeline (pseudocode / steps)
+inputs:
+  - data: dataset.zip (hash: SHA256:...)
+  - bundle: HHM_bundle.json (version: 2.2, hash: ...)
+params:
+  seed: 20250111
+  windows: "2s @ 50% overlap"
+  basis: "Fourier 1–40 Hz, Hamming"
+steps:
+  - verify_manifest(dataset.manifest)
+  - preprocess(data, basis, windows, filters=["bandpass 1–40Hz"])
+  - op(OP001_CollapsePattern)
+  - op(OP003_Echo)
+  - op(OP002_Rec)              # if comparison target provided
+  - op(OP006_UnifiedEntropy)
+  - nulls: ["time_shuffle", "phase_randomize"]
+  - bootstrap: n=1000
+  - compare_to_thresholds(bundle.thresholds)
+  - emit_result_card(schema=bundle.result_schema)
+  - validate_json(result_card.json, bundle.result_schema)
+outputs:
+  - result_card.json
+  - ci.json
+  - prep_log.jsonl
+  - ops_metrics.parquet
+</code></pre>
+  </details>
+
+  <details><summary>Runbook R2 — Benchmark & Transfer</summary>
+    <pre><code># R2_benchmark_transfer (outline)
+- load library of reference result_cards/*
+- compute Rec/Entropy/Echo similarity surfaces
+- report top-k matches + T014 status
+- emit transfer_report.json (+ plots)
+</code></pre>
+  </details>
+</section>
+
+<section>
+  <h2>Seeds, Determinism & Environment Capture</h2>
+  <ul>
+    <li><strong>Seed once, everywhere:</strong> one <code>global_seed</code> for Python/NumPy/random/backends; record it in the result card.</li>
+    <li><strong>Pin numeric libs:</strong> BLAS/LAPACK/GPU versions can change floating-point noise; capture in an <code>env_lock</code>.</li>
+    <li><strong>Containerize:</strong> run inside a pinned image; record image digest (immutable SHA).</li>
+  </ul>
+  <pre><code># pipeline.yaml (excerpt)
+env:
+  container: ghcr.io/hhm/hhm-pipeline:2.2.0@sha256:<digest>
+  seeds:
+    global: 20250111
+capture:
+  python: "3.11.7"
+  numpy: "1.26.4"
+  scipy: "1.11.4"
+  mkl: "2024.1"
+  cuda: ""
+</code></pre>
+  <a class="button" href="/downloads/templates/HHM_Env_Lock_Template.json" download>Download Env Lock Template</a>
+</section>
+
+<section>
+  <h2>Manifests & Provenance</h2>
+  <p>Every file is content-addressed and every derivative is linked back to its sources.</p>
+  <ul>
+    <li><strong>Manifest:</strong> paths, sizes, BLAKE3/SHA-256 hashes, access level.</li>
+    <li><strong>Provenance graph:</strong> nodes (files) + edges (transforms) with tool versions, params, seeds, and logs.</li>
+  </ul>
+  <a class="button" href="/downloads/templates/HHM_Manifest_Template.json" download>Manifest Template</a>
+  <a class="button" href="/downloads/templates/HHM_Provenance_Template.json" download>Provenance Template</a>
+</section>
+
+<section>
+  <h2>Nulls, CI, and Threshold Decisions</h2>
+  <p>Nulls and CIs are part of the pipeline, not an afterthought.</p>
+  <ul>
+    <li><strong>Null generators:</strong> e.g., <code>time_shuffle</code>, <code>phase_randomize</code>, <code>block_bootstrap</code> — defined in the bundle.</li>
+    <li><strong>CI:</strong> bootstrap (default n=1000) with the bundle’s confidence level (e.g., 95%).</li>
+    <li><strong>Decisions:</strong> pass/fail only when metrics clear preregistered thresholds vs null.</li>
+  </ul>
+  <pre><code># thresholds.json (excerpt from HHM bundle)
+{
+  "Echo.min": 0.90,
+  "Rec.min": 0.85,
+  "Entropy.delta.max": 0.15,
+  "CollapseOrbit.delta.max": 1
+}
+</code></pre>
+  <a class="button" href="/thresholds-nulls-ci.html">Read: Test Thresholds, Nulls & CI</a>
+</section>
+
+<section>
+  <h2>Result Card — Schema & Example</h2>
+  <p>Every run produces a machine-checkable JSON that locks versions, seeds, inputs, and outcomes.</p>
+  <pre><code>{
+  "schema": "hhm.result_card.v2",
+  "bundle_version": "2.2.0",
+  "env_lock": "env-lock:sha256:...",
+  "dataset_id": "hhm-bio-whale-001",
+  "manifest_hash": "blake3:...",
+  "operators": ["OP001","OP003","OP006"],
+  "params": { "basis": "Fourier 1-40Hz", "window": "2s/50%" },
+  "seed": 20250111,
+  "metrics": { "Echo": 0.931, "Entropy": 0.821 },
+  "nulls": { "method": ["time_shuffle","phase_randomize"], "n": 1000 },
+  "ci": { "Echo": [0.914, 0.946], "Entropy": [0.79, 0.85] },
+  "thresholds_version": "2.2.0",
+  "decisions": { "Echo.pass": true, "T014.pass": false },
+  "artifacts": {
+    "ops_metrics": "ipfs://.../ops.parquet",
+    "audit_report": "ipfs://.../audit.html"
+  },
+  "created_at": "2025-08-11T12:00:00Z",
+  "run_id": "rc-2025-08-11-1200-abc123"
+}</code></pre>
+  <details><summary>CLI: validate a result card</summary>
+    <pre><code>hhm-validate \
+  --schema /downloads/schemas/hhm.result_card.v2.json \
+  --input result_card.json</code></pre>
+  </details>
+  <a class="button" href="/downloads/schemas/hhm.result_card.v2.json" download>Download Result Card Schema</a>
+</section>
+
+<section>
+  <h2>CI/CD Checks (Recommended)</h2>
+  <ul>
+    <li><strong>Schema check:</strong> result card must validate.</li>
+    <li><strong>Determinism check:</strong> re-run same seed → identical decisions; metric deltas within numeric tolerance.</li>
+    <li><strong>Threshold lock:</strong> thresholds version must match bundle; no local overrides.</li>
+    <li><strong>Provenance closure:</strong> no orphaned artifacts; all derived files traced to raw inputs.</li>
+  </ul>
+  <details><summary>GitHub Actions — sample job</summary>
+    <pre><code>name: hhm-ci
+on: [push, pull_request]
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Pull container
+        run: docker pull ghcr.io/hhm/hhm-pipeline:2.2.0@sha256:&lt;digest&gt;
+      - name: Run pipeline (dry)
+        run: docker run --rm -v $PWD:/work ghcr.io/hhm/hhm-pipeline:2.2.0 \
+             hhm-run --pipeline pipeline.yaml --dry-run
+      - name: Execute
+        run: docker run --rm -v $PWD:/work ghcr.io/hhm/hhm-pipeline:2.2.0 \
+             hhm-run --pipeline pipeline.yaml
+      - name: Validate result card
+        run: docker run --rm -v $PWD:/work ghcr.io/hhm/hhm-pipeline:2.2.0 \
+             hhm-validate --schema /schemas/hhm.result_card.v2.json --input result_card.json
+</code></pre>
+  </details>
+</section>
+
+<section>
+  <h2>Local vs Cloud — Same Pipeline</h2>
+  <p>Run the same <code>pipeline.yaml</code> locally or in the cloud. Only the <code>storage:</code> stanza changes.</p>
+  <pre><code># pipeline.yaml (storage profiles)
+storage:
+  local:
+    root: "./data"
+  s3:
+    root: "s3://hhm-datasets/proj-x/"
+    profile: "default"
+profile: "local"   # or "s3"
+</code></pre>
+</section>
+
+<section>
+  <h2>Common Failure Modes (and Fixes)</h2>
+  <details><summary>“My numbers moved slightly between runs.”</summary>
+    <ul>
+      <li>Check seeds across all libs; confirm same container digest.</li>
+      <li>Ensure BLAS/GPU kernels are pinned; disable nondeterministic ops if present.</li>
+      <li>Increase sample sizes/bootstraps or tighten numeric tolerances in the audit.</li>
+    </ul>
+  </details>
+  <details><summary>“Schema validation failed.”</summary>
+    <ul>
+      <li>Diff your <code>result_card.json</code> against the schema; look for missing required fields.</li>
+      <li>Ensure <code>thresholds_version</code> and <code>bundle_version</code> match the bundle you ran.</li>
+    </ul>
+  </details>
+  <details><summary>“Pass/Fail changed after I tweaked preprocessing.”</summary>
+    <ul>
+      <li>Preprocessing is part of the registered pipeline. If you change it, bump <code>pipeline_version</code> and re-run full nulls/CI.</li>
+    </ul>
+  </details>
+</section>
+
+<section>
+  <h2>Ethics, Consent & Privacy</h2>
+  <ul>
+    <li>Respect dataset licenses and consent levels in the sheet; enforce PII policies at intake.</li>
+    <li>Never upload sensitive data to third-party clouds without a DPA and documented consent.</li>
+    <li>Prefer de-identified, aggregated outputs in result cards and reports.</li>
+  </ul>
+  <a class="button" href="/dataset-sheets-provenance.html">Dataset Sheets &amp; Provenance</a>
+</section>
+
+<hr/>
+
+<section>
+  <h2>Downloads & Starters</h2>
+  <p>Everything you need to produce a clean, reproducible HHM run.</p>
+  <ul>
+    <li><a class="button" href="/downloads/HHM_bundle.json" download>HHM Bundle (operators + thresholds + schema)</a></li>
+    <li><a class="button" href="/downloads/templates/HHM_Pipeline_Template.yaml" download>Pipeline YAML Template</a></li>
+    <li><a class="button" href="/downloads/templates/HHM_Dataset_Sheet_Template.json" download>Dataset Sheet Template</a></li>
+    <li><a class="button" href="/downloads/templates/HHM_Manifest_Template.json" download>Manifest Template</a></li>
+    <li><a class="button" href="/downloads/templates/HHM_Provenance_Template.json" download>Provenance Template</a></li>
+    <li><a class="button" href="/downloads/schemas/hhm.result_card.v2.json" download>Result Card Schema</a></li>
+  </ul>
+</section>
+
+<section>
+  <h2>FAQ</h2>
+  <details><summary>Do I need Python execution to run HHM?</summary>
+    <p>No. For planning and interpretation, file-aware AIs are enough. For measurement, use the provided container or your own pinned environment.</p>
+  </details>
+  <details><summary>What counts as a “reproducible” change?</summary>
+    <p>Any change that alters preprocessing, operators, thresholds, or nulls requires a new <code>pipeline_version</code> and fresh result cards.</p>
+  </details>
+  <details><summary>Can I add custom operators?</summary>
+    <p>Yes — follow the operator template, register in your pipeline, and validate on a known dataset before claiming results.</p>
+  </details>
+</section>
+
+</main>
+
+<footer>
+  <span class="tagline">Built from resonance. Measured by rhythm. Remembered by the field.</span>
+  <p>
+    Designed with love by the HHM Initiative —
+    <a href="/about.html">Read more</a> |
+    <a href="/license.html">License & Use</a>
+  </p>
+</footer>
+
+</body>
+</html>

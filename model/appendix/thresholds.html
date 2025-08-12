@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script defer data-domain="harmonia.to" src="https://plausible.io/js/script.file-downloads.outbound-links.js"></script>
+  <script>window.plausible = window.plausible || function(){(window.plausible.q=window.plausible.q||[]).push(arguments)}</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HHM — Test Thresholds, Nulls & CI Methods</title>
+  <meta name="description" content="How HHM defines test thresholds, builds null models, and computes confidence intervals across domains for rigorous, reproducible analysis of Ψ(x,t)."/>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root { color-scheme: light; }
+    * { box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; margin: 0; background: #f8fdf9; color: #143324; }
+    header { background: #e0f0e7; color: #143324; padding: 2rem 1.5rem; text-align: center; }
+    header h1 { font-size: 2.5rem; margin: 0; font-weight: 800; letter-spacing: .5px; }
+    header p { margin-top: .5rem; font-size: 1.15rem; opacity: .9; }
+
+    nav[aria-label="Primary"] { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.25rem; background: #d8ede0; padding: 1rem 0; }
+    nav[aria-label="Primary"] a { text-decoration: none; color: #185c37; font-weight: 600; transition: color .2s; }
+    nav[aria-label="Primary"] a:hover { color: #0f2e21; text-decoration: underline; }
+
+    .toc { max-width: 980px; margin: 2rem auto 0; padding: 0 1.5rem; }
+    .toc .cards { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1rem; }
+    .card { background: #f4faf7; border: 1px solid #d9e6df; border-radius: 10px; padding: .9rem 1rem; }
+    .card h3 { margin: 0 0 .35rem 0; font-size: 1.05rem; }
+    .card a { color: #185c37; font-weight: 600; text-decoration: none; }
+    .card a:hover { text-decoration: underline; }
+
+    main { max-width: 880px; margin: 2rem auto 3rem; padding: 0 1.5rem; line-height: 1.75; }
+    section { margin: 3rem 0; }
+    h2 { font-size: 1.8rem; margin-bottom: .5rem; }
+    h3 { font-size: 1.35rem; margin-bottom: .35rem; }
+    h4 { font-size: 1.05rem; margin: .75rem 0 .25rem; }
+    p code, li code, td code, th code { background: #f4f7f5; padding: .1rem .35rem; border-radius: 4px; }
+    pre code { display: block; padding: .75rem; background: #f4f7f5; border-radius: 6px; overflow-x: auto; }
+    .button { display: inline-block; padding: .7rem 1.1rem; margin-top: 1rem; background: #2e8b57; color: #fff; border-radius: 6px; font-weight: 700; text-decoration: none; }
+    .button:hover { background: #246e45; }
+    .callout { border-left: 4px solid #2e8b57; background: #f4faf7; padding: .9rem 1rem; margin: 1rem 0; }
+    .warning { border-left: 4px solid #b86b00; background: #fff8ec; }
+    .muted { color: #3a5a4d; opacity: .9; }
+
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    th, td { text-align: left; padding: .55rem .5rem; border-bottom: 1px solid #d9e6df; vertical-align: top; }
+    thead th { border-bottom: 2px solid #cfe0d8; }
+
+    footer { margin-top: 4rem; padding: 2rem 1.5rem; text-align: center; font-size: .95rem; background: #d1e9de; color: #143324; }
+    footer .tagline { font-weight: 600; font-style: italic; margin-bottom: .6rem; display: block; }
+    footer a { color: #185c37; text-decoration: underline; }
+    footer a:hover { color: #0a2016; }
+
+    @media (max-width: 720px) {
+      .toc .cards { grid-template-columns: 1fr; }
+      header p { font-size: 1.05rem; }
+      body { font-size: 1.04rem; }
+      nav[aria-label="Primary"] { flex-direction: column; gap: .7rem; }
+      .button { width: 100%; text-align: center; }
+      table { display: block; overflow-x: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Test Thresholds, Nulls & CI Methods</h1>
+    <p>How HHM decides what “counts,” how we guard against coincidences, and how confident we are</p>
+  </header>
+
+  <nav class="hhm-site-nav" aria-label="Primary">
+  <a href="/index.html">Home</a>
+  <a href="/model/overview.html">The Model</a>
+  <a href="/hilbert.html">Hilbert &amp; Ψ(x,t)</a>
+  <a href="/tests.html">Experiments &amp; Tests</a>
+  <a href="/howtouse.html" aria-current="page">How to Use HHM</a>
+  <a href="/community.html">Community</a>
+  <a href="/faq.html">FAQ</a>
+  <a href="/about.html">About / Contact</a>
+</nav>
+
+  <!-- Quick in-page nav -->
+  <div class="toc" aria-label="In-page navigation">
+    <div class="cards">
+      <div class="card">
+        <h3>Overview & Defaults</h3>
+        <ul style="margin:0; padding-left:1rem;">
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#defaults">Default Thresholds</a></li>
+          <li><a href="#calibration">Calibrating by Dataset</a></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Nulls & Uncertainty</h3>
+        <ul style="margin:0; padding-left:1rem;">
+          <li><a href="#nulls">Null Models</a></li>
+          <li><a href="#permutation">Permutation & Resampling</a></li>
+          <li><a href="#ci">Confidence Intervals</a></li>
+          <li><a href="#multiplicity">Multiple Comparisons</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <section id="overview">
+      <h2>What this page covers</h2>
+      <p>
+        HHM results are only as strong as their testing rules. This page documents how we set <strong>thresholds</strong> for operators (e.g., OP002 <code>Rec</code>, OP003 <code>Echo</code>, OP006 <code>UnifiedEntropy</code>, OP014 <code>CollapseOrbit</code>), how we construct <strong>null models</strong> to estimate chance levels, and how we compute <strong>confidence intervals</strong> and error control for reproducible claims.
+      </p>
+      <div class="callout">
+        <strong>Repro tip:</strong> Use the exact schemas in <code>HHM_bundle.json</code> when you (or AI) run tests. Return a <em>Result Card</em> with thresholds, null choice, CI method, effect sizes, and decisions.
+      </div>
+      <details><summary>Run this with an AI</summary>
+        <pre><code>"Load HHM_bundle.json. For the attached dataset, compute OP002 (Rec), OP003 (Echo), OP006 (Entropy),
+and OP014 (CollapseOrbit). Use the bundle's default thresholds and null models.
+Return a Result Card per schema with CIs, effect sizes, and pass/fail decisions."</code></pre>
+      </details>
+    </section>
+
+    <section id="defaults">
+      <h2>Default Thresholds (bundle-wide, adjustable)</h2>
+      <p class="muted">These are the baseline values used in the HHM minimum validation set. Adjust per dataset via the calibration flow below.</p>
+      <table aria-label="Default operator thresholds">
+        <thead>
+          <tr>
+            <th>Metric / Operator</th>
+            <th>Symbol</th>
+            <th>Default Threshold</th>
+            <th>Decision Rule</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Recurrence similarity (OP002)</td>
+            <td><code>Rec(Ψ₁,Ψ₂)</code></td>
+            <td>≥ 0.85</td>
+            <td>Pass if Rec ≥ 0.85</td>
+            <td>Cosine similarity on matched feature space; domain-normalized.</td>
+          </tr>
+          <tr>
+            <td>Self-echo (OP003)</td>
+            <td><code>Echo(Ψ)</code></td>
+            <td>≥ 0.90</td>
+            <td>Pass if max lag peak ≥ 0.90 (τ ≠ 0)</td>
+            <td>Autocorr/RQA; report lag τ* at peak.</td>
+          </tr>
+          <tr>
+            <td>Entropy delta (OP006)</td>
+            <td><code>|ΔH|</code></td>
+            <td>≤ 0.15</td>
+            <td>Pass if |H₁ − H₂| ≤ 0.15</td>
+            <td>UnifiedEntropy on normalized modal distribution.</td>
+          </tr>
+          <tr>
+            <td>Orbit agreement (OP014)</td>
+            <td><code>ΔOrbit</code></td>
+            <td>≤ 1 step</td>
+            <td>Pass if |n₁ − n₂| ≤ 1</td>
+            <td>Small tolerance for noisy sequences.</td>
+          </tr>
+          <tr>
+            <td>Identity match (composite)</td>
+            <td><code>IMS</code></td>
+            <td>≥ 0.85</td>
+            <td>Pass if IMS ≥ 0.85</td>
+            <td>Bundle-defined weighted mix of Rec/Echo/Entropy/Orbit.</td>
+          </tr>
+        </tbody>
+      </table>
+      <details><summary>Result Card fields (excerpt)</summary>
+        <pre><code>{
+  "operator": "OP002",
+  "metric": "Rec",
+  "value": 0.891,
+  "threshold": 0.85,
+  "null_model": "phase_randomization",
+  "p_value": 0.004,
+  "ci": {"method":"BCa","level":0.95,"lower":0.862,"upper":0.915},
+  "effect_size": {"type":"Cohen_d","value":1.12},
+  "decision": "pass"
+}</code></pre>
+      </details>
+    </section>
+
+    <section id="calibration">
+      <h2>Calibrating Thresholds by Dataset</h2>
+      <p>
+        Thresholds are <em>principled defaults</em>, not commandments. For each dataset, we calibrate using distributional checks, null simulations, and ROC analysis.
+      </p>
+      <ol>
+        <li><strong>Normalize features</strong> (per-basis scaling, z-score by channel/segment).</li>
+        <li><strong>Estimate chance levels</strong> with at least one <a href="#nulls">null model</a>.</li>
+        <li><strong>Target α</strong> (e.g., 0.05) and derive threshold that keeps FPR ≤ α on null samples.</li>
+        <li><strong>Check ROC/AUC</strong> if labeled positives exist; pick threshold near Youden’s J.</li>
+        <li><strong>Lock threshold</strong> before looking at holdout data.</li>
+      </ol>
+      <details><summary>Run this with an AI</summary>
+        <pre><code>"Using HHM_bundle.json, calibrate Rec/Echo thresholds for this dataset.
+Generate null distributions via circular shift (time-series) and symbol shuffle (glyph).
+Report ROC, AUC, chosen threshold for α=0.05, and freeze settings into a Thresholds block."</code></pre>
+      </details>
+    </section>
+
+    <section id="nulls">
+      <h2>Null Models (choose by data type)</h2>
+      <p>
+        Nulls approximate “no structured match/recurrence.” Choose the weakest assumption that still preserves nuisance structure (e.g., spectrum, autocorrelation).
+      </p>
+
+      <table aria-label="Null model catalog">
+        <thead>
+          <tr>
+            <th>Null</th>
+            <th>Use For</th>
+            <th>Preserves</th>
+            <th>Breaks</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Random shuffle</strong></td>
+            <td>Symbols, unordered events</td>
+            <td>Marginal histogram</td>
+            <td>Order, recurrence</td>
+          </tr>
+          <tr>
+            <td><strong>Circular time shift</strong></td>
+            <td>Time-series (EEG, audio)</td>
+            <td>Spectrum, amplitude</td>
+            <td>Phase alignment across windows</td>
+          </tr>
+          <tr>
+            <td><strong>Phase randomization</strong></td>
+            <td>Stationary signals</td>
+            <td>Power spectrum</td>
+            <td>Temporal structure</td>
+          </tr>
+          <tr>
+            <td><strong>IAAFT surrogate</strong></td>
+            <td>Nonlinear time-series</td>
+            <td>Amplitude distribution + spectrum</td>
+            <td>Higher-order dependencies</td>
+          </tr>
+          <tr>
+            <td><strong>Block bootstrap</strong></td>
+            <td>Autocorrelated data</td>
+            <td>Local correlation (block length)</td>
+            <td>Long-range order</td>
+          </tr>
+          <tr>
+            <td><strong>Label permutation</strong></td>
+            <td>Between-group tests</td>
+            <td>All within-sample structure</td>
+            <td>Condition linkage</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <strong>Rule of thumb:</strong> If you’re testing Echo (OP003), keep the spectrum (use phase-randomized or circular-shift nulls). For Rec (OP002) across domains, use label permutations plus domainwise normalizations.
+      </div>
+
+      <details><summary>Run this with an AI</summary>
+        <pre><code>"Compute null distributions for OP003 (Echo) using phase randomization (N=2000) and circular shifts (N=2000).
+Return p-values, QQ plots, and a merged conservative p via max method. Update the Result Card."</code></pre>
+      </details>
+    </section>
+
+    <section id="permutation">
+      <h2>Permutation, Resampling & Power</h2>
+      <h3>Permutation tests</h3>
+      <ul>
+        <li><strong>Within-sample:</strong> Time-shift or phase-randomize; recompute metric to get null.</li>
+        <li><strong>Between-group:</strong> Shuffle labels; recompute group difference of metric.</li>
+      </ul>
+
+      <h3>Bootstrap</h3>
+      <ul>
+        <li><strong>Percentile / BCa</strong> CIs for metrics (Rec, Echo, Entropy).</li>
+        <li><strong>Block bootstrap</strong> for autocorrelated series (pick block length via ACF cutoff).</li>
+      </ul>
+
+      <h3>Power analysis (pragmatic)</h3>
+      <ul>
+        <li>Estimate effect size from pilot (e.g., ΔRec vs null mean / pooled SD).</li>
+        <li>Simulate resamples to find N (segments/windows) for 80–90% power at α = 0.05.</li>
+      </ul>
+
+      <details><summary>Run this with an AI</summary>
+        <pre><code>"Estimate power to detect Rec ≥ 0.85 given empirical null from circular shifts.
+Use block bootstrap (block=2s) to model dependency; report N windows for 0.8 and 0.9 power."</code></pre>
+      </details>
+    </section>
+
+    <section id="ci">
+      <h2>Confidence Intervals & Effect Sizes</h2>
+      <h3>CI methods</h3>
+      <ul>
+        <li><strong>Bootstrap Percentile</strong> (default for bounded metrics): report 95% CI from resamples.</li>
+        <li><strong>BCa</strong> (bias-corrected & accelerated) when distributions are skewed.</li>
+        <li><strong>Parametric CI</strong> when justified; e.g., Fisher z-transform for correlations.</li>
+      </ul>
+      <h3>Examples</h3>
+      <ul>
+        <li><em>Rec</em>: Fisher z CI or bootstrap-BCa if non-normal.</li>
+        <li><em>Echo</em>: Bootstrap peak distribution across windows (exclude τ=0).</li>
+        <li><em>Entropy</em>: Bootstrap on normalized modal probabilities; delta method optional.</li>
+      </ul>
+      <h3>Effect sizes</h3>
+      <ul>
+        <li><strong>Cliff’s δ</strong> for robust difference vs null.</li>
+        <li><strong>Cohen’s d</strong> when assumptions are met.</li>
+        <li><strong>AUC</strong> for discriminability across classes.</li>
+      </ul>
+
+      <details><summary>Run this with an AI</summary>
+        <pre><code>"Compute 95% BCa CI for Echo and Rec on the attached sequence (window=4s, step=0.5s).
+Also report Cliff's δ vs null and interpret in plain language. Update the Result Card."</code></pre>
+      </details>
+    </section>
+
+    <section id="multiplicity">
+      <h2>Multiple Comparisons & Reporting</h2>
+      <p>
+        When running many windows, channels, or operator variants, control false discoveries.
+      </p>
+      <ul>
+        <li><strong>FDR (Benjamini–Hochberg)</strong> across families of related tests.</li>
+        <li><strong>FWER</strong> (Holm–Bonferroni) for small families or critical claims.</li>
+        <li><strong>Cluster-wise correction</strong> for contiguous time/frequency effects.</li>
+      </ul>
+      <div class="callout">
+        <strong>Report:</strong> raw p, adjusted p (method), number of tests, family definition, and pre-registered threshold choice.
+      </div>
+
+      <details><summary>Run this with an AI</summary>
+        <pre><code>"Apply BH-FDR (q=0.05) across 64 channels × 10 lags for Echo tests.
+Return per-channel significant lags, adjusted p-values, and cluster summaries."</code></pre>
+      </details>
+    </section>
+
+    <section id="normalization">
+      <h2>Cross-Domain Normalization (when comparing unlike things)</h2>
+      <ul>
+        <li><strong>Feature scaling:</strong> z-score within domain; unit-norm vectors before OP002.</li>
+        <li><strong>Basis alignment:</strong> map to shared modal bins or learned embedding.</li>
+        <li><strong>Entropy comparability:</strong> use the same binning or adaptive partitioning.</li>
+      </ul>
+      <p class="muted">Note: Always state normalization in the Result Card. Different choices can change IMS slightly; thresholds should be calibrated under the same pipeline.</p>
+    </section>
+
+    <section id="schema">
+      <h2>Result Card — Minimal Fields</h2>
+      <table aria-label="Result Card schema">
+        <thead>
+          <tr>
+            <th>Field</th><th>Type</th><th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>operator</code></td><td>string</td><td>OP id (e.g., OP002)</td></tr>
+          <tr><td><code>metric</code></td><td>string</td><td>Name (Rec, Echo, Entropy, Orbit)</td></tr>
+          <tr><td><code>value</code></td><td>number</td><td>Observed statistic</td></tr>
+          <tr><td><code>threshold</code></td><td>number</td><td>Decision cutoff after calibration</td></tr>
+          <tr><td><code>null_model</code></td><td>string</td><td>e.g., circular_shift, phase_rand</td></tr>
+          <tr><td><code>p_value</code></td><td>number</td><td>One- or two-sided p</td></tr>
+          <tr><td><code>ci</code></td><td>object</td><td>{method, level, lower, upper}</td></tr>
+          <tr><td><code>effect_size</code></td><td>object</td><td>{type, value}</td></tr>
+          <tr><td><code>multiplicity</code></td><td>object</td><td>{method, m, p_adj}</td></tr>
+          <tr><td><code>decision</code></td><td>string</td><td>pass / fail</td></tr>
+          <tr><td><code>notes</code></td><td>string</td><td>Plain-language interpretation</td></tr>
+        </tbody>
+      </table>
+      <a class="button" href="/downloads/HHM_bundle.json" download>Download HHM_bundle.json</a>
+    </section>
+
+    <section id="checklist">
+      <h2>Reproducibility Checklist</h2>
+      <ul>
+        <li>State operators, windows, preprocessing, and basis.</li>
+        <li>Lock thresholds after calibration on train/validation; test on holdout.</li>
+        <li>Declare null model(s) and resample counts (N ≥ 2000 recommended).</li>
+        <li>Provide CI method, level (95% default), and effect sizes.</li>
+        <li>Control multiplicity; report adjusted p-values and family definition.</li>
+        <li>Attach Result Cards and data hashes; version everything.</li>
+      </ul>
+      <div class="callout warning">
+        <strong>Safety & claims:</strong> HHM metrics are research signals. Don’t use them to diagnose, predict individual outcomes, or make high-stakes decisions without independent validation.
+      </div>
+    </section>
+  </main>
+
+  <footer>
+  <span class="tagline">Built from resonance. Measured by rhythm. Remembered by the field.</span>
+  <p>
+    Designed with love by the HHM Initiative —
+    <a href="/about.html">Read more</a> |
+    <a href="/license.html">License & Use</a>
+  </p>
+</footer>
+
+</body>
+</html>

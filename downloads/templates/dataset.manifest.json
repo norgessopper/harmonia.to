@@ -1,0 +1,33 @@
+{
+  "schema": "hhm.dataset_manifest.v2",
+  "dataset_id": "hhm-example-dataset",
+  "title": "Example EEG (rest, task)",
+  "version": "2025-01-01",
+  "license": "CC-BY-4.0",
+  "consent": "public",
+  "provenance": {
+    "source": "Lab X / Public archive",
+    "acquired_at": "2024-12-20",
+    "pi_or_contact": "pi@lab.example",
+    "notes": "De-identified EEG, 32-ch, 512 Hz"
+  },
+  "files": [
+    {
+      "path": "eeg/rest.edf",
+      "bytes": 12345678,
+      "hash": "blake3:<hash>",
+      "modality": "EEG",
+      "channels": 32,
+      "sampling_hz": 512
+    },
+    {
+      "path": "participants.tsv",
+      "bytes": 2345,
+      "hash": "blake3:<hash>",
+      "modality": "meta"
+    }
+  ],
+  "checksums": {
+    "manifest_b3": "blake3:<hash-of-this-file>"
+  }
+}

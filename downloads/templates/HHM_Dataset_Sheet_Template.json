@@ -1,0 +1,43 @@
+{
+  "schema": "hhm.dataset_sheet.v1",
+  "dataset_id": "hhm-<domain>-<name>-<id>",
+  "title": "",
+  "version": "1.0.0",
+  "domain": "",
+  "modality": "",
+  "description": "",
+  "license": "CC-BY-4.0",
+  "consent": {
+    "level": "public",
+    "notes": "",
+    "contact": "contact@harmonia.to"
+  },
+  "pii_status": "none",
+  "collection": {
+    "date_range": "",
+    "sites": [],
+    "devices": [],
+    "protocols": []
+  },
+  "preprocessing": [],
+  "operators_expected": [],
+  "threshold_profile": "",
+  "manifest_ref": "manifest.json",
+  "provenance_ref": "provenance.json",
+  "sheet_hash": {
+    "algo": "sha256",
+    "value": ""
+  },
+  "created_at": "",
+  "created_by": {
+    "name": "HHM Initiative",
+    "org": "harmonia.to",
+    "email": "contact@harmonia.to"
+  },
+  "links": {
+    "homepage": "https://harmonia.to",
+    "issue_tracker": "",
+    "doi": ""
+  },
+  "notes": ""
+}

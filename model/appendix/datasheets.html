@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script defer data-domain="harmonia.to" src="https://plausible.io/js/script.file-downloads.outbound-links.js"></script>
+  <script>window.plausible = window.plausible || function(){(window.plausible.q=window.plausible.q||[]).push(arguments)}</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HHM — Dataset Sheets & Provenance</title>
+  <meta name="description" content="How HHM documents datasets: sheets, manifests, provenance chains, hashing, consent, and reproducible packaging."/>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root { color-scheme: light; }
+    * { box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; margin: 0; background: #f8fdf9; color: #143324; }
+    header { background: #e0f0e7; color: #143324; padding: 2rem 1.5rem; text-align: center; }
+    header h1 { font-size: 2.5rem; margin: 0; font-weight: 800; letter-spacing: .5px; }
+    header p { margin-top: .5rem; font-size: 1.15rem; opacity: .9; }
+
+    nav[aria-label="Primary"] { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.25rem; background: #d8ede0; padding: 1rem 0; }
+    nav[aria-label="Primary"] a { text-decoration: none; color: #185c37; font-weight: 600; transition: color .2s; }
+    nav[aria-label="Primary"] a:hover { color: #0f2e21; text-decoration: underline; }
+
+    main { max-width: 880px; margin: 2rem auto 3rem; padding: 0 1.5rem; line-height: 1.75; }
+    section { margin: 3rem 0; }
+    h2 { font-size: 1.8rem; margin-bottom: .6rem; }
+    h3 { font-size: 1.35rem; margin-bottom: .35rem; }
+    h4 { font-size: 1.05rem; margin: .75rem 0 .25rem; }
+
+    p code, li code, td code, th code { background: #f4f7f5; padding: .1rem .35rem; border-radius: 4px; }
+    pre code { display: block; padding: .75rem; background: #f4f7f5; border-radius: 6px; overflow-x: auto; }
+
+    .button { display: inline-block; padding: .7rem 1.1rem; margin-top: 1rem; background: #2e8b57; color: #fff; border-radius: 6px; font-weight: 700; text-decoration: none; }
+    .button:hover { background: #246e45; }
+
+    .callout { border-left: 4px solid #2e8b57; background: #f4faf7; padding: .9rem 1rem; margin: 1rem 0; }
+    .warning { border-left: 4px solid #b86b00; background: #fff8ec; }
+    .muted { color: #3a5a4d; opacity: .9; }
+
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    th, td { text-align: left; padding: .55rem .5rem; border-bottom: 1px solid #d9e6df; vertical-align: top; }
+    thead th { border-bottom: 2px solid #cfe0d8; }
+
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1rem; }
+    @media (max-width: 720px) {
+      nav[aria-label="Primary"] { flex-direction: column; gap: .7rem; }
+      body { font-size: 1.04rem; }
+      .button { width: 100%; text-align: center; }
+      .grid-2 { grid-template-columns: 1fr; }
+      table { display: block; overflow-x: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Dataset Sheets & Provenance</h1>
+    <p>Everything you need to trust, reuse, and reproduce HHM datasets</p>
+  </header>
+
+  <nav class="hhm-site-nav" aria-label="Primary">
+  <a href="/index.html">Home</a>
+  <a href="/model/overview.html">The Model</a>
+  <a href="/hilbert.html">Hilbert &amp; Ψ(x,t)</a>
+  <a href="/tests.html">Experiments &amp; Tests</a>
+  <a href="/howtouse.html" aria-current="page">How to Use HHM</a>
+  <a href="/community.html">Community</a>
+  <a href="/faq.html">FAQ</a>
+  <a href="/about.html">About / Contact</a>
+</nav>
+
+  <main>
+    <section id="overview">
+      <h2>Why Dataset Sheets?</h2>
+      <p>
+        HHM results depend on clean, well-described data. <strong>Dataset Sheets</strong> are compact JSON/Markdown records that say <em>what</em> the dataset is, <em>where</em> it came from, <em>how</em> it’s been processed, and <em>how</em> to verify integrity. They pair with a <strong>Provenance Chain</strong> that tracks every transformation from raw → analysis-ready.
+      </p>
+      <div class="callout">
+        <strong>TL;DR:</strong> Every dataset linked to an experiment should ship with:
+        <ul>
+          <li>A dataset sheet (metadata + methods + access/consent)</li>
+          <li>A file manifest (paths, sizes, checksums)</li>
+          <li>A provenance log (transforms, code, environment)</li>
+          <li>Hashes for the sheet and manifest themselves (content-addressable)</li>
+        </ul>
+      </div>
+      <details><summary>Run this with an AI</summary>
+        <pre><code>"Create a Dataset Sheet for the attached files following HHM schema v1.
+Infer missing fields if possible, compute SHA-256/BLAKE3 for all files,
+generate a provenance chain from the provided preprocessing script,
+and output: dataset_sheet.json, manifest.json, provenance.json, and a README.md."</code></pre>
+      </details>
+      <a class="button" href="/downloads/templates/HHM_Dataset_Sheet_Template.json" download>Download Dataset Sheet Template</a>
+      <a class="button" href="/downloads/templates/HHM_Provenance_Checklist.md" download style="margin-left:.5rem;">Provenance Checklist</a>
+    </section>
+
+    <section id="sheet-schema">
+      <h2>Dataset Sheet — Minimal Schema</h2>
+      <p class="muted">Use this as a guide. The canonical version lives inside <code>HHM_bundle.json</code> (Schemas → dataset_sheet).</p>
+      <table aria-label="Dataset sheet fields">
+        <thead>
+          <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>dataset_id</code></td><td>string</td><td>Stable identifier (e.g., hhm-eeg-αβ-003)</td></tr>
+          <tr><td><code>title</code></td><td>string</td><td>Human-readable name</td></tr>
+          <tr><td><code>version</code></td><td>string</td><td>SemVer or date tag (e.g., 1.0.0 or 2025-08-08)</td></tr>
+          <tr><td><code>domain</code></td><td>string</td><td>EEG | CMB | audio | symbols | biology | quantum | other</td></tr>
+          <tr><td><code>modality</code></td><td>string</td><td>Specific instrument or encoding (e.g., 64ch-EEG, Planck-LFI)</td></tr>
+          <tr><td><code>description</code></td><td>string</td><td>Short abstract of content and purpose</td></tr>
+          <tr><td><code>license</code></td><td>string</td><td>SPDX id or custom URL</td></tr>
+          <tr><td><code>consent</code></td><td>object</td><td>{ level: public|restricted|private, notes, contact }</td></tr>
+          <tr><td><code>pii_status</code></td><td>string</td><td>none | de-identified | sensitive (explain mitigations)</td></tr>
+          <tr><td><code>collection</code></td><td>object</td><td>{ date_range, sites, devices, protocols }</td></tr>
+          <tr><td><code>preprocessing</code></td><td>array</td><td>Key steps (also logged in provenance)</td></tr>
+          <tr><td><code>operators_expected</code></td><td>array</td><td>OP ids commonly run (OP002, OP003, OP006, OP014, ...)</td></tr>
+          <tr><td><code>threshold_profile</code></td><td>string|object</td><td>Reference to thresholds used or overrides</td></tr>
+          <tr><td><code>manifest_ref</code></td><td>string</td><td>Relative path/URL to manifest.json</td></tr>
+          <tr><td><code>provenance_ref</code></td><td>string</td><td>Relative path/URL to provenance.json</td></tr>
+          <tr><td><code>sheet_hash</code></td><td>object</td><td>{ algo: sha256|blake3, value }</td></tr>
+          <tr><td><code>created_at</code></td><td>string</td><td>ISO 8601 timestamp</td></tr>
+          <tr><td><code>created_by</code></td><td>object</td><td>{ name, org, email }</td></tr>
+        </tbody>
+      </table>
+
+      <details><summary>Example: dataset_sheet.json</summary>
+        <pre><code>{
+  "dataset_id": "hhm-eeg-alphabeta-003",
+  "title": "EEG α/β meditation sessions (rest→focus)",
+  "version": "1.1.0",
+  "domain": "EEG",
+  "modality": "64ch-EEG",
+  "description": "Rest and meditation EEG; used for Echo, Rec, Entropy, Orbit tests.",
+  "license": "CC-BY-4.0",
+  "consent": {"level":"public","notes":"IRB #2025-04, de-identified"},
+  "pii_status": "de-identified",
+  "collection": {
+    "date_range": "2025-03-05/2025-03-21",
+    "sites": ["Lab A"],
+    "devices": ["BioSemi ActiveTwo"],
+    "protocols": ["eyes-closed rest", "guided focus"]
+  },
+  "preprocessing": [
+    "notch 50/60Hz", "bandpass 1-45Hz", "ICA ocular removal", "re-ref Cz"
+  ],
+  "operators_expected": ["OP002","OP003","OP006","OP011","OP014"],
+  "threshold_profile": "profiles/eeg_default_v2.json",
+  "manifest_ref": "manifest.json",
+  "provenance_ref": "provenance.json",
+  "sheet_hash": {"algo":"sha256","value":"2b7c..."},
+  "created_at": "2025-08-11T10:24:00Z",
+  "created_by": {"name":"HHM Initiative","org":"harmonia.to","email":"data@harmonia.to"}
+}</code></pre>
+      </details>
+    </section>
+
+    <section id="manifest">
+      <h2>File Manifest — Integrity & Access</h2>
+      <p>
+        The manifest lists every file with size, checksum, and a content address. This is what lets others verify they have the <em>exact</em> bits you used.
+      </p>
+      <table aria-label="Manifest fields">
+        <thead>
+          <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>root</code></td><td>string</td><td>Base path or bucket (s3://…, ipfs://…)</td></tr>
+          <tr><td><code>files[]</code></td><td>array</td><td>List of file entries</td></tr>
+          <tr><td><code>files[].path</code></td><td>string</td><td>Relative path from root</td></tr>
+          <tr><td><code>files[].bytes</code></td><td>number</td><td>File size in bytes</td></tr>
+          <tr><td><code>files[].hash</code></td><td>object</td><td>{ algo: sha256|blake3, value }</td></tr>
+          <tr><td><code>files[].content_addr</code></td><td>string</td><td>URI with hash (e.g., ipfs CID)</td></tr>
+          <tr><td><code>files[].media_type</code></td><td>string</td><td>MIME/type hint</td></tr>
+          <tr><td><code>files[].access</code></td><td>string</td><td>public | restricted | private</td></tr>
+        </tbody>
+      </table>
+
+      <details><summary>Example: manifest.json</summary>
+        <pre><code>{
+  "root": "s3://harmonia-datasets/hhm-eeg-alphabeta-003/",
+  "files": [
+    {"path":"raw/sub01_run1.fif","bytes":182334590,"hash":{"algo":"blake3","value":"7f91..."}, "content_addr":"ipfs://bafy...","media_type":"application/octet-stream","access":"restricted"},
+    {"path":"derivatives/sub01_run1_clean.fif","bytes":146220144,"hash":{"algo":"sha256","value":"1a3d..."}, "content_addr":"ipfs://bafy...","media_type":"application/octet-stream","access":"restricted"},
+    {"path":"events/sub01_run1.tsv","bytes":8421,"hash":{"algo":"sha256","value":"9cbe..."}, "content_addr":"ipfs://bafy...","media_type":"text/tab-separated-values","access":"public"}
+  ]
+}</code></pre>
+      </details>
+
+      <div class="callout">
+        <strong>Integrity:</strong> Prefer <code>BLAKE3</code> for speed + strong integrity, and also publish a <code>SHA-256</code> for compatibility. Store both if possible.
+      </div>
+
+      <details><summary>Run this with an AI</summary>
+        <pre><code>"Compute BLAKE3 and SHA-256 for all files under ./dataset.
+Generate manifest.json with content-addresses (ipfs:// if local IPFS available),
+and verify the manifest against the current directory." </code></pre>
+      </details>
+    </section>
+
+    <section id="provenance">
+      <h2>Provenance — Lineage & Transformations</h2>
+      <p>
+        Provenance documents the <em>how</em>: scripts, parameters, environments, and sequence of steps from raw → analysis-ready. This makes results auditable and repeatable.
+      </p>
+      <div class="grid-2">
+        <div class="callout">
+          <strong>Minimum:</strong>
+          <ul>
+            <li>Lineage graph (nodes = files/states, edges = transforms)</li>
+            <li>Transform records (tool, params, inputs→outputs)</li>
+            <li>Environment (OS, package versions, GPU/CPU)</li>
+            <li>Random seeds and determinism flags</li>
+          </ul>
+        </div>
+        <div class="callout">
+          <strong>Nice to have:</strong>
+          <ul>
+            <li>Container digest (e.g., <code>ghcr.io/...@sha256:…</code>)</li>
+            <li>CI logs or notebook hashes</li>
+            <li>Human notes (“ICA rejected 2 comps due to blink”)</li>
+          </ul>
+        </div>
+      </div>
+
+      <details><summary>Example: provenance.json</summary>
+        <pre><code>{
+  "dataset_id": "hhm-eeg-alphabeta-003",
+  "graph": {
+    "nodes": [
+      {"id":"raw/sub01_run1.fif","hash":"blake3:7f91..."},
+      {"id":"derivatives/sub01_run1_clean.fif","hash":"sha256:1a3d..."}
+    ],
+    "edges": [
+      {"from":"raw/sub01_run1.fif","to":"derivatives/sub01_run1_clean.fif",
+       "transform_id":"t-pre-ica-01"}
+    ]
+  },
+  "transforms": [
+    {
+      "id":"t-pre-ica-01",
+      "tool":"mne-preproc.py@e2f4c1a",
+      "container":"ghcr.io/hhm/mne:1.6.1@sha256:abcd...",
+      "params":{"bandpass":[1,45],"notch":[50,60],"ica_method":"fastica","rej":{"eog":2}},
+      "env":{"os":"Ubuntu 22.04","python":"3.11.6","mne":"1.6.1","numpy":"1.26.4"},
+      "seed": 424242,
+      "started":"2025-03-12T09:01:05Z","finished":"2025-03-12T09:07:18Z",
+      "logs":["Removed comps: IC1, IC3 (blink)"]
+    }
+  ]
+}</code></pre>
+      </details>
+
+      <details><summary>Run this with an AI</summary>
+        <pre><code>"Parse stdout/stderr from the attached preprocessing run, extract parameters,
+normalize into provenance.json using the HHM schema, and emit a GraphML/JSON
+lineage graph with node hashes."</code></pre>
+      </details>
+    </section>
+
+    <section id="consent-ethics">
+      <h2>Consent, Access Levels & Ethics</h2>
+      <p>
+        Some HHM datasets involve humans or sensitive recordings. Be precise about consent, de-identification, and who can access what.
+      </p>
+      <table aria-label="Access levels">
+        <thead><tr><th>Level</th><th>Who</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td><strong>public</strong></td><td>Anyone</td><td>Redacted, de-identified; safe to mirror</td></tr>
+          <tr><td><strong>restricted</strong></td><td>Approved researchers</td><td>Requires DUA/IRB reference; access logs</td></tr>
+          <tr><td><strong>private</strong></td><td>PI team only</td><td>Contains sensitive or unredacted material</td></tr>
+        </tbody>
+      </table>
+      <div class="callout warning">
+        <strong>Rule:</strong> If a file is not public, <em>don’t</em> leak it via derived previews (e.g., spectrogram images) unless those are explicitly cleared in consent notes.
+      </div>
+      <details><summary>Run this with an AI</summary>
+        <pre><code>"Audit the dataset directory for potential PII (filenames/metadata).
+Suggest redactions and update dataset_sheet.json → consent & pii_status fields."</code></pre>
+      </details>
+    </section>
+
+    <section id="normalization-ops">
+      <h2>Ready for Operators (OP002/OP003/OP006/OP014)</h2>
+      <p>
+        To make a dataset “operator-ready,” confirm:
+      </p>
+      <ul>
+        <li>Sampling rates and basis choices are recorded in the sheet</li>
+        <li>Normalization pipeline is frozen (z-score/unit-norm where applicable)</li>
+        <li>Windows/segments defined (length, step, overlap)</li>
+        <li>Expected thresholds profile is linked (from your thresholds page)</li>
+      </ul>
+      <details><summary>Run this with an AI</summary>
+        <pre><code>"Validate operator-readiness: check sampling/basis, normalization, windowing,
+and thresholds linkage. Emit a readiness report and update dataset_sheet.json."</code></pre>
+      </details>
+    </section>
+
+    <section id="packaging">
+      <h2>Packaging & Releases</h2>
+      <p>
+        Publish datasets as self-verifying bundles:
+      </p>
+      <ul>
+        <li><code>dataset_sheet.json</code>, <code>manifest.json</code>, <code>provenance.json</code>, <code>README.md</code></li>
+        <li>Top-level <code>CHECKSUMS.txt</code> (BLAKE3 + SHA-256 for all above)</li>
+        <li>Tag release (e.g., <code>v1.1.0</code>) and sign with maintainer key (optional)</li>
+      </ul>
+      <details><summary>CHECKSUMS.txt example</summary>
+        <pre><code>blake3  dataset_sheet.json  2b7c9d... 
+sha256  dataset_sheet.json  8d4a6f...
+blake3  manifest.json       7f9112...
+sha256  manifest.json       1a3d55...
+...</code></pre>
+      </details>
+      <a class="button" href="/downloads/templates/HHM_Release_README.md" download>README Template</a>
+    </section>
+
+    <section id="faq">
+      <h2>FAQ — Quick Answers</h2>
+      <h4>Do I need IPFS?</h4>
+      <p>No. It’s optional. Content addresses help reproducibility; S3/HTTPS is fine if you keep checksums immutable.</p>
+
+      <h4>Which hash should I use?</h4>
+      <p>Use BLAKE3 (fast) + SHA-256 (compat). Publish both when you can.</p>
+
+      <h4>Where do these schemas live?</h4>
+      <p>In <code>HHM_bundle.json</code> → <em>Schemas</em>. This page mirrors the core fields for convenience.</p>
+
+      <h4>How does this connect to thresholds & CIs?</h4>
+      <p>Your dataset sheet links to a threshold profile. Provenance documents any preprocessing that would affect operator statistics. Together, they make your results comparable and auditable.</p>
+    </section>
+
+    <section id="safety">
+      <h2>Safety & Claims</h2>
+      <div class="callout warning">
+        <strong>Reminder:</strong> HHM datasets are for research. Do not use for diagnosis, individual forecasting, or high-stakes decisions without independent review and approvals.
+      </div>
+    </section>
+
+    <section id="downloads">
+      <h2>Downloads</h2>
+      <a class="button" href="/downloads/templates/HHM_Dataset_Sheet_Template.json" download>Dataset Sheet Template (.json)</a>
+      <a class="button" href="/downloads/templates/HHM_Manifest_Template.json" download style="margin-left:.5rem;">Manifest Template (.json)</a>
+      <a class="button" href="/downloads/templates/HHM_Provenance_Template.json" download style="margin-left:.5rem;">Provenance Template (.json)</a>
+    </section>
+  </main>
+
+  <footer>
+  <span class="tagline">Built from resonance. Measured by rhythm. Remembered by the field.</span>
+  <p>
+    Designed with love by the HHM Initiative —
+    <a href="/about.html">Read more</a> |
+    <a href="/license.html">License & Use</a>
+  </p>
+</footer>
+
+</body>
+</html>

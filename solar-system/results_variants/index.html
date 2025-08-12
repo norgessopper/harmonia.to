@@ -1,0 +1,41 @@
+<!doctype html><meta charset='utf-8'><title>Earth drift — variants</title>
+<style>body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial;background:#0b0f14;color:#e8eef5;padding:24px}
+.grid{display:grid;gap:16px;grid-template-columns:1fr;}
+@media(min-width:1000px){.grid{grid-template-columns:1fr 1fr}}
+.card{background:#0f1520;border:1px solid #243241;border-radius:12px;padding:12px}
+img{width:100%;height:auto;border-radius:8px;border:1px solid #243241}
+h2{font-size:1.2rem;margin:.2rem 0 .6rem}
+table{width:100%;border-collapse:collapse;margin:12px 0}th,td{border-bottom:1px solid #243241;padding:6px 8px;text-align:left}
+</style>
+<h1>Earth — frame & cadence variants</h1>
+<p>Comparison of OP023–perihelion drift across frames/cadence. Each card shows <code>drift.png</code> from a fresh run.</p>
+<div class='grid'>
+<div class='card'>
+<h2>Heliocentric (Sun@10), 1-day</h2>
+<table><thead><tr><th>Coverage</th><th>Mean Δt (d)</th><th>σ (d)</th><th>φ</th></tr></thead><tbody>
+<tr><td>1.000</td><td>+11.019</td><td>23.961</td><td>+0.0302</td></tr>
+</tbody></table>
+<img src='earth_helio_1day_drift.png' alt='drift Heliocentric (Sun@10), 1-day'/>
+</div>
+<div class='card'>
+<h2>Heliocentric (Sun@10), 2-day</h2>
+<table><thead><tr><th>Coverage</th><th>Mean Δt (d)</th><th>σ (d)</th><th>φ</th></tr></thead><tbody>
+<tr><td>1.000</td><td>-82.241</td><td>22.065</td><td>-0.2252</td></tr>
+</tbody></table>
+<img src='earth_helio_2days_drift.png' alt='drift Heliocentric (Sun@10), 2-day'/>
+</div>
+<div class='card'>
+<h2>Barycentric (SSB@0), 1-day</h2>
+<table><thead><tr><th>Coverage</th><th>Mean Δt (d)</th><th>σ (d)</th><th>φ</th></tr></thead><tbody>
+<tr><td>1.000</td><td>+4.769</td><td>58.371</td><td>+0.0131</td></tr>
+</tbody></table>
+<img src='earth_ssb_1day_drift.png' alt='drift Barycentric (SSB@0), 1-day'/>
+</div>
+<div class='card'>
+<h2>Earth–Moon Barycenter (EMB), 1-day</h2>
+<table><thead><tr><th>Coverage</th><th>Mean Δt (d)</th><th>σ (d)</th><th>φ</th></tr></thead><tbody>
+<tr><td>1.000</td><td>+13.184</td><td>17.918</td><td>+0.0361</td></tr>
+</tbody></table>
+<img src='earth_emb_1day_drift.png' alt='drift Earth–Moon Barycenter (EMB), 1-day'/>
+</div>
+</div>

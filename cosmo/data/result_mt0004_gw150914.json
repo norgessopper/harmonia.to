@@ -1,0 +1,9 @@
+{
+  "recurrence_score": 0.49975143035308384,
+  "similarity_threshold": 0.95,
+  "recurrence_lag_min": 5,
+  "comparison_pairs": 2087946,
+  "recurring_pairs": 1043454,
+  "threshold": 0.4,
+  "passed": true
+}

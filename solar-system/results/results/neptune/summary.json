@@ -1,0 +1,62 @@
+{
+  "planet": "neptune",
+  "period_days": 60189.0,
+  "params": {
+    "smooth": 15,
+    "min_sep": 21066,
+    "peri_minsep": 42132,
+    "match_window": 30094,
+    "z": 0.5
+  },
+  "signal_mode": "dim0",
+  "N_peri": 5,
+  "N_peaks": 9,
+  "matched": 5,
+  "coverage": 1.0,
+  "mean_dt_days": 7210.8,
+  "median_dt_days": 6836.0,
+  "std_dt_days": 842.0114013479865,
+  "min_dt_days": 6825.0,
+  "max_dt_days": 8717.0,
+  "phase_frac": 0.11980262174151424,
+  "strength": 0.9861079411704574,
+  "matched_dt": [
+    6825.0,
+    6835.0,
+    8717.0,
+    6836.0,
+    6841.0
+  ],
+  "matched_years": [
+    1759,
+    1924,
+    2001,
+    2088,
+    2253
+  ],
+  "phi_series": [
+    0.11339281264018342,
+    0.1135589559554071,
+    0.14482712788050978,
+    0.11357557028692955,
+    0.11365864194454134
+  ],
+  "lag_sweep": {
+    "best_lag_days": 22602,
+    "best_r": 0.9463581231544782
+  },
+  "csv_path": "/Users/fanten/Python/data/neptune_1600to2300.csv",
+  "csv_sha256": "6d1c37f7a663c03bc07df814ac61b38cf4164c48028dc14dd16abfde346c8c3f",
+  "csv_mtime_utc": "2025-08-09T15:47:37.894748Z",
+  "csv_span_years": {
+    "start_year": 1600,
+    "end_year": 2300
+  },
+  "date0_iso": "1600-01-01",
+  "horizons_header": {
+    "center": "Sun (10)",
+    "frame": "Ecliptic of J2000.0, GEOMETRIC",
+    "units": "AU, AU/day",
+    "step": "1440 min (1 day)"
+  }
+}

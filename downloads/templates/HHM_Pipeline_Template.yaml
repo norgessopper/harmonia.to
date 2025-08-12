@@ -1,0 +1,66 @@
+# HHM Pipeline Template v2.2.0
+# Defines a full, reproducible HHM run.
+
+pipeline_version: 2.2.0
+bundle_version: 2.2.0
+description: "Minimal reproducible HHM run (R1) with example params."
+
+env:
+  container: "ghcr.io/hhm/hhm-pipeline:2.2.0@sha256:<digest>"
+  python: "3.11.7"
+  numpy: "1.26.4"
+  scipy: "1.11.4"
+  mkl: "2024.1"
+  cuda: ""
+seeds:
+  global: 20250111
+
+dataset:
+  id: "hhm-example-dataset"
+  manifest: "dataset.manifest.json"
+  hash: "blake3:<dataset_hash>"
+  license: "CC-BY-4.0"
+  consent: "public"
+  notes: "Example EEG dataset"
+
+preprocessing:
+  basis: "Fourier 1-40Hz"
+  window: "2s"
+  overlap: 0.5
+  filters:
+    - "bandpass 1-40Hz"
+    - "notch 50Hz"
+
+operators:
+  - OP001  # CollapsePattern
+  - OP003  # Echo
+  - OP002  # Rec
+  - OP006  # UnifiedEntropy
+
+nulls:
+  methods:
+    - time_shuffle
+    - phase_randomize
+  bootstraps: 1000
+  confidence_level: 0.95
+
+thresholds:
+  version: "2.2.0"
+  criteria:
+    Echo.min: 0.90
+    Rec.min: 0.85
+    Entropy.delta.max: 0.15
+    CollapseOrbit.delta.max: 1
+
+outputs:
+  result_card: "result_card.json"
+  ci: "ci.json"
+  ops_metrics: "ops_metrics.parquet"
+  prep_log: "prep_log.jsonl"
+  audit_report: "audit_report.html"
+
+audit:
+  schema_validation: true
+  determinism_check: true
+  threshold_lock: true
+  provenance_check: true

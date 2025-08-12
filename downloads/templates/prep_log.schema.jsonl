@@ -1,0 +1,14 @@
+{
+  "ts": "2025-08-11T12:34:56.789Z",
+  "level": "INFO",
+  "step": "preprocess/bandpass",
+  "run_id": "run_2025_08_11_abc123",
+  "dataset_id": "hhm-example-dataset",
+  "params": { "low_hz": 1, "high_hz": 40, "order": 4 },
+  "inputs": ["eeg/rest.edf"],
+  "outputs": ["cache/rest_bp.fif"],
+  "hash_in": ["blake3:<hash>"],
+  "hash_out": ["blake3:<hash>"],
+  "duration_ms": 142,
+  "msg": "Bandpass complete."
+}

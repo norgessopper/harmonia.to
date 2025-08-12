@@ -1,0 +1,17 @@
+{
+  "schema": "hhm.ops_metrics.schema.v2",
+  "fields": [
+    { "name": "run_id", "type": "string" },
+    { "name": "dataset_id", "type": "string" },
+    { "name": "operator", "type": "string" },      // e.g., OP001
+    { "name": "metric", "type": "string" },        // e.g., Echo, Rec, Entropy
+    { "name": "value", "type": "double" },
+    { "name": "segment_id", "type": "string" },    // optional: window/epoch id
+    { "name": "unit", "type": "string" },          // e.g., "scalar", "bits"
+    { "name": "ci_lo", "type": "double", "nullable": true },
+    { "name": "ci_hi", "type": "double", "nullable": true },
+    { "name": "null_p", "type": "double", "nullable": true },
+    { "name": "created_at", "type": "timestamp-ms" }
+  ],
+  "primary_key": ["run_id", "operator", "metric", "segment_id"]
+}

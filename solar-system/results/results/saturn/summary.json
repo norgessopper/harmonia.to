@@ -1,0 +1,62 @@
+{
+  "planet": "saturn",
+  "period_days": 10759.22,
+  "params": {
+    "smooth": 270,
+    "min_sep": 3586,
+    "peri_minsep": 7172,
+    "match_window": 3766,
+    "z": 0.8
+  },
+  "signal_mode": "dim0",
+  "N_peri": 5,
+  "N_peaks": 9,
+  "matched": 5,
+  "coverage": 1.0,
+  "mean_dt_days": 1952.4,
+  "median_dt_days": 2022.0,
+  "std_dt_days": 157.9186499435706,
+  "min_dt_days": 1670.0,
+  "max_dt_days": 2028.0,
+  "phase_frac": 0.18146296850515187,
+  "strength": 0.9854296712672587,
+  "matched_dt": [
+    2017.0,
+    2025.0,
+    2022.0,
+    2028.0,
+    1670.0
+  ],
+  "matched_years": [
+    1902,
+    1931,
+    1961,
+    1990,
+    2020
+  ],
+  "phi_series": [
+    0.18746712122254217,
+    0.1882106695466772,
+    0.18793183892512655,
+    0.18848950016822785,
+    0.15521571266318568
+  ],
+  "lag_sweep": {
+    "best_lag_days": 3419,
+    "best_r": 0.9464586279604807
+  },
+  "csv_path": "/Users/fanten/Python/data/saturn_1900to2025.csv",
+  "csv_sha256": "62904fdaa13e839998c499cdaee495be820204d05fa3acae73d934386bace16a",
+  "csv_mtime_utc": "2025-08-07T15:03:24.840625Z",
+  "csv_span_years": {
+    "start_year": 1900,
+    "end_year": 2025
+  },
+  "date0_iso": "1900-01-01",
+  "horizons_header": {
+    "center": "Sun (10)",
+    "frame": "Ecliptic of J2000.0, GEOMETRIC",
+    "units": "AU, AU/day",
+    "step": "1440 min (1 day)"
+  }
+}

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Analytics -->
+  <script defer data-domain="harmonia.to" src="https://plausible.io/js/script.file-downloads.outbound-links.js"></script>
+  <script>window.plausible = window.plausible || function(){(window.plausible.q = window.plausible.q || []).push(arguments)}</script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hilbert & Ψ(x,t) — Holographic Harmonic Model</title>
+  <meta name="description" content="What a Hilbert space is, why it matters for Ψ(x,t), and how HHM uses it as a real, measurable framework across domains." />
+  <link rel="icon" href="/favicon.ico" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <!-- Math rendering -->
+  <script defer id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    :root {
+      --ink:#143324;
+      --ink-2:#185c37;
+      --bg:#f8fdf9;
+      --panel:#e0f0e7;
+      --panel-2:#d8ede0;
+      --panel-3:#eef7f2;
+      --accent:#2e8b57;
+      --accent-ink:#0f2e21;
+      --rule:#cfe8db;
+    }
+    * { box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; margin: 0; background: var(--bg); color: var(--ink); line-height: 1.75; }
+    header { background: var(--panel); padding: 2rem 1.5rem; text-align: center; }
+    header h1 { margin: 0 0 .4rem; }
+    nav.site { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; background: var(--panel-2); padding: 1rem 0; }
+    nav.site a { text-decoration: none; color: var(--ink-2); font-weight: 600; }
+    nav.site a:hover { color: var(--accent-ink); text-decoration: underline; }
+    main { max-width: 820px; margin: 3rem auto; padding: 0 1.5rem; }
+    section { margin-bottom: 3rem; }
+    blockquote { border-left: 4px solid var(--accent); margin: 1.25rem 0; padding: .5rem 1rem; background: rgba(46,139,87,.06); }
+    footer { margin-top: 4rem; padding: 2.5rem 1.5rem; text-align: center; background: #d1e9de; }
+    .toc { background: var(--panel-3); border: 1px solid var(--rule); border-radius: 8px; padding: 1rem 1.25rem; }
+    .toc ul { margin: .5rem 0 0 1.25rem; }
+    .toc a { color: var(--ink-2); text-decoration: none; }
+    .toc a:hover { text-decoration: underline; }
+    .note { opacity:.85; }
+    .see-more { border:1px solid var(--rule); background: var(--panel-3); border-radius:8px; padding:1rem 1.25rem; }
+    .button { display:inline-block; padding:.6rem 1rem; background: var(--accent); color:#fff; text-decoration:none; border-radius:8px; font-weight:600; }
+    .button:hover { filter: brightness(.95); }
+    code, pre code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    table.basic { width:100%; border-collapse: collapse; }
+    table.basic th, table.basic td { padding:.6rem .5rem; border-bottom: 1px solid #e3efe9; text-align: left; }
+    table.basic thead th { background: var(--panel-2); }
+    @media (max-width: 640px) {
+      main { margin: 2rem auto; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Hilbert & Ψ(x,t)</h1>
+  <p>A guided introduction to Hilbert spaces, the wavefunction, and how HHM builds a bridge from theory to measurement.</p>
+</header>
+
+<nav class="site" aria-label="Primary">
+  <a href="/index.html">Home</a>
+  <a href="/model/overview.html">The Model</a>
+  <a href="/hilbert.html">Hilbert &amp; Ψ(x,t)</a>
+  <a href="/tests.html">Experiments &amp; Tests</a>
+  <a href="/howtouse.html">How to Use HHM</a>
+  <a href="/community.html">Community</a>
+  <a href="/faq.html">FAQ</a>
+  <a href="/about.html">About / Contact</a>
+</nav>
+
+<main>
+
+  <!-- On this page - mini ToC (trimmed to just this page’s content) -->
+  <nav aria-label="On this page" class="toc" id="on-this-page">
+    <strong>On this page</strong>
+    <ul>
+      <li><a href="#who-was-hilbert">Who was Hilbert?</a></li>
+      <li><a href="#what-is-a-hilbert-space">What is a Hilbert space?</a></li>
+      <li><a href="#hilbert-to-hhm">Bridge to HHM</a></li>
+      <li><a href="#worked-examples">Worked examples (sketch)</a></li>
+      <li><a href="#see-more">Go deeper (HHM overview)</a></li>
+      <li><a href="#notation">Notation</a></li>
+      <li><a href="#faq-hilbert">FAQ</a></li>
+      <li><a href="#references">References</a></li>
+    </ul>
+  </nav>
+
+  <!-- ———————————————————————————————
+       1) Who was Hilbert?
+       ——————————————————————————————— -->
+  <section id="who-was-hilbert">
+    <h2>👤 Who was David Hilbert?</h2>
+    <p>
+      David Hilbert (1862–1943) was one of the most influential mathematicians of the modern era. His work
+      reshaped geometry, algebra, number theory, analysis, and mathematical physics, but his deepest contribution
+      was a programmatic vision: that mathematics should rest on a <em>clear, complete, and consistent</em> set of
+      axioms from which everything else could be derived.
+    </p>
+
+    <p>
+      Hilbert’s approach was both philosophical and practical. Start with precise <strong>axioms</strong>,
+      fix the <strong>rules of inference</strong>, and build subjects so proofs become transparent and reproducible.
+      This agenda powered his <em>Grundlagen der Geometrie</em> (1899), which recast Euclidean geometry on rigorous
+      axiomatic footing and influenced the modern style of doing mathematics.
+    </p>
+
+    <p>
+      He also recognized that 20th-century problems demanded a new kind of “space” that could host not just points,
+      but <em>functions</em>—objects like signals, fields, and solutions to differential equations. From work on integral
+      equations and spectral theory emerged what we now call a <strong>Hilbert space</strong>: a complete inner-product space
+      where geometry (lengths, angles, orthogonality) and analysis (limits, convergence) coexist. That framework
+      became the natural mathematical home for wave phenomena across science.
+    </p>
+
+    <blockquote>
+      “Wir müssen wissen — wir werden wissen.”<br />
+      <span class="note">— David Hilbert</span>
+    </blockquote>
+
+    <p>
+      Today, Hilbert spaces are the standard setting for <strong>quantum mechanics</strong> (state vectors and observables),
+      <strong>signal processing</strong> (Fourier/Wavelet bases and projections), and <strong>field theory</strong> (modes and spectra).
+      They are the “home” of the wavefunction <strong>Ψ(x,t)</strong>—the object that encodes the state of a system.
+      For Hilbert, the appeal was not mysticism but clarity: a single environment where geometry, algebra,
+      and calculus meet, letting us treat waves, signals, and abstract states with the same rigor as a triangle on paper.
+    </p>
+
+    <h3 style="margin-top:1.25rem">A few milestones (very short)</h3>
+    <ul>
+      <li><strong>1899:</strong> <em>Foundations of Geometry</em> formalizes Euclidean geometry axiomatically.</li>
+      <li><strong>1900:</strong> Poses the famous “Hilbert Problems,” setting directions for 20th-century math.</li>
+      <li><strong>1900s–1910s:</strong> Integral equations & spectral methods lay groundwork for Hilbert spaces.</li>
+      <li><strong>1920s–1930s:</strong> Functional analysis and operator theory flourish; quantum theory adopts the Hilbert-space formalism.</li>
+    </ul>
+
+    <p class="note" style="margin-top:.5rem">
+      This page uses that heritage directly: we place <strong>Ψ(x,t)</strong> in a Hilbert space and explain how its structure is measured.
+      That is the bridge into HHM: a rigorous, shared language for patterns—across physics, biology, acoustics, and symbols.
+    </p>
+  </section>
+
+  <!-- ———————————————————————————————
+       2) What is a Hilbert space?
+       ——————————————————————————————— -->
+  <section id="what-is-a-hilbert-space">
+    <h2>📐 What is a Hilbert space?</h2>
+
+    <p>
+      A <strong>Hilbert space</strong> is a vector space with an inner product that is
+      <em>complete</em> in the norm induced by that inner product. It is the natural home
+      for waves, signals, fields, and abstract state vectors—finite or infinite dimensional.
+    </p>
+
+    <h3>Plain-language unpacking</h3>
+    <ul>
+      <li><strong>Vector space:</strong> a collection of objects (“vectors”) you can add and scale. In a Hilbert
+        space, vectors can be <em>functions</em> (signals, images), <em>sequences</em>, or <em>quantum states</em>.</li>
+      <li><strong>Inner product:</strong> a generalized dot product <span style="white-space:nowrap">⟨u, v⟩</span>
+        that lets us talk about <em>length</em>, <em>angle</em>, and <em>orthogonality</em>—even with infinitely many coordinates.</li>
+      <li><strong>Complete:</strong> if vectors get arbitrarily close (a Cauchy sequence), they converge to a vector
+        <em>in the space</em>. No “holes.” This is crucial for limits, Fourier series, PDE solutions, and stability.</li>
+    </ul>
+
+    <h3>Formal definition (compact)</h3>
+    <p>Let <em>H</em> be a complex vector space with inner product ⟨·,·⟩ and induced norm \( \|u\| = \sqrt{\langle u,u\rangle} \). Then:</p>
+    <ol>
+      <li><strong>Vector space axioms:</strong> closed under addition and scalar multiplication; has a zero vector and additive inverses.</li>
+      <li><strong>Inner product axioms:</strong>
+        <ul>
+          <li>Conjugate symmetry: \( \langle u, v\rangle = \overline{\langle v, u\rangle} \)</li>
+          <li>Linearity in the first argument: \( \langle \alpha u + \beta w, v\rangle = \alpha\langle u, v\rangle + \beta\langle w, v\rangle \)</li>
+          <li>Positive-definite: \( \langle u, u\rangle \ge 0 \) and \( \langle u, u\rangle = 0 \) iff \( u = 0 \)</li>
+        </ul>
+      </li>
+      <li><strong>Completeness:</strong> every Cauchy sequence \( \{u_n\} \) converges in \( \|\cdot\| \) to some \( u \in H \).</li>
+    </ol>
+
+    <h3>Canonical examples</h3>
+    <ul>
+      <li><strong>\(\mathbb{R}^n\), \(\mathbb{C}^n\):</strong> dot product \( \langle x,y\rangle = \sum_i x_i \overline{y_i} \).</li>
+      <li><strong>\(\ell^2\):</strong> square-summable sequences \( a=(a_1,a_2,\dots) \) with \( \sum |a_k|^2 < \infty \); inner product \( \sum a_k \overline{b_k} \).</li>
+      <li><strong>\(L^2(\Omega)\):</strong> square-integrable functions with \( \langle f,g\rangle = \int_\Omega f(x)\overline{g(x)}\,dx \) (modulo a.e.).</li>
+      <li><strong>Sobolev \(H^m\):</strong> functions with square-integrable derivatives up to order \( m \) (with suitable inner products).</li>
+    </ul>
+
+    <h3>Geometry in infinite dimensions</h3>
+    <ul>
+      <li><strong>Orthogonality:</strong> \( u \perp v \) iff \( \langle u,v\rangle = 0 \).</li>
+      <li><strong>Pythagoras:</strong> if \( u \perp v \) then \( \|u+v\|^2 = \|u\|^2 + \|v\|^2 \).</li>
+      <li><strong>Projections:</strong> onto a closed subspace \( M \subset H \) there is a unique closest point \( P_M(u) \) with \( u-P_M(u) \perp M \).</li>
+      <li><strong>Orthonormal bases:</strong> \( \{ \phi_k \} \) with \( \langle \phi_i,\phi_j\rangle=\delta_{ij} \) and \( u=\sum \langle u,\phi_k\rangle \phi_k \) (Parseval/Plancherel preserve energy).</li>
+    </ul>
+
+    <h3>Mini–worked examples</h3>
+    <p><strong>1) Fourier series as coordinates in \( L^2(-\pi,\pi) \):</strong></p>
+    <pre><code>Orthonormal basis:  φ₀ = 1/√(2π),  φ_k = cos(kx)/√π,  ψ_k = sin(kx)/√π
+For f ∈ L²(−π, π):
+  f(x) = a₀ φ₀(x) + Σ_{k=1}^∞ [ a_k φ_k(x) + b_k ψ_k(x) ],
+where   a_k = ⟨f, φ_k⟩,  b_k = ⟨f, ψ_k⟩.
+Energy: ‖f‖² = |a₀|² + Σ (|a_k|² + |b_k|²).   (Parseval)
+    </code></pre>
+
+    <p><strong>2) Best approximation / projection:</strong> given data \( f \) and orthonormal basis \( \{\phi_1,\dots,\phi_n\} \):</p>
+    <pre><code>fₙ = Σ_{k=1}^n c_k φ_k,   with   c_k = ⟨f, φ_k⟩.
+Residual r = f − fₙ is orthogonal to each φ_k.
+    </code></pre>
+
+    <h3>Why Hilbert spaces matter (beyond the definition)</h3>
+    <ul>
+      <li><strong>Quantum mechanics:</strong> states are unit vectors; observables are self-adjoint; time evolution is (often) unitary. \( \Psi(x,t) \) is a coordinate realization of the state.</li>
+      <li><strong>Signal processing:</strong> signals live in \( L^2 \); Fourier/Wavelet transforms are unitary changes of basis; filtering is operator action; energy preservation is Plancherel.</li>
+      <li><strong>PDEs:</strong> weak solutions and eigenfunction expansions live in \( L^2 \)/Sobolev spaces; spectral theory decomposes dynamics into modes.</li>
+    </ul>
+
+    <h3>Common pitfalls (good to know)</h3>
+    <ul>
+      <li>Not every inner-product space is complete; sometimes you take its <em>completion</em> to get a Hilbert space.</li>
+      <li>Distributions (like Dirac delta) aren’t in \( L^2 \); they live in dual spaces (rigged Hilbert spaces handle both worlds).</li>
+      <li>“Orthogonal” depends on the inner product you chose (weights matter).</li>
+    </ul>
+
+    <p class="note" style="margin-top:1rem">
+      In short: Hilbert spaces give a rigorous, geometry-aware stage where functions, signals, and states can be
+      added, compared, projected, and evolved. That’s why they are the mathematical backbone for \( \Psi(x,t) \).
+    </p>
+  </section>
+
+  <!-- ———————————————————————————————
+       3) Bridge to HHM (narrative, no heavy math)
+       ——————————————————————————————— -->
+  <section id="hilbert-to-hhm">
+    <h2>🌉 From Hilbert Space to the Holographic Harmonic Model</h2>
+    <p>
+      In modern science, a Hilbert space is the abstract arena in which systems evolve:
+      each possible state is a vector, and the wavefunction \( \Psi(x,t) \) is one coordinate
+      representation of such a state. In textbook quantum mechanics, \( \Psi \) is a
+      <em>probability amplitude</em>—a device for predicting measurement outcomes.
+    </p>
+    <p>
+      The Holographic Harmonic Model (HHM) keeps the same rigorous mathematical stage but
+      shifts perspective: \( \Psi(x,t) \) is not merely a computational tool; it is a
+      <strong>real, measurable field</strong> whose structure can be probed directly.
+      The geometry of \( \Psi \) in Hilbert space—its coordinates, basis expansions,
+      and responses to operators—becomes the primary object of measurement.
+    </p>
+
+    <h3>1) \( \Psi(x,t) \) as a real field</h3>
+    <p>
+      In HHM, \( \Psi(x,t) \) is the <em>modal state</em> of the system—the complete structural
+      pattern present at a given moment. This can describe a heartbeat, a gravitational wave,
+      a glyph sequence, or a brainwave; the substance differs, but the <em>structure</em>
+      resides in the same kind of space.
+    </p>
+
+    <h3>2) Hilbert space as an active measurement arena</h3>
+    <p>
+      Rather than a passive container for states, Hilbert space is where we <em>measure</em>.
+      We apply well-defined operators to \( \Psi \) to quantify things like immediate structure
+      (collapse pattern), rhythmic repetition (echo), cross-state alignment (recurrence),
+      and dispersion (entropy). These yield reproducible numbers that can be compared across data sources.
+    </p>
+
+    <h3>3) Cross-domain universality</h3>
+    <p>
+      Because the measurements act on structure rather than semantics, the same style of analysis
+      can be applied to EEG, cosmology, audio, or symbols. If two systems share a similar modal
+      organization in Hilbert space, they will score similarly—even if the underlying physics differs.
+    </p>
+
+    <h3>4) The key insight</h3>
+    <p>
+      If Hilbert space faithfully represents states in physics, biology, and culture, it is already
+      a <strong>universal stage</strong>. HHM turns that stage into a common measurement framework:
+      <em>structure is structure</em>, regardless of origin.
+    </p>
+  </section>
+
+  <!-- ———————————————————————————————
+       4) Worked examples (light sketch + links out)
+       ——————————————————————————————— -->
+  <section id="worked-examples">
+    <h2>📊 Worked examples (sketch)</h2>
+
+    <article aria-labelledby="ex-eeg">
+      <h3 id="ex-eeg">1) EEG α/β segment</h3>
+      <p><em>Idea:</em> treat a short EEG window as \( \Psi(t) \in L^2(0,T) \), expand in band-limited atoms,
+        and summarize its modal structure. Typical outcomes include a strong echo peak and low-to-moderate entropy
+        in relaxed but alert states. <a href="/tests.html#eeg-alpha-beta">See full pipeline & CI</a>.</p>
+    </article>
+
+    <article aria-labelledby="ex-cmb">
+      <h3 id="ex-cmb">2) Cosmology — CMB low-ℓ</h3>
+      <p><em>Idea:</em> use spherical harmonics \( Y_{\ell m} \) to represent the sky as \( \Psi(\theta,\phi) \in L^2(S^2) \),
+        then analyze low-ℓ modal structure. <a href="/tests.html#cmb-planck">Methods & data</a>.</p>
+    </article>
+
+    <article aria-labelledby="ex-gw">
+      <h3 id="ex-gw">3) LIGO GW150914</h3>
+      <p><em>Idea:</em> view a cleaned strain window as \( \Psi(t) \), optionally reduce via principal components,
+        and evaluate recurrence and entropy around merger. <a href="/tests.html#gw150914">Scripts & JSON outputs</a>.</p>
+    </article>
+  </section>
+
+  <!-- ———————————————————————————————
+       5) See more: link to overview heavy sections
+       ——————————————————————————————— -->
+  <section aria-labelledby="see-more" id="see-more">
+    <h2>Want to go deeper?</h2>
+    <div class="see-more">
+      <ul style="margin:0; padding-left:1.1rem">
+        <li><a href="/model/overview.html#operators-formal">HHM Operators (formal definitions)</a></li>
+        <li><a href="/model/overview.html#worked-examples">Worked examples with full methods & CI</a></li>
+        <li><a href="/model/overview.html#validation-summary">Theory Validation Summary</a></li>
+        <li><a href="/model/overview.html#reproducibility">Reproducibility & datasets</a></li>
+        <li><a href="/tests.html">All Tests & Results</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ———————————————————————————————
+       6) Notation (small, handy)
+       ——————————————————————————————— -->
+  <section id="notation">
+    <h2>🔤 Notation</h2>
+    <table class="basic" aria-label="Notation reference">
+      <thead>
+        <tr><th>Symbol</th><th>Meaning</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>⟨u,v⟩</code></td><td>Inner product on \( H \)</td></tr>
+        <tr><td><code>‖u‖</code></td><td>Norm \( \sqrt{\langle u,u\rangle} \)</td></tr>
+        <tr><td><code>\(\{\phi_i\}\)</code></td><td>Orthonormal basis in \( H \)</td></tr>
+        <tr><td><code>Ψ(x,t)</code></td><td>Modal field over position/time (coordinate representation)</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ———————————————————————————————
+       7) FAQ (light)
+       ——————————————————————————————— -->
+  <section id="faq-hilbert">
+    <h2>❓ FAQ</h2>
+
+    <details>
+      <summary>Is \( \Psi(x,t) \) a probability amplitude or a real field?</summary>
+      <p>Both usages exist. In textbook QM, \( \Psi \) is often a probability amplitude. In HHM, we treat \( \Psi \) as the measured <em>modal structure</em> of a system; probabilistic interpretations can be derived when relevant, but structure is primary.</p>
+    </details>
+
+    <details>
+      <summary>Why infinite dimensions — isn’t that overkill?</summary>
+      <p>Many systems need arbitrarily fine modal resolution. Hilbert spaces guarantee convergence of expansions and stability of projections—crucial for real data (Fourier/wavelet, eigenmodes, etc.).</p>
+    </details>
+
+    <details>
+      <summary>Can I run these ideas on my own data?</summary>
+      <p>Yes. Head to <a href="/tests.html">Tests & Results</a> for scripts and upload options; everything needed for reproducibility is linked there.</p>
+    </details>
+  </section>
+
+  <!-- ———————————————————————————————
+       8) References
+       ——————————————————————————————— -->
+  <section id="references">
+    <h2>📚 References</h2>
+    <ul>
+      <li>Hilbert, D. <em>Grundlagen der Geometrie</em> (1899).</li>
+      <li>von Neumann, J. <em>Mathematical Foundations of Quantum Mechanics</em> (1932).</li>
+      <li>Riesz, F. &amp; Sz.-Nagy, B. <em>Functional Analysis</em>.</li>
+      <li>Oppenheim, A.V. &amp; Schafer, R.W. <em>Discrete-Time Signal Processing</em>.</li>
+      <li>Planck Collaboration (2018) public data; GWOSC documentation — linked on <a href="/tests.html">Tests &amp; Results</a>.</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  <span class="tagline">Built from resonance. Measured by rhythm. Remembered by the field.</span>
+  <p>
+    Designed with love by the HHM Initiative —
+    <a href="/about.html">Read more</a> |
+    <a href="/license.html">License & Use</a>
+  </p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,7 @@
+{
+  "schema": "hhm.nulls.v2",
+  "methods": ["time_shuffle", "phase_randomize"],
+  "n_boot": 1000,
+  "confidence_level": 0.95,
+  "seed": 20250111
+}

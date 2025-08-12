@@ -1,0 +1,33 @@
+<!doctype html>
+<meta charset="utf-8">
+<style>
+  :root{ --bg:#0f1520; --fg:#e8eef5; --line:#243241; --muted:#a9b5c2; }
+  body{ margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial; background:transparent; color:var(--fg) }
+  table{ width:100%; border-collapse:collapse; font-size:14px }
+  th,td{ padding:8px 10px; border-bottom:1px solid var(--line); text-align:left; white-space:nowrap }
+  th{ color:#fff; position:sticky; top:0; background:rgba(15,21,32,0.9); backdrop-filter:saturate(120%) blur(4px) }
+  td.mono{ font-variant-numeric:tabular-nums; }
+  caption{ text-align:left; color:var(--muted); padding:8px 0; }
+</style>
+<table>
+  <caption>Linear φ drift over time (per planet)</caption>
+  <thead>
+    <tr>
+      <th>Planet</th>
+      <th>Slope (φ/year)</th>
+      <th>95% CI</th>
+      <th>p-value</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr><td>earth</td><td class='mono'>+0.0007308</td><td class='mono'>[+0.0004797, +0.0009819]</td><td class='mono'>8.19e-08</td></tr>
+<tr><td>jupiter</td><td class='mono'>-5.651e-06</td><td class='mono'>[-8.52e-06, -2.781e-06]</td><td class='mono'>0.00385</td></tr>
+<tr><td>mars</td><td class='mono'>+4.275e-06</td><td class='mono'>[-4.781e-06, +1.333e-05]</td><td class='mono'>0.358</td></tr>
+<tr><td>mercury</td><td class='mono'>+8.875e-06</td><td class='mono'>[+1.243e-06, +1.651e-05]</td><td class='mono'>0.0231</td></tr>
+<tr><td>neptune</td><td class='mono'>-4.288e-07</td><td class='mono'>[-8.644e-05, +8.559e-05]</td><td class='mono'>0.993</td></tr>
+<tr><td>pluto</td><td class='mono'>-6.011e-07</td><td class='mono'>[-1.382e-06, +1.799e-07]</td><td class='mono'>0.373</td></tr>
+<tr><td>saturn</td><td class='mono'>-0.0002185</td><td class='mono'>[-0.0004747, +3.775e-05]</td><td class='mono'>0.193</td></tr>
+<tr><td>uranus</td><td class='mono'>-1.401e-05</td><td class='mono'>[-2.944e-05, +1.413e-06]</td><td class='mono'>0.118</td></tr>
+<tr><td>venus</td><td class='mono'>+1.094e-05</td><td class='mono'>[+4.595e-06, +1.728e-05]</td><td class='mono'>0.00087</td></tr>
+  </tbody>
+</table>

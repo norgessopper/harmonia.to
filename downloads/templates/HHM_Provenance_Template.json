@@ -1,0 +1,47 @@
+{
+  "schema": "hhm.provenance.v1",
+  "dataset_id": "hhm-<domain>-<name>-<id>",
+  "graph": {
+    "nodes": [
+      { "id": "raw/<file>", "hash": "blake3:<hash>" },
+      { "id": "derivatives/<file>", "hash": "sha256:<hash>" }
+    ],
+    "edges": [
+      { "from": "raw/<file>", "to": "derivatives/<file>", "transform_id": "t-<step>-01" }
+    ]
+  },
+  "transforms": [
+    {
+      "id": "t-<step>-01",
+      "tool": "<script or binary>@<git-sha>",
+      "container": "ghcr.io/<org>/<image>:<tag>@sha256:<digest>",
+      "params": {},
+      "env": {
+        "os": "",
+        "python": "",
+        "packages": {
+          "numpy": "",
+          "scipy": "",
+          "mne": ""
+        },
+        "gpu": {
+          "vendor": "",
+          "driver": "",
+          "compute": ""
+        }
+      },
+      "seed": 0,
+      "deterministic": true,
+      "started": "",
+      "finished": "",
+      "logs": []
+    }
+  ],
+  "notes": "",
+  "created_at": "",
+  "created_by": {
+    "name": "HHM Initiative",
+    "org": "harmonia.to",
+    "email": "contact@harmonia.to"
+  }
+}

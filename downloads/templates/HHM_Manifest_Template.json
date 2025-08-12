@@ -1,0 +1,20 @@
+{
+  "schema": "hhm.manifest.v1",
+  "dataset_id": "hhm-<domain>-<name>-<id>",
+  "root": "s3://<bucket>/<prefix>/",
+  "files": [
+    {
+      "path": "raw/<file>",
+      "bytes": 0,
+      "hash": { "algo": "blake3", "value": "" },
+      "content_addr": "",
+      "media_type": "application/octet-stream",
+      "access": "restricted"
+    }
+  ],
+  "generated_at": "",
+  "generated_by": {
+    "tool": "hhm-manifest",
+    "version": "1.0.0"
+  }
+}
