@@ -188,11 +188,11 @@ python3 scripts/pipeline_multi_planet_v3.py --planets uranus \
 
     <h3>4) Files (Relative Links)</h3>
     <ul class="list-tight">
-      <li>Results table: <a href="../results/summary.csv">results/summary.csv</a></li>
-      <li>Report with plot links: <a href="../results/report.html">results/report.html</a></li>
-      <li>Uncertainty table: <a href="../results/uncertainty_ci.html">results/uncertainty_ci.html</a></li>
-      <li>Phase-stability table: <a href="../results/phase_stability.html">results/phase_stability.html</a></li>
-      <li>Main pipeline: <a href="../scripts/pipeline_multi_planet_v3.py">scripts/pipeline_multi_planet_v3.py</a></li>
+      <li>Results table: <a href="/solar-system/results/summary.csv">results/summary.csv</a></li>
+      <li>Report with plot links: <a href="/solar-system/results/report.html">results/report.html</a></li>
+      <li>Uncertainty table: <a href="/solar-system/results/uncertainty_ci.html">results/uncertainty_ci.html</a></li>
+      <li>Phase-stability table: <a href="/solar-system/results/phase_stability.html">results/phase_stability.html</a></li>
+      <li>Main pipeline: <a href="/solar-system/scripts/pipeline_multi_planet_v3.py">scripts/pipeline_multi_planet_v3.py</a></li>
     </ul>
   </section>
 
@@ -270,7 +270,7 @@ python3 scripts/pipeline_multi_planet_v3.py --planets uranus \
     </div>
 
     <h3>Diagnostics (per-planet)</h3>
-    <p>Open <a href="../results/report.html">report.html</a>, then use each planet’s links (overlay, R-overlay, zoom, phase histogram, drift, FFT, entropy, sharpness, lag sweep).</p>
+    <p>Open <a href="/solar-system/results/report.html">report.html</a>, then use each planet’s links (overlay, R-overlay, zoom, phase histogram, drift, FFT, entropy, sharpness, lag sweep).</p>
   </section>
 
   <!-- 3) Full parameter table -->
@@ -330,7 +330,7 @@ python3 scripts/pipeline_multi_planet_v3.py --planets uranus \
     <br>
     <em>Cadence note:</em> a 2-day heliocentric run produced a very different mean Δt (−82.241 d), suggesting aliasing — use <strong>1-day</strong> cadence for drift metrics.
     <br>
-    <a href="../results_variants/index.html">View side-by-side drift curves</a>
+    <a href="/solar-system/results_variants/index.html">View side-by-side drift curves</a>
   </div>
   <!-- End Earth variants subsection -->
 
@@ -359,13 +359,13 @@ python3 scripts/pipeline_multi_planet_v3.py --planets uranus \
     <p>For each planet, confidence intervals are estimated by bootstrap resampling of matched events. We report: mean <code>Δt</code> ± 95% CI, dispersion via both <code>σ</code> and robust MAD×1.4826, and phase fraction <code>φ</code> ± 95% CI.</p>
     <details open><summary>Show uncertainty table (inline)</summary>
       <div class="iframe-box">
-        <iframe src="../results/uncertainty_ci.html" style="width:100%; height:360px; border:0"></iframe>
+        <iframe src="/solar-system/results/uncertainty_ci.html" style="width:100%; height:360px; border:0"></iframe>
       </div>
       <p class="small muted">If the table above is empty, (re)build it with:
         <code>python3 scripts/post_build_uncertainty.py</code>
       </p>
     </details>
-    <p class="small muted">Direct link: <a href="../results/uncertainty_ci.html">results/uncertainty_ci.html</a></p>
+    <p class="small muted">Direct link: <a href="/solar-system/results/uncertainty_ci.html">results/uncertainty_ci.html</a></p>
   </section>
 
   <!-- 8) Phase-stability over time (auto-includes results/phase_stability.html) -->
@@ -375,13 +375,13 @@ python3 scripts/pipeline_multi_planet_v3.py --planets uranus \
     <p>Yearly drift plots (<code>results/&lt;planet&gt;/drift.png</code>) show mean <code>Δt</code> per year. In phase space, we fit <code>φ</code> vs year; slope≈0 indicates a stationary phase offset.</p>
     <details open><summary>Show φ-vs-year stability table (inline)</summary>
       <div class="iframe-box">
-        <iframe src="../results/phase_stability.html" style="width:100%; height:360px; border:0"></iframe>
+        <iframe src="/solar-system/results/phase_stability.html" style="width:100%; height:360px; border:0"></iframe>
       </div>
       <p class="small muted">If the table above is empty, (re)build it with:
         <code>python3 scripts/build_phase_stability.py</code>
       </p>
     </details>
-    <p class="small muted">Direct link: <a href="../results/phase_stability.html">results/phase_stability.html</a></p>
+    <p class="small muted">Direct link: <a href="/solar-system/results/phase_stability.html">results/phase_stability.html</a></p>
   </section>
 
   <!-- 9) Best-lag analysis -->
